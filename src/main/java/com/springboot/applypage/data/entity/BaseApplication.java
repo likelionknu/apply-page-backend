@@ -21,7 +21,8 @@ public class BaseApplication {
     private String phoneNumber;
     @Column(length = 600)
     private String motive;
-    private String portfolio;
+    private String portfolioFile;
+    private String portfolioLink;
 
     @CreatedDate
     @Column(updatable = false)

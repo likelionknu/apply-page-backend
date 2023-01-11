@@ -25,7 +25,8 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplicationResponse.setSid(backendApplication.getSid());
         backendApplicationResponse.setEmail(backendApplication.getEmail());
         backendApplicationResponse.setMotive(backendApplication.getMotive());
-        backendApplicationResponse.setPortfolio(backendApplication.getPortfolio());
+        backendApplicationResponse.setPortfolioFile(backendApplication.getPortfolioFile());
+        backendApplicationResponse.setPortfolioLink(backendApplication.getPortfolioLink());
         backendApplicationResponse.setPhoneNumber(backendApplication.getPhoneNumber());
 
         return backendApplicationResponse;
@@ -39,7 +40,8 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplication.setName(backendApplicationDto.getName());
         backendApplication.setSid(backendApplicationDto.getSid());
         backendApplication.setMotive(backendApplicationDto.getMotive());
-        backendApplication.setPortfolio(backendApplicationDto.getPortfolio());
+        backendApplication.setPortfolioFile(backendApplicationDto.getPortfolioFile());
+        backendApplication.setPortfolioLink(backendApplicationDto.getPortfolioLink());
         backendApplication.setPhoneNumber(backendApplicationDto.getPhoneNumber());
 
         BackendApplication savedBackedApplication = backendApplicationDAO.insertBackendApplication(backendApplication);
@@ -49,7 +51,8 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplicationResponse.setSid(savedBackedApplication.getSid());
         backendApplicationResponse.setEmail(savedBackedApplication.getEmail());
         backendApplicationResponse.setMotive(savedBackedApplication.getMotive());
-        backendApplicationResponse.setPortfolio(savedBackedApplication.getPortfolio());
+        backendApplicationResponse.setPortfolioFile(savedBackedApplication.getPortfolioFile());
+        backendApplicationResponse.setPortfolioLink(savedBackedApplication.getPortfolioLink());
         backendApplicationResponse.setPhoneNumber(savedBackedApplication.getPhoneNumber());
 
 
@@ -62,22 +65,24 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         BackendApplication backendApplication = new BackendApplication();
         backendApplication.setEmail(backendApplicationDto.getEmail());
         backendApplication.setName(backendApplicationDto.getName());
-        backendApplication.setPortfolio(backendApplicationDto.getPortfolio());
+        backendApplication.setPortfolioFile(backendApplicationDto.getPortfolioFile());
+        backendApplication.setPortfolioLink(backendApplicationDto.getPortfolioLink());
         backendApplication.setMotive(backendApplicationDto.getMotive());
         backendApplication.setSid(backendApplicationDto.getSid());
         backendApplication.setPhoneNumber(backendApplicationDto.getPhoneNumber());
 
         BackendApplication updateBackendApplication = backendApplicationDAO.updateBackendApplication(backendApplication);
-        BackendApplicationDto updateBackendApplicatonDto = new BackendApplicationDto();
+        BackendApplicationDto updateBackendApplicationDto = new BackendApplicationDto();
 
-        updateBackendApplicatonDto.setEmail(updateBackendApplication.getEmail());
-        updateBackendApplicatonDto.setName(updateBackendApplication.getName());
-        updateBackendApplicatonDto.setPortfolio(updateBackendApplication.getPortfolio());
-        updateBackendApplicatonDto.setMotive(updateBackendApplication.getMotive());
-        updateBackendApplicatonDto.setSid(updateBackendApplication.getSid());
-        updateBackendApplicatonDto.setPhoneNumber(updateBackendApplication.getPhoneNumber());
+        updateBackendApplicationDto.setEmail(updateBackendApplication.getEmail());
+        updateBackendApplicationDto.setName(updateBackendApplication.getName());
+        updateBackendApplicationDto.setPortfolioLink(updateBackendApplication.getPortfolioLink());
+        updateBackendApplicationDto.setPortfolioFile(updateBackendApplication.getPortfolioFile());
+        updateBackendApplicationDto.setMotive(updateBackendApplication.getMotive());
+        updateBackendApplicationDto.setSid(updateBackendApplication.getSid());
+        updateBackendApplicationDto.setPhoneNumber(updateBackendApplication.getPhoneNumber());
 
-        return updateBackendApplicatonDto;
+        return updateBackendApplicationDto;
     }
 
     @Override

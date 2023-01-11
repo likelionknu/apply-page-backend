@@ -8,5 +8,6 @@ public class BaseApplicationDto {
     private String email;
     private String phoneNumber;
     private String motive;
-    private String portfolio;
+    private String portfolioFile;
+    private String portfolioLink;
 }

@@ -25,7 +25,8 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         frontendApplicationResponse.setSid(frontendApplication.getSid());
         frontendApplicationResponse.setEmail(frontendApplication.getEmail());
         frontendApplicationResponse.setMotive(frontendApplication.getMotive());
-        frontendApplicationResponse.setPortfolio(frontendApplication.getPortfolio());
+        frontendApplicationResponse.setPortfolioLink(frontendApplication.getPortfolioLink());
+        frontendApplicationResponse.setPortfolioFile(frontendApplication.getPortfolioFile());
         frontendApplicationResponse.setPhoneNumber(frontendApplication.getPhoneNumber());
 
         return frontendApplicationResponse;
@@ -39,7 +40,8 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         frontendApplication.setName(frontendApplicationDto.getName());
         frontendApplication.setSid(frontendApplicationDto.getSid());
         frontendApplication.setMotive(frontendApplicationDto.getMotive());
-        frontendApplication.setPortfolio(frontendApplicationDto.getPortfolio());
+        frontendApplication.setPortfolioFile(frontendApplicationDto.getPortfolioFile());
+        frontendApplication.setPortfolioLink(frontendApplicationDto.getPortfolioLink());
         frontendApplication.setPhoneNumber(frontendApplicationDto.getPhoneNumber());
 
         FrontendApplication savedFrontendApplication = frontendApplicationDAO.insertFrontendApplication(frontendApplication);
@@ -49,7 +51,8 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         FrontendApplicationResponse.setSid(savedFrontendApplication.getSid());
         FrontendApplicationResponse.setEmail(savedFrontendApplication.getEmail());
         FrontendApplicationResponse.setMotive(savedFrontendApplication.getMotive());
-        FrontendApplicationResponse.setPortfolio(savedFrontendApplication.getPortfolio());
+        FrontendApplicationResponse.setPortfolioFile(savedFrontendApplication.getPortfolioFile());
+        FrontendApplicationResponse.setPortfolioLink(savedFrontendApplication.getPortfolioLink());
         FrontendApplicationResponse.setPhoneNumber(savedFrontendApplication.getPhoneNumber());
 
 
@@ -61,7 +64,8 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         FrontendApplication frontendApplication = new FrontendApplication();
         frontendApplication.setEmail(frontendApplicationDto.getEmail());
         frontendApplication.setName(frontendApplicationDto.getName());
-        frontendApplication.setPortfolio(frontendApplicationDto.getPortfolio());
+        frontendApplication.setPortfolioFile(frontendApplicationDto.getPortfolioFile());
+        frontendApplication.setPortfolioLink(frontendApplicationDto.getPortfolioLink());
         frontendApplication.setMotive(frontendApplicationDto.getMotive());
         frontendApplication.setSid(frontendApplicationDto.getSid());
         frontendApplication.setPhoneNumber(frontendApplicationDto.getPhoneNumber());
@@ -71,7 +75,8 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
 
         updateFrontendApplicatonDto.setEmail(updateFrontendApplication.getEmail());
         updateFrontendApplicatonDto.setName(updateFrontendApplication.getName());
-        updateFrontendApplicatonDto.setPortfolio(updateFrontendApplication.getPortfolio());
+        updateFrontendApplicatonDto.setPortfolioLink(updateFrontendApplication.getPortfolioLink());
+        updateFrontendApplicatonDto.setPortfolioFile(updateFrontendApplication.getPortfolioFile());
         updateFrontendApplicatonDto.setMotive(updateFrontendApplication.getMotive());
         updateFrontendApplicatonDto.setSid(updateFrontendApplication.getSid());
         updateFrontendApplicatonDto.setPhoneNumber(updateFrontendApplication.getPhoneNumber());
