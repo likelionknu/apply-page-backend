@@ -1,7 +1,6 @@
 package com.springboot.applypage.controller;
 
 import com.springboot.applypage.data.dto.BackendApplicationDto;
-import com.springboot.applypage.data.dto.ProductDto;
 import com.springboot.applypage.service.BackendApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

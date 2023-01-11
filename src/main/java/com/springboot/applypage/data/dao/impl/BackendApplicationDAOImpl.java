@@ -20,14 +20,14 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
 
     @Override
     public BackendApplication insertBackendApplication(BackendApplication backendApplication) {
-        BackendApplication savedApplication = backendApplicationRepository.save(backendApplication);
-        return savedApplication;
+        BackendApplication savedBackendApplication = backendApplicationRepository.save(backendApplication);
+        return savedBackendApplication;
     }
 
     @Override
     public BackendApplication selectBackendApplication(String sid) {
-        BackendApplication selected = backendApplicationRepository.getById(sid);
-        return selected;
+        BackendApplication selectedBackendApplication = backendApplicationRepository.getById(sid);
+        return selectedBackendApplication;
     }
 
     @Override
@@ -55,9 +55,9 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
 
     @Override
     public void deleteBackendApplication(String sid) throws Exception {
-        Optional<BackendApplication> seletedBackendApplication = backendApplicationRepository.findById(sid);
-        if(seletedBackendApplication.isPresent()){
-            BackendApplication backendApplication = seletedBackendApplication.get();
+        Optional<BackendApplication> selectedBackendApplication = backendApplicationRepository.findById(sid);
+        if(selectedBackendApplication.isPresent()){
+            BackendApplication backendApplication = selectedBackendApplication.get();
             backendApplicationRepository.delete(backendApplication);
         }else{
             throw new Exception();
