@@ -25,9 +25,15 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
     }
 
     @Override
-    public BackendApplication selectBackendApplication(String sid) {
-        BackendApplication selectedBackendApplication = backendApplicationRepository.getById(sid);
+    public BackendApplication selectBackendApplication(String sid){
+        BackendApplication selectedBackendApplication;
+        if(backendApplicationRepository.existsById(sid)){
+            selectedBackendApplication = backendApplicationRepository.getById(sid);
+        }else{
+            selectedBackendApplication = new BackendApplication();
+        }
         return selectedBackendApplication;
+
     }
 
     @Override

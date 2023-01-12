@@ -27,7 +27,13 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
 
     @Override
     public DesignApplication selectDesignApplication(String sid) {
-        DesignApplication selectedDesignApplication = designApplicationRepository.getById(sid);
+        DesignApplication selectedDesignApplication;
+
+        if(designApplicationRepository.existsById(sid)){
+            selectedDesignApplication = designApplicationRepository.getById(sid);
+        }else{
+            selectedDesignApplication = new DesignApplication();
+        }
         return selectedDesignApplication;
     }
 

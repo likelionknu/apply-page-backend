@@ -26,7 +26,13 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
 
     @Override
     public FrontendApplication selectFrontendApplication(String sid) {
-        FrontendApplication selectedFrontendApplication = frontendApplicationRepository.getById(sid);
+        FrontendApplication selectedFrontendApplication;
+
+        if(frontendApplicationRepository.existsById(sid)){
+            selectedFrontendApplication = frontendApplicationRepository.getById(sid);
+        }else{
+            selectedFrontendApplication = new FrontendApplication();
+        }
         return selectedFrontendApplication;
     }
 
