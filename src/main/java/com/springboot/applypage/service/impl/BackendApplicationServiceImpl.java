@@ -44,16 +44,16 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplication.setPortfolioLink(backendApplicationDto.getPortfolioLink());
         backendApplication.setPhoneNumber(backendApplicationDto.getPhoneNumber());
 
-        BackendApplication savedBackedApplication = backendApplicationDAO.insertBackendApplication(backendApplication);
+        BackendApplication savedBackendApplication = backendApplicationDAO.insertBackendApplication(backendApplication);
         BackendApplicationDto backendApplicationResponse = new BackendApplicationDto();
 
-        backendApplicationResponse.setName(savedBackedApplication.getName());
-        backendApplicationResponse.setSid(savedBackedApplication.getSid());
-        backendApplicationResponse.setEmail(savedBackedApplication.getEmail());
-        backendApplicationResponse.setMotive(savedBackedApplication.getMotive());
-        backendApplicationResponse.setPortfolioFile(savedBackedApplication.getPortfolioFile());
-        backendApplicationResponse.setPortfolioLink(savedBackedApplication.getPortfolioLink());
-        backendApplicationResponse.setPhoneNumber(savedBackedApplication.getPhoneNumber());
+        backendApplicationResponse.setName(savedBackendApplication.getName());
+        backendApplicationResponse.setSid(savedBackendApplication.getSid());
+        backendApplicationResponse.setEmail(savedBackendApplication.getEmail());
+        backendApplicationResponse.setMotive(savedBackendApplication.getMotive());
+        backendApplicationResponse.setPortfolioFile(savedBackendApplication.getPortfolioFile());
+        backendApplicationResponse.setPortfolioLink(savedBackendApplication.getPortfolioLink());
+        backendApplicationResponse.setPhoneNumber(savedBackendApplication.getPhoneNumber());
 
 
         return backendApplicationResponse;
