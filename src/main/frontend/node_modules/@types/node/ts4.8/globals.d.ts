@@ -57,7 +57,7 @@ interface AbortController {
 }
 
 /** A signal object that allows you to communicate with a DOM request (such as a Fetch) and abort it if required via an AbortController object. */
-interface AbortSignal extends EventTarget {
+interface AbortSignal {
     /**
      * Returns true if this AbortSignal's AbortController has signaled to abort, and false otherwise.
      */
@@ -99,16 +99,6 @@ interface Float64Array extends RelativeIndexable<number> {}
 interface BigInt64Array extends RelativeIndexable<bigint> {}
 interface BigUint64Array extends RelativeIndexable<bigint> {}
 //#endregion ArrayLike.at() end
-
-/**
- * @since v17.0.0
- *
- * Creates a deep clone of an object.
- */
-declare function structuredClone<T>(
-    value: T,
-    transfer?: { transfer: ReadonlyArray<import('worker_threads').TransferListItem> },
-): T;
 
 /*----------------------------------------------*
 *                                               *
@@ -215,9 +205,9 @@ declare namespace NodeJS {
         writable: boolean;
         write(buffer: Uint8Array | string, cb?: (err?: Error | null) => void): boolean;
         write(str: string, encoding?: BufferEncoding, cb?: (err?: Error | null) => void): boolean;
-        end(cb?: () => void): this;
-        end(data: string | Uint8Array, cb?: () => void): this;
-        end(str: string, encoding?: BufferEncoding, cb?: () => void): this;
+        end(cb?: () => void): void;
+        end(data: string | Uint8Array, cb?: () => void): void;
+        end(str: string, encoding?: BufferEncoding, cb?: () => void): void;
     }
 
     interface ReadWriteStream extends ReadableStream, WritableStream { }
