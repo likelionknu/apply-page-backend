@@ -7,6 +7,8 @@ import com.springboot.applypage.service.BackendApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class BackendApplicationServiceImpl implements BackendApplicationService {
 
@@ -18,16 +20,28 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
 
     @Override
     public BackendApplicationDto getBackendApplication(String sid){
+
         BackendApplication backendApplication = backendApplicationDAO.selectBackendApplication(sid);
         BackendApplicationDto backendApplicationResponse = new BackendApplicationDto();
 
-        backendApplicationResponse.setName(backendApplication.getName());
         backendApplicationResponse.setSid(backendApplication.getSid());
-        backendApplicationResponse.setEmail(backendApplication.getEmail());
-        backendApplicationResponse.setMotive(backendApplication.getMotive());
+        backendApplicationResponse.setPhoneNumber(backendApplication.getPhoneNumber());
         backendApplicationResponse.setPortfolioFile(backendApplication.getPortfolioFile());
         backendApplicationResponse.setPortfolioLink(backendApplication.getPortfolioLink());
-        backendApplicationResponse.setPhoneNumber(backendApplication.getPhoneNumber());
+        backendApplicationResponse.setName(backendApplication.getName());
+        backendApplicationResponse.setEmail(backendApplication.getEmail());
+        backendApplicationResponse.setDepartment(backendApplication.getDepartment());
+
+        backendApplicationResponse.setMotive(backendApplication.getMotive());
+        backendApplicationResponse.setHardWork(backendApplication.getHardWork());
+        backendApplicationResponse.setKeyWord(backendApplication.getKeyWord());
+        backendApplicationResponse.setMostDeeplyWork(backendApplication.getMostDeeplyWork());
+
+        backendApplicationResponse.setPassOrNot(backendApplication.getPassOrNot());
+
+        backendApplicationResponse.setDifficultAndOvercoming(backendApplication.getDifficultAndOvercoming());
+        backendApplicationResponse.setStudyFramework(backendApplication.getStudyFramework());
+        backendApplicationResponse.setImportantGroup(backendApplication.getImportantGroup());
 
         return backendApplicationResponse;
     }
@@ -36,24 +50,47 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     public BackendApplicationDto saveBackendApplication(BackendApplicationDto backendApplicationDto) {
         BackendApplication backendApplication = new BackendApplication();
 
-        backendApplication.setEmail(backendApplicationDto.getEmail());
-        backendApplication.setName(backendApplicationDto.getName());
         backendApplication.setSid(backendApplicationDto.getSid());
-        backendApplication.setMotive(backendApplicationDto.getMotive());
+        backendApplication.setPhoneNumber(backendApplicationDto.getPhoneNumber());
         backendApplication.setPortfolioFile(backendApplicationDto.getPortfolioFile());
         backendApplication.setPortfolioLink(backendApplicationDto.getPortfolioLink());
-        backendApplication.setPhoneNumber(backendApplicationDto.getPhoneNumber());
+        backendApplication.setName(backendApplicationDto.getName());
+        backendApplication.setEmail(backendApplicationDto.getEmail());
+        backendApplication.setDepartment(backendApplicationDto.getDepartment());
+
+        backendApplication.setMotive(backendApplicationDto.getMotive());
+        backendApplication.setHardWork(backendApplicationDto.getHardWork());
+        backendApplication.setKeyWord(backendApplicationDto.getKeyWord());
+        backendApplication.setMostDeeplyWork(backendApplicationDto.getMostDeeplyWork());
+
+        backendApplication.setPassOrNot(backendApplicationDto.getPassOrNot());
+
+        backendApplication.setDifficultAndOvercoming(backendApplicationDto.getDifficultAndOvercoming());
+        backendApplication.setStudyFramework(backendApplicationDto.getStudyFramework());
+        backendApplication.setImportantGroup(backendApplicationDto.getImportantGroup());
+
 
         BackendApplication savedBackendApplication = backendApplicationDAO.insertBackendApplication(backendApplication);
         BackendApplicationDto backendApplicationResponse = new BackendApplicationDto();
 
-        backendApplicationResponse.setName(savedBackendApplication.getName());
         backendApplicationResponse.setSid(savedBackendApplication.getSid());
-        backendApplicationResponse.setEmail(savedBackendApplication.getEmail());
-        backendApplicationResponse.setMotive(savedBackendApplication.getMotive());
+        backendApplicationResponse.setPhoneNumber(savedBackendApplication.getPhoneNumber());
         backendApplicationResponse.setPortfolioFile(savedBackendApplication.getPortfolioFile());
         backendApplicationResponse.setPortfolioLink(savedBackendApplication.getPortfolioLink());
-        backendApplicationResponse.setPhoneNumber(savedBackendApplication.getPhoneNumber());
+        backendApplicationResponse.setName(savedBackendApplication.getName());
+        backendApplicationResponse.setEmail(savedBackendApplication.getEmail());
+        backendApplicationResponse.setDepartment(savedBackendApplication.getDepartment());
+
+        backendApplicationResponse.setMotive(savedBackendApplication.getMotive());
+        backendApplicationResponse.setHardWork(savedBackendApplication.getHardWork());
+        backendApplicationResponse.setKeyWord(savedBackendApplication.getKeyWord());
+        backendApplicationResponse.setMostDeeplyWork(savedBackendApplication.getMostDeeplyWork());
+
+        backendApplicationResponse.setPassOrNot(savedBackendApplication.getPassOrNot());
+
+        backendApplicationResponse.setDifficultAndOvercoming(savedBackendApplication.getDifficultAndOvercoming());
+        backendApplicationResponse.setStudyFramework(savedBackendApplication.getStudyFramework());
+        backendApplicationResponse.setImportantGroup(savedBackendApplication.getImportantGroup());
 
 
         return backendApplicationResponse;
@@ -63,24 +100,46 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     public BackendApplicationDto updateBackendApplication(BackendApplicationDto backendApplicationDto) throws Exception {
 
         BackendApplication backendApplication = new BackendApplication();
-        backendApplication.setEmail(backendApplicationDto.getEmail());
-        backendApplication.setName(backendApplicationDto.getName());
-        backendApplication.setPortfolioFile(backendApplicationDto.getPortfolioFile());
-        backendApplication.setPortfolioLink(backendApplicationDto.getPortfolioLink());
-        backendApplication.setMotive(backendApplicationDto.getMotive());
         backendApplication.setSid(backendApplicationDto.getSid());
         backendApplication.setPhoneNumber(backendApplicationDto.getPhoneNumber());
+        backendApplication.setPortfolioFile(backendApplicationDto.getPortfolioFile());
+        backendApplication.setPortfolioLink(backendApplicationDto.getPortfolioLink());
+        backendApplication.setName(backendApplicationDto.getName());
+        backendApplication.setEmail(backendApplicationDto.getEmail());
+        backendApplication.setDepartment(backendApplicationDto.getDepartment());
+
+        backendApplication.setMotive(backendApplicationDto.getMotive());
+        backendApplication.setHardWork(backendApplicationDto.getHardWork());
+        backendApplication.setKeyWord(backendApplicationDto.getKeyWord());
+        backendApplication.setMostDeeplyWork(backendApplicationDto.getMostDeeplyWork());
+
+        backendApplication.setPassOrNot(backendApplicationDto.getPassOrNot());
+
+        backendApplication.setDifficultAndOvercoming(backendApplicationDto.getDifficultAndOvercoming());
+        backendApplication.setStudyFramework(backendApplicationDto.getStudyFramework());
+        backendApplication.setImportantGroup(backendApplicationDto.getImportantGroup());
 
         BackendApplication updateBackendApplication = backendApplicationDAO.updateBackendApplication(backendApplication);
         BackendApplicationDto updateBackendApplicationDto = new BackendApplicationDto();
 
-        updateBackendApplicationDto.setEmail(updateBackendApplication.getEmail());
-        updateBackendApplicationDto.setName(updateBackendApplication.getName());
-        updateBackendApplicationDto.setPortfolioLink(updateBackendApplication.getPortfolioLink());
-        updateBackendApplicationDto.setPortfolioFile(updateBackendApplication.getPortfolioFile());
-        updateBackendApplicationDto.setMotive(updateBackendApplication.getMotive());
         updateBackendApplicationDto.setSid(updateBackendApplication.getSid());
         updateBackendApplicationDto.setPhoneNumber(updateBackendApplication.getPhoneNumber());
+        updateBackendApplicationDto.setPortfolioFile(updateBackendApplication.getPortfolioFile());
+        updateBackendApplicationDto.setPortfolioLink(updateBackendApplication.getPortfolioLink());
+        updateBackendApplicationDto.setName(updateBackendApplication.getName());
+        updateBackendApplicationDto.setEmail(updateBackendApplication.getEmail());
+        updateBackendApplicationDto.setDepartment(updateBackendApplication.getDepartment());
+
+        updateBackendApplicationDto.setMotive(updateBackendApplication.getMotive());
+        updateBackendApplicationDto.setHardWork(updateBackendApplication.getHardWork());
+        updateBackendApplicationDto.setKeyWord(updateBackendApplication.getKeyWord());
+        updateBackendApplicationDto.setMostDeeplyWork(updateBackendApplication.getMostDeeplyWork());
+
+        updateBackendApplicationDto.setPassOrNot(updateBackendApplication.getPassOrNot());
+
+        updateBackendApplicationDto.setDifficultAndOvercoming(updateBackendApplication.getDifficultAndOvercoming());
+        updateBackendApplicationDto.setStudyFramework(updateBackendApplication.getStudyFramework());
+        updateBackendApplicationDto.setImportantGroup(updateBackendApplication.getImportantGroup());
 
         return updateBackendApplicationDto;
     }

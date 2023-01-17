@@ -45,13 +45,27 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
 
         if(selectBackendApplication.isPresent()){
             BackendApplication newBackendApplication = selectBackendApplication.get();
+
             newBackendApplication.setPhoneNumber(backendApplication.getPhoneNumber());
             newBackendApplication.setPortfolioFile(backendApplication.getPortfolioFile());
             newBackendApplication.setPortfolioLink(backendApplication.getPortfolioLink());
-            newBackendApplication.setMotive(backendApplication.getMotive());
             newBackendApplication.setName(backendApplication.getName());
             newBackendApplication.setEmail(backendApplication.getEmail());
             newBackendApplication.setUpdatedAt(LocalDateTime.now());
+            newBackendApplication.setDepartment(backendApplication.getDepartment());
+
+            newBackendApplication.setMotive(backendApplication.getMotive());
+            newBackendApplication.setHardWork(backendApplication.getHardWork());
+            newBackendApplication.setKeyWord(backendApplication.getKeyWord());
+            newBackendApplication.setMostDeeplyWork(backendApplication.getMostDeeplyWork());
+
+            newBackendApplication.setPassOrNot(backendApplication.getPassOrNot());
+
+            newBackendApplication.setDifficultAndOvercoming(backendApplication.getDifficultAndOvercoming());
+            newBackendApplication.setStudyFramework(backendApplication.getStudyFramework());
+            newBackendApplication.setImportantGroup(backendApplication.getImportantGroup());
+
+
 
             updateBackendApplication = backendApplicationRepository.save(newBackendApplication);
         }else{
