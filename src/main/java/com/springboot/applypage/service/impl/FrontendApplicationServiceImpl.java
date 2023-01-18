@@ -21,13 +21,26 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         FrontendApplication frontendApplication = frontendApplicationDAO.selectFrontendApplication(sid);
         FrontendApplicationDto frontendApplicationResponse = new FrontendApplicationDto();
 
-        frontendApplicationResponse.setName(frontendApplication.getName());
-        frontendApplicationResponse.setSid(frontendApplication.getSid());
-        frontendApplicationResponse.setEmail(frontendApplication.getEmail());
-        frontendApplicationResponse.setMotive(frontendApplication.getMotive());
-        frontendApplicationResponse.setPortfolioLink(frontendApplication.getPortfolioLink());
-        frontendApplicationResponse.setPortfolioFile(frontendApplication.getPortfolioFile());
         frontendApplicationResponse.setPhoneNumber(frontendApplication.getPhoneNumber());
+        frontendApplicationResponse.setPortfolioFile(frontendApplication.getPortfolioFile());
+        frontendApplicationResponse.setPortfolioLink(frontendApplication.getPortfolioLink());
+        frontendApplicationResponse.setName(frontendApplication.getName());
+        frontendApplicationResponse.setEmail(frontendApplication.getEmail());
+        frontendApplicationResponse.setDepartment(frontendApplication.getDepartment());
+        frontendApplicationResponse.setSid(frontendApplication.getSid());
+
+        frontendApplicationResponse.setMotive(frontendApplication.getMotive());
+        frontendApplicationResponse.setHardWork(frontendApplication.getHardWork());
+        frontendApplicationResponse.setKeyWord(frontendApplication.getKeyWord());
+        frontendApplicationResponse.setMostDeeplyWork(frontendApplication.getMostDeeplyWork());
+
+        frontendApplicationResponse.setPassOrNot(frontendApplication.getPassOrNot());
+
+        frontendApplicationResponse.setWhyFrontend(frontendApplication.getWhyFrontend());
+        frontendApplicationResponse.setUsingStack(frontendApplication.getUsingStack());
+        frontendApplicationResponse.setTeamProject(frontendApplication.getTeamProject());
+        frontendApplicationResponse.setAchieve(frontendApplication.getAchieve());
+
 
         return frontendApplicationResponse;
     }
@@ -36,50 +49,98 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     public FrontendApplicationDto saveFrontendApplication(FrontendApplicationDto frontendApplicationDto) {
         FrontendApplication frontendApplication = new FrontendApplication();
 
-        frontendApplication.setEmail(frontendApplicationDto.getEmail());
-        frontendApplication.setName(frontendApplicationDto.getName());
-        frontendApplication.setSid(frontendApplicationDto.getSid());
-        frontendApplication.setMotive(frontendApplicationDto.getMotive());
+        frontendApplication.setPhoneNumber(frontendApplicationDto.getPhoneNumber());
         frontendApplication.setPortfolioFile(frontendApplicationDto.getPortfolioFile());
         frontendApplication.setPortfolioLink(frontendApplicationDto.getPortfolioLink());
-        frontendApplication.setPhoneNumber(frontendApplicationDto.getPhoneNumber());
+        frontendApplication.setName(frontendApplicationDto.getName());
+        frontendApplication.setEmail(frontendApplicationDto.getEmail());
+        frontendApplication.setDepartment(frontendApplicationDto.getDepartment());
+        frontendApplication.setSid(frontendApplicationDto.getSid());
+
+        frontendApplication.setMotive(frontendApplicationDto.getMotive());
+        frontendApplication.setHardWork(frontendApplicationDto.getHardWork());
+        frontendApplication.setKeyWord(frontendApplicationDto.getKeyWord());
+        frontendApplication.setMostDeeplyWork(frontendApplicationDto.getMostDeeplyWork());
+
+        frontendApplication.setPassOrNot(frontendApplicationDto.getPassOrNot());
+
+        frontendApplication.setWhyFrontend(frontendApplicationDto.getWhyFrontend());
+        frontendApplication.setUsingStack(frontendApplicationDto.getUsingStack());
+        frontendApplication.setTeamProject(frontendApplicationDto.getTeamProject());
+        frontendApplication.setAchieve(frontendApplicationDto.getAchieve());
 
         FrontendApplication savedFrontendApplication = frontendApplicationDAO.insertFrontendApplication(frontendApplication);
-        FrontendApplicationDto FrontendApplicationResponse = new FrontendApplicationDto();
+        FrontendApplicationDto frontendApplicationResponse = new FrontendApplicationDto();
 
-        FrontendApplicationResponse.setName(savedFrontendApplication.getName());
-        FrontendApplicationResponse.setSid(savedFrontendApplication.getSid());
-        FrontendApplicationResponse.setEmail(savedFrontendApplication.getEmail());
-        FrontendApplicationResponse.setMotive(savedFrontendApplication.getMotive());
-        FrontendApplicationResponse.setPortfolioFile(savedFrontendApplication.getPortfolioFile());
-        FrontendApplicationResponse.setPortfolioLink(savedFrontendApplication.getPortfolioLink());
-        FrontendApplicationResponse.setPhoneNumber(savedFrontendApplication.getPhoneNumber());
+        frontendApplicationResponse.setPhoneNumber(savedFrontendApplication.getPhoneNumber());
+        frontendApplicationResponse.setPortfolioFile(savedFrontendApplication.getPortfolioFile());
+        frontendApplicationResponse.setPortfolioLink(savedFrontendApplication.getPortfolioLink());
+        frontendApplicationResponse.setName(savedFrontendApplication.getName());
+        frontendApplicationResponse.setEmail(savedFrontendApplication.getEmail());
+        frontendApplicationResponse.setDepartment(savedFrontendApplication.getDepartment());
+        frontendApplicationResponse.setSid(savedFrontendApplication.getSid());
 
+        frontendApplicationResponse.setMotive(savedFrontendApplication.getMotive());
+        frontendApplicationResponse.setHardWork(savedFrontendApplication.getHardWork());
+        frontendApplicationResponse.setKeyWord(savedFrontendApplication.getKeyWord());
+        frontendApplicationResponse.setMostDeeplyWork(savedFrontendApplication.getMostDeeplyWork());
 
-        return FrontendApplicationResponse;
+        frontendApplicationResponse.setPassOrNot(savedFrontendApplication.getPassOrNot());
+
+        frontendApplicationResponse.setWhyFrontend(savedFrontendApplication.getWhyFrontend());
+        frontendApplicationResponse.setUsingStack(savedFrontendApplication.getUsingStack());
+        frontendApplicationResponse.setTeamProject(savedFrontendApplication.getTeamProject());
+        frontendApplicationResponse.setAchieve(savedFrontendApplication.getAchieve());
+
+        return frontendApplicationResponse;
     }
 
     @Override
     public FrontendApplicationDto updateFrontendApplication(FrontendApplicationDto frontendApplicationDto) throws Exception {
         FrontendApplication frontendApplication = new FrontendApplication();
-        frontendApplication.setEmail(frontendApplicationDto.getEmail());
-        frontendApplication.setName(frontendApplicationDto.getName());
+
+        frontendApplication.setPhoneNumber(frontendApplicationDto.getPhoneNumber());
         frontendApplication.setPortfolioFile(frontendApplicationDto.getPortfolioFile());
         frontendApplication.setPortfolioLink(frontendApplicationDto.getPortfolioLink());
-        frontendApplication.setMotive(frontendApplicationDto.getMotive());
+        frontendApplication.setName(frontendApplicationDto.getName());
+        frontendApplication.setEmail(frontendApplicationDto.getEmail());
+        frontendApplication.setDepartment(frontendApplicationDto.getDepartment());
         frontendApplication.setSid(frontendApplicationDto.getSid());
-        frontendApplication.setPhoneNumber(frontendApplicationDto.getPhoneNumber());
+
+        frontendApplication.setMotive(frontendApplicationDto.getMotive());
+        frontendApplication.setHardWork(frontendApplicationDto.getHardWork());
+        frontendApplication.setKeyWord(frontendApplicationDto.getKeyWord());
+        frontendApplication.setMostDeeplyWork(frontendApplicationDto.getMostDeeplyWork());
+
+        frontendApplication.setPassOrNot(frontendApplicationDto.getPassOrNot());
+
+        frontendApplication.setWhyFrontend(frontendApplicationDto.getWhyFrontend());
+        frontendApplication.setUsingStack(frontendApplicationDto.getUsingStack());
+        frontendApplication.setTeamProject(frontendApplicationDto.getTeamProject());
+        frontendApplication.setAchieve(frontendApplicationDto.getAchieve());
 
         FrontendApplication updateFrontendApplication = frontendApplicationDAO.updateFrontendApplication(frontendApplication);
         FrontendApplicationDto updateFrontendApplicatonDto = new FrontendApplicationDto();
 
-        updateFrontendApplicatonDto.setEmail(updateFrontendApplication.getEmail());
-        updateFrontendApplicatonDto.setName(updateFrontendApplication.getName());
-        updateFrontendApplicatonDto.setPortfolioLink(updateFrontendApplication.getPortfolioLink());
-        updateFrontendApplicatonDto.setPortfolioFile(updateFrontendApplication.getPortfolioFile());
-        updateFrontendApplicatonDto.setMotive(updateFrontendApplication.getMotive());
-        updateFrontendApplicatonDto.setSid(updateFrontendApplication.getSid());
         updateFrontendApplicatonDto.setPhoneNumber(updateFrontendApplication.getPhoneNumber());
+        updateFrontendApplicatonDto.setPortfolioFile(updateFrontendApplication.getPortfolioFile());
+        updateFrontendApplicatonDto.setPortfolioLink(updateFrontendApplication.getPortfolioLink());
+        updateFrontendApplicatonDto.setName(updateFrontendApplication.getName());
+        updateFrontendApplicatonDto.setEmail(updateFrontendApplication.getEmail());
+        updateFrontendApplicatonDto.setDepartment(updateFrontendApplication.getDepartment());
+        updateFrontendApplicatonDto.setSid(updateFrontendApplication.getSid());
+
+        updateFrontendApplicatonDto.setMotive(updateFrontendApplication.getMotive());
+        updateFrontendApplicatonDto.setHardWork(updateFrontendApplication.getHardWork());
+        updateFrontendApplicatonDto.setKeyWord(updateFrontendApplication.getKeyWord());
+        updateFrontendApplicatonDto.setMostDeeplyWork(updateFrontendApplication.getMostDeeplyWork());
+
+        updateFrontendApplicatonDto.setPassOrNot(updateFrontendApplication.getPassOrNot());
+
+        updateFrontendApplicatonDto.setWhyFrontend(updateFrontendApplication.getWhyFrontend());
+        updateFrontendApplicatonDto.setUsingStack(updateFrontendApplication.getUsingStack());
+        updateFrontendApplicatonDto.setTeamProject(updateFrontendApplication.getTeamProject());
+        updateFrontendApplicatonDto.setAchieve(updateFrontendApplication.getAchieve());
 
         return updateFrontendApplicatonDto;
     }

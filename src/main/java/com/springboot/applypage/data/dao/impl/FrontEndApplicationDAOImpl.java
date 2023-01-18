@@ -47,10 +47,23 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
             newFrontendApplication.setPhoneNumber(frontendApplication.getPhoneNumber());
             newFrontendApplication.setPortfolioFile(frontendApplication.getPortfolioFile());
             newFrontendApplication.setPortfolioLink(frontendApplication.getPortfolioLink());
-            newFrontendApplication.setMotive(frontendApplication.getMotive());
             newFrontendApplication.setName(frontendApplication.getName());
             newFrontendApplication.setEmail(frontendApplication.getEmail());
             newFrontendApplication.setUpdatedAt(LocalDateTime.now());
+            newFrontendApplication.setDepartment(frontendApplication.getDepartment());
+            newFrontendApplication.setSid(frontendApplication.getSid());
+
+            newFrontendApplication.setMotive(frontendApplication.getMotive());
+            newFrontendApplication.setHardWork(frontendApplication.getHardWork());
+            newFrontendApplication.setKeyWord(frontendApplication.getKeyWord());
+            newFrontendApplication.setMostDeeplyWork(frontendApplication.getMostDeeplyWork());
+
+            newFrontendApplication.setPassOrNot(frontendApplication.getPassOrNot());
+
+            newFrontendApplication.setWhyFrontend(frontendApplication.getWhyFrontend());
+            newFrontendApplication.setUsingStack(frontendApplication.getUsingStack());
+            newFrontendApplication.setTeamProject(frontendApplication.getTeamProject());
+            newFrontendApplication.setAchieve(frontendApplication.getAchieve());
 
             updatedFrontendApplication = frontendApplicationRepository.save(newFrontendApplication);
 
