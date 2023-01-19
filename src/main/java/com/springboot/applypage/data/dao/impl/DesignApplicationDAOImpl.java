@@ -45,13 +45,26 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
 
         if(selectDesignApplication.isPresent()){
             DesignApplication newDesignApplication = selectDesignApplication.get();
+
             newDesignApplication.setPhoneNumber(designApplication.getPhoneNumber());
             newDesignApplication.setPortfolioFile(designApplication.getPortfolioFile());
             newDesignApplication.setPortfolioLink(designApplication.getPortfolioLink());
-            newDesignApplication.setMotive(designApplication.getMotive());
             newDesignApplication.setName(designApplication.getName());
             newDesignApplication.setEmail(designApplication.getEmail());
             newDesignApplication.setUpdatedAt(LocalDateTime.now());
+            newDesignApplication.setDepartment(designApplication.getDepartment());
+
+            newDesignApplication.setMotive(designApplication.getMotive());
+            newDesignApplication.setHardWork(designApplication.getHardWork());
+            newDesignApplication.setKeyWord(designApplication.getKeyWord());
+            newDesignApplication.setMostDeeplyWork(designApplication.getMostDeeplyWork());
+
+            newDesignApplication.setPassOrNot(designApplication.getPassOrNot());
+
+            newDesignApplication.setWhyDesign(designApplication.getWhyDesign());
+            newDesignApplication.setToolExperience(designApplication.getToolExperience());
+            newDesignApplication.setTeamworkExperience(designApplication.getTeamworkExperience());
+            newDesignApplication.setDesignGrowth(designApplication.getDesignGrowth());
 
             updateDesignApplication = designApplicationRepository.save(newDesignApplication);
         }else{
