@@ -1,324 +1,320 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react'
-import { WrapperProps } from '../App'
-import { css } from '@emotion/react'
-import banner from '../images/banner.png'
-import loading from '../images/loading.gif';
+import React, { ChangeEvent, useState } from 'react'
 import axios from 'axios';
-
-const Section = ({ children }: WrapperProps) => {
-    return (
-        <section css={css`
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%);
-            max-width: 75em;
-            width: 100%;
-            background-color: white;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 5em;
-            row-gap: 1.1em;
-        `}>
-            {children}
-        </section>
-    )
-}
-
-const InputTitle = ({ children }: WrapperProps) => {
-    return (
-        <p css={css`
-            font-family: 'Pretendard-Bold';
-            letter-spacing: -0.03em;
-            font-size: 16px;
-
-            display: flex;
-            align-items: center;
-        `}>
-            {children}
-        </p>
-    )
-}
-
-const Article = ({ children }: WrapperProps) => {
-    return (
-        <article css={css`
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            justify-content: center;
-        `}>
-            {children}
-        </article>
-    )
-}
-
-const Button = (props: WrapperProps) => {
-    return (
-        <button css={css`
-            font-family: 'Pretendard-Bold';
-            letter-spacing: -0.03em;
-            font-size: 16px;
-            width: 15em;
-            height: 3.5em;
-            border: none;
-            border-radius: 7px;
-            color: white;
-            cursor: pointer;
-            transition: 0.5s all;
-            ${props.name === "임시저장" && `background-color : #262626;`}
-            ${props.name === "제출하기" && `background-color : #ff7828;`}
-
-            &:hover {
-                opacity: 80%;
-            }
-        `}{...props}>
-            {props.children}
-        </button>
-    )
-}
-
-const ButtonBox = () => {
-    return (
-        <div css={css`
-            display: flex;
-            column-gap: 1em;
-            margin-top: 3em;
-        `}>
-            <Button name="임시저장">임시저장</Button>
-            <Button name="제출하기">제출하기</Button>
-        </div>
-    )
-}
-
-interface InputType {
-    type?: string;
-    placeholder?: string;
-    value?: string;
-    disabled?: boolean;
-    maxlength?: string;
-}
-
-const TextAreaBox = (props: InputType) => {
-    return (
-        <textarea css={css`
-        font-family: 'Pretendard-Medium';
-        letter-spacing: -0.03em;
-        line-height: 1.5em;
-        padding: 0;
-        padding-left: 1em;
-        padding-bottom: 1em;
-        padding-right: 1em;
-        padding-top: 1em;
-        width: 62.5em;
-        height: 15em;
-        border: solid;
-        border-radius: 15px;
-        border-color: #707070;
-        border-width: 1px;
-        font-size: 16px;
-        box-sizing: border-box;
-        resize: none;
-        
-        &:focus {
-            outline-color: #ff7828;
-        }
-
-        &::placeholder {
-            font-family: 'Pretendard-Light';
-        }
-        `} maxlength="1000" {...props} />
-    )
-}
-
-const UploadButton = () => {
-    return (
-        <div css={css`
-            position: absolute;
-            font-family: 'Pretendard-Bold';
-            letter-spacing: -0.03em;
-            font-size: 15px;
-            border: none;
-            border-radius: 7px;
-            width: 5.8em;
-            height: 2em;       
-            background-color: #ff7828;     
-            margin-left: 59em;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            cursor: pointer;
-            transition: 0.5s all;
-
-            &:hover {
-                opacity: 80%;
-            }
-        `}>
-            <span css={css`
-                color: white;
-            `}>업로드</span>
-        </div>
-    )
-}
-
-const InputBox = (props: InputType) => {
-    return (
-        <input css={css`
-        font-family: 'Pretendard-Medium';
-        letter-spacing: -0.03em;
-        padding: 0;
-        padding-left: 1em;
-        width: 62.5em;
-        height: 3.7em;
-        border: solid;
-        border-radius: 15px;
-        border-color: #707070;
-        border-width: 1px;
-        font-size: 16px;
-        box-sizing: border-box;
-
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        &:focus {
-            outline-color: #ff7828;
-        }
-
-        &::placeholder {
-            font-family: 'Pretendard-Light';
-        }
-        `}{...props} />
-    )
-}
-
-interface PositionType {
-    name: string;
-    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    children: React.ReactNode;
-    state: string;
-}
-
-const Position = (props: PositionType) => {
-    return (
-        <button css={css`
-            font-family: 'Pretendard-Medium';
-            letter-spacing: -0.03em;
-            font-size: 16px;
-            height: 3.7em;
-            border-radius: 50px;
-            border: solid;
-            border-width: 1px;
-            border-color: #707070;
-            transition: 0.5s all;
-            cursor: pointer;
-
-            ${props.name === props.state ? css`
-            color: white;
-            background-color: #ff7828;
-            border: none;
-            ` : css`
-            background-color: white;
-            color: #707070;
-
-            &:hover {
-                border-color: #ff7828;
-                color:  #ff7828;
-            }
-            `}
-        `}{...props}>{props.children}</button>
-    )
-}
-
-const PositionBox = ({ children }: WrapperProps) => {
-    return (
-        <div css={css`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 1em;
-    font-size: 16px;
-    width: 62.5em;
-`}>
-            {children}
-        </div>
-    )
-}
-
-// 로딩중을 표시하는 컴포넌트
-const Loading = () => {
-    return (
-        <img alt="로딩 이미지" src={loading} css={css`
-            width: 12em;
-        `} />
-    )
-}
-
-const Require = () => {
-    return (
-        <div css={css`
-            margin-left: 0.4em;
-        `}>
-            <span css={css`
-                font-family: 'Pretendard-Medium';
-                letter-spacing: -0.03em;
-                font-size: 15px;
-                color: #ff0000;
-            `}>* </span>
-        </div>
-    )
-}
-
-const Banner = () => {
-    return (
-        <img alt="배너 이미지" src={banner} css={css`
-            margin-top: 40px;
-            max-width: 1000px;
-        `} />
-    )
-}
+import checkBox from '../images/checkBox.svg';
+import checkedBox from '../images/checkedBox.svg';
+import { useMemo } from 'react';
+import { css, keyframes } from "@emotion/react";
+import { fadeLeft, fadeUp } from '../styles/Keyframes';
+import { Section, Banner, Article, InputTitle, InputBox, PositionBox, Position, Require, Precautions, ArgreeBox, Argree, ButtonBox, Button, Modal } from './emotion/component';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, TestState } from '../app/store';
+import { view, saveIndex, saveBackEnd, saveCommon, saveFrontEnd, saveDesign } from '../features/fetcherSlice';
+import { useEffect } from 'react';
 
 export default function Index() {
+    const [name, setName] = useState<string>('');
+    const [id, setID] = useState<number | string>('');
+    const [email, setEmail] = useState<string>('');
+    const [phone, setPhone] = useState<number | string>('');
+    const [department, setDepartment] = useState<string>('');
+    const [temp, setTemp] = useState<boolean>(false);
 
-    const [frontend, setFrontEnd] = useState<boolean>(false);
-    const [backend, setBackEnd] = useState<boolean>(false);
-    const [design, setDesign] = useState<boolean>(false);
     const [position, setPosition] = useState<string>('');
+    const [precautions, setPrecautions] = useState<boolean>(false);
+    const [privacy, setPrivacy] = useState<boolean>(false);
+    const [buttonState, setButtonState] = useState<boolean>(false);
+    const [tempButtonState, setTempButtonState] = useState<boolean>(false);
+    const [submitCount, setSubmitCount] = useState<number>(0);
+    const [tempCount, setTempCount] = useState<number>(0);
+
+    const userName = useSelector((state: TestState) => state.fetcher.userName);
+    const userID = useSelector((state: TestState) => state.fetcher.userID);
+    const userPhone = useSelector((state: TestState) => state.fetcher.userPhone);
+    const userEmail = useSelector((state: TestState) => state.fetcher.userEmail);
+    const userPosition = useSelector((state: TestState) => state.fetcher.userPosition);
+    const userDepartment = useSelector((state: TestState) => state.fetcher.userDepartment);
+
+
+    useEffect(() => {
+        // 이전 값들을 저장하기 위해서 Redux 사용
+        if (userName && userID && userPhone && userEmail && userPosition && userDepartment) {
+            setName(userName);
+            setID(userID);
+            setEmail(userEmail);
+            setPhone(userPhone);
+            setPosition(userPosition);
+            setDepartment(userDepartment);
+        }
+    }, [])
+
+    useMemo(() => {
+        if (name && id && email && phone && position && precautions && privacy && department) {
+            setButtonState(false)
+        } else {
+            setButtonState(true)
+        }
+
+        if (submitCount >= 1) {
+            setButtonState(true);
+        }
+
+        if (tempCount >= 1) {
+            setTempButtonState(true);
+        }
+
+    }, [name, id, email, phone, position, precautions, privacy, department, submitCount, tempCount])
+
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+
+    const handleTemp = async () => {
+        if (position) {
+            if (position === "백엔드") {
+                await axios.get(`/backendApplication?sid=${id}`)
+                    .then(async (res) => {
+                        if (res.data.motiv || res.data.hardwork || res.data.keyword || res.data.mostDeeplyWork) {
+                            setTemp(!temp);
+                            if (window.confirm("임시저장된 게시물을 이어서 쓸까요?")) {
+                                await dispatch(saveIndex({ userName: res.data.name, userID: res.data.sid, userPhone: res.data.phoneNumber, userEmail: res.data.email, userPosition: position, userDepartment: res.data.department }));
+                                await dispatch(saveBackEnd({ userDifficultAndOvercoming: res.data.difficultAndOvercoming, userImportantGroup: res.data.importantGroup, userPortfolioLink: res.data.portfolioLink, userStudyFramework: res.data.studyFramework }));
+                                await dispatch(saveCommon({ userMotiv: res.data.motive, userHardWork: res.data.hardWork, userKeyword: res.data.keyWord, userMostDeeplyWork: res.data.mostDeeplyWork }));
+                                await navigate('/common');
+                            } else {
+                                await dispatch(saveIndex({ userName: name, userID: id, userPhone: phone, userEmail: email, userPosition: position, userDepartment: department }));
+                                navigate('/common');
+                            }
+                        } else {
+                            alert("저장된 지원서가 없습니다!");
+                        }
+                    })
+            }
+
+            if (position === "프론트엔드") {
+                await axios.get(`/frontendApplication?sid=${id}`)
+                    .then(async (res) => {
+                        if (res.data.motiv || res.data.hardwork || res.data.keyword || res.data.mostDeeplyWork) {
+                            setTemp(!temp);
+                            if (window.confirm("임시저장된 게시물을 이어서 쓸까요?")) {
+                                await dispatch(saveIndex({ userName: res.data.name, userID: res.data.sid, userPhone: res.data.phoneNumber, userEmail: res.data.email, userPosition: position, userDepartment: res.data.department }));
+                                await dispatch(saveFrontEnd({ userWhyFrontend: res.data.whyFrontend, userUsingStack: res.data.usingStack, userTeamProject: res.data.teamProject, userAchieve: res.data.achieve, userPortfolioLinkFront: res.data.portfolioLink }));;
+                                await dispatch(saveCommon({ userMotiv: res.data.motive, userHardWork: res.data.hardWork, userKeyword: res.data.keyWord, userMostDeeplyWork: res.data.mostDeeplyWork }));
+                                await navigate('/common');
+                            } else {
+                                await dispatch(saveIndex({ userName: name, userID: id, userPhone: phone, userEmail: email, userPosition: position, userDepartment: department }));
+                                navigate('/common');
+                            }
+                        } else {
+                            alert("저장된 지원서가 없습니다!");
+                        }
+                    })
+            }
+
+            if (position === "디자인") {
+                await axios.get(`/backendApplication?sid=${id}`)
+                    .then(async (res) => {
+                        if (res.data.motiv || res.data.hardwork || res.data.keyword || res.data.mostDeeplyWork) {
+                            setTemp(!temp);
+                            if (window.confirm("임시저장된 게시물을 이어서 쓸까요?")) {
+                                await dispatch(saveIndex({ userName: res.data.name, userID: res.data.sid, userPhone: res.data.phoneNumber, userEmail: res.data.email, userPosition: position, userDepartment: res.data.department }));
+                                await dispatch(saveDesign({
+                                    userWhyDesign: res.data.whyDesign, userToolExperience: res.data.toolExperience, userTeamworkExperience: res.data.teamworkExperience, userPortfolioLinkDesign: res.data.portfolioLink, userDesignGrowth: res.data.designGrowth,
+                                }));
+                                await dispatch(saveCommon({ userMotiv: res.data.motive, userHardWork: res.data.hardWork, userKeyword: res.data.keyWord, userMostDeeplyWork: res.data.mostDeeplyWork }));
+                                await navigate('/common');
+                            } else {
+                                await dispatch(saveIndex({ userName: name, userID: id, userPhone: phone, userEmail: email, userPosition: position, userDepartment: department }));
+                                navigate('/common');
+                            }
+                        } else {
+                            alert("저장된 지원서가 없습니다!");
+                        }
+                    })
+            }
+        } else {
+            alert("포지션을 먼저 선택해주세요!");
+        }
+    }
+
+    const handleClick = async () => {
+        if (position) {
+            setSubmitCount((prev) => (prev + 1))
+            if (position === "백엔드") {
+                await axios.get(`/backendApplication?sid=${id}`)
+                    .then(async (res) => {
+                        if (res.data.motiv || res.data.hardwork || res.data.keyword || res.data.mostDeeplyWork) {
+                            setTemp(!temp);
+                        } else {
+                            dispatch(saveIndex({ userName: name, userID: id, userPhone: phone, userEmail: email, userPosition: position, userDepartment: department }));
+                            navigate('/common');
+                        }
+                    })
+            }
+
+            if (position === "프론트엔드") {
+                await axios.get(`/frontendApplication?sid=${id}`)
+                    .then(async (res) => {
+                        if (res.data.motiv || res.data.hardwork || res.data.keyword || res.data.mostDeeplyWork) {
+                            setTemp(!temp);
+                        } else {
+                            dispatch(saveIndex({ userName: name, userID: id, userPhone: phone, userEmail: email, userPosition: position, userDepartment: department }));
+                            navigate('/common');
+                        }
+                    })
+            }
+
+            if (position === "디자인") {
+                await axios.get(`/backendApplication?sid=${id}`)
+                    .then(async (res) => {
+                        if (res.data.motiv || res.data.hardwork || res.data.keyword || res.data.mostDeeplyWork) {
+                            setTemp(!temp);
+                        } else {
+                            dispatch(saveIndex({ userName: name, userID: id, userPhone: phone, userEmail: email, userPosition: position, userDepartment: department }));
+                            navigate('/common');
+                        }
+                    })
+            }
+        }
+    }
+
+    const continueApply = async () => {
+        setTempCount((prev) => (prev + 1))
+        if (position === "백엔드") {
+            await axios.get(`/backendApplication?sid=${id}`)
+                .then(async (res) => {
+                    await dispatch(saveIndex({ userName: res.data.name, userID: res.data.sid, userPhone: res.data.phoneNumber, userEmail: res.data.email, userPosition: position, userDepartment: res.data.department }));
+                    await dispatch(saveBackEnd({ userDifficultAndOvercoming: res.data.difficultAndOvercoming, userImportantGroup: res.data.importantGroup, userPortfolioLink: res.data.portfolioLink, userStudyFramework: res.data.studyFramework }));
+                    await dispatch(saveCommon({ userMotiv: res.data.motive, userHardWork: res.data.hardWork, userKeyword: res.data.keyWord, userMostDeeplyWork: res.data.mostDeeplyWork }));
+                    await navigate('/common');
+                })
+        }
+
+        if (position === "프론트엔드") {
+            await axios.get(`/frontendApplication?sid=${id}`)
+                .then(async (res) => {
+                    await dispatch(saveIndex({ userName: res.data.name, userID: res.data.sid, userPhone: res.data.phoneNumber, userEmail: res.data.email, userPosition: position, userDepartment: res.data.department }));
+                    await dispatch(saveFrontEnd({ userWhyFrontend: res.data.whyFrontend, userUsingStack: res.data.usingStack, userTeamProject: res.data.teamProject, userAchieve: res.data.achieve, userPortfolioLinkFront: res.data.portfolioLink }));;
+                    await dispatch(saveCommon({ userMotiv: res.data.motive, userHardWork: res.data.hardWork, userKeyword: res.data.keyWord, userMostDeeplyWork: res.data.mostDeeplyWork }));
+                    await navigate('/common');
+                })
+        }
+
+        if (position === "디자인") {
+            await axios.get(`/backendApplication?sid=${id}`)
+                .then(async (res) => {
+                    await dispatch(saveIndex({ userName: res.data.name, userID: res.data.sid, userPhone: res.data.phoneNumber, userEmail: res.data.email, userPosition: position, userDepartment: res.data.department }));
+                    await dispatch(saveDesign({
+                        userWhyDesign: res.data.whyDesign, userToolExperience: res.data.toolExperience, userTeamworkExperience: res.data.teamworkExperience, userPortfolioLinkDesign: res.data.portfolioLink, userDesignGrowth: res.data.designGrowth,
+                    }));
+                    await dispatch(saveCommon({ userMotiv: res.data.motive, userHardWork: res.data.hardWork, userKeyword: res.data.keyWord, userMostDeeplyWork: res.data.mostDeeplyWork }));
+                    await navigate('/common');
+                })
+        }
+    }
+
+    const newApply = async () => {
+        await setTempCount((prev) => (prev + 1))
+        await dispatch(saveIndex({ userName: name, userID: id, userPhone: phone, userEmail: email, userPosition: position, userDepartment: department }));
+        if (position === "프론트엔드") {
+            await dispatch(saveFrontEnd({
+                userWhyFrontend: '',
+                userUsingStack: '',
+                userAchieve: '',
+                userPortfolioLinkFront: '',
+                userTeamProject: '',
+            }));
+        }
+        if (position === "디자인") {
+            await dispatch(saveDesign({
+                userWhyDesign: '',
+                userToolExperience: '',
+                userTeamworkExperience: '',
+                userPortfolioLinkDesign: '',
+                userDesignGrowth: '',
+            }));
+        }
+
+        if (position === "백엔드") {
+            await dispatch(saveBackEnd({
+                userDifficultAndOvercoming: '',
+                userImportantGroup: '',
+                userPortfolioLink: '',
+                userStudyFramework: '',
+            }));
+        }
+
+        await dispatch(saveCommon({
+            userMotiv: '',
+            userHardWork: '',
+            userKeyWord: '',
+            userMostDeeplyWork: '',
+        }))
+        navigate('/common');
+    }
 
     function CheckPosition(event: React.MouseEvent<HTMLButtonElement>): void {
         const name = (event.target as HTMLButtonElement).name;
         setPosition(name);
     }
 
+    const checking = (event: React.MouseEvent<HTMLImageElement>): void => {
+        const name = (event.target as HTMLImageElement).alt;
+        if (name === "주의사항") {
+            setPrecautions(!precautions);
+        }
+        if (name === "개인정보") {
+            setPrivacy(!privacy);
+        }
+    }
+
+    const changeValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.name === "이름") {
+            setName(event.target.value);
+        }
+        if (event.target.name === "학번") {
+            setID(event.target.value);
+        }
+        if (event.target.name === "이메일") {
+            setEmail(event.target.value);
+        }
+        if (event.target.name === "연락처") {
+            setPhone(event.target.value);
+        }
+        if (event.target.name === "학과") {
+            setDepartment(event.target.value);
+        }
+    }
+
     return (
         <Section>
+            {temp ?
+                <Modal>
+                    <Button name="임시저장" onClick={newApply} disabled={tempButtonState}>{tempCount >= 1 ? `잠시만 기다려주세요...` : `새로 작성하기`}</Button>
+                    <Button name="제출하기" onClick={continueApply} disabled={tempButtonState}>{tempCount >= 1 ? `잠시만 기다려주세요...` : `이어서 작성하기`}</Button>
+                </Modal>
+                : null
+            }
             <Banner />
-            {/* <Article>
-                <InputTitle>멋쟁이사자처럼 강남대학교 구성원 모집의 기본이 되는 정보이므로 정확하게 입력해 주시기 바랍니다.</InputTitle>
-                <InputTitle>서류접수 제출 이전에는 자유롭게 지원서 수정 및 접수 취소가 가능합니다.</InputTitle>
-                <InputTitle>서류접수 마감 이후에는 지원서 수정 및 접수 취소가 불가능합니다.</InputTitle>
-                <InputTitle>서류접수 마감 직전에는 지원서 접수가 원활하지 않을 수 있으므로 여유롭게 제출 부탁 드립니다.</InputTitle>
-            </Article> */}
             <Article>
                 <InputTitle>이름 <Require /> </InputTitle>
-                <InputBox type="text" placeholder="이름을 입력해주세요" />
+                <InputBox type="text" placeholder="이름을 입력해주세요" name="이름" onChange={changeValue} value={name} />
             </Article>
             <Article>
                 <InputTitle>학번 <Require /> </InputTitle>
-                <InputBox type="number" placeholder="학번을 입력해주세요" />
+                <InputBox type="number" placeholder="학번을 입력해주세요" name="학번" onChange={changeValue} value={id} />
+            </Article>
+            <Article>
+                <InputTitle>학과 <Require /> </InputTitle>
+                <InputBox type="string" placeholder="학과를 입력해주세요" name="학과" onChange={changeValue} value={department} />
             </Article>
             <Article>
                 <InputTitle>이메일 <Require /> </InputTitle>
-                <InputBox type="text" placeholder="이메일을 입력해주세요" />
+                <InputBox type="text" placeholder="이메일을 입력해주세요" name="이메일" onChange={changeValue} value={email} />
             </Article>
             <Article>
-                <InputTitle>연락처 <Require /> </InputTitle>
-                <InputBox type="number" placeholder="연락 가능한 번호를 입력해주세요" />
+                <InputTitle>연락처 (하이픈을 제외한 숫자만 입력)<Require /> </InputTitle>
+                <InputBox type="number" placeholder="연락 가능한 번호를 입력해주세요" name="연락처" onChange={changeValue} value={phone} />
             </Article>
             <Article>
                 <InputTitle>지원 포지션 <Require /> </InputTitle>
@@ -328,46 +324,18 @@ export default function Index() {
                     <Position name="디자인" onClick={CheckPosition} state={position}>디자인</Position>
                 </PositionBox>
             </Article>
-            {/* <Article>
-                <label htmlFor="select1">Label Text</label>
-                <select id="select1">
-                    <option>백앤드</option>
-                    <option>프론트엔드</option>
-                    <option>디자인</option>
-                </select>
-            </Article> */}
             <Article>
-                <InputTitle>멋쟁이사자처럼에 지원을 하게 된 동기를 알려주세요 (최대 1000자)<Require /> </InputTitle>
-                <TextAreaBox placeholder="텍스트를 입력해주세요" />
+                <Precautions />
             </Article>
             <Article>
-                <InputTitle>본인의 장단점은 무엇이고 이 장단점이 어떻게 활동될 수 있는지 서술해주세요 (최대 1000자)<Require /> </InputTitle>
-                <TextAreaBox placeholder="텍스트를 입력해주세요" />
+                <ArgreeBox>
+                    <Argree name="주의사항" src={precautions ? checkedBox : checkBox} text="위의 주의사항을 확인하였습니다" onClick={checking} />
+                    <Argree name="개인정보" src={privacy ? checkedBox : checkBox} text="개인 정보 수집 및 이용에 동의합니다 (모집 종료 후 개인정보는 자동으로 파기됩니다)" onClick={checking} />
+                </ArgreeBox>
             </Article>
-            <Article>
-                <InputTitle>가장 열정적으로 했었던 일과 이를 통해서 이룬 것에 대해 느낀점 중심으로 서술해주세요 (최대 1000자)<Require /> </InputTitle>
-                <TextAreaBox placeholder="텍스트를 입력해주세요" />
-            </Article>
-            <Article>
-                <InputTitle>갈등이 발생했던 구체적인 상황과 이를 극복하기 위해 노력했던 사례를 느낀 점 중심으로 서술해주세요 (최대 1000자)<Require /> </InputTitle>
-                <TextAreaBox placeholder="텍스트를 입력해주세요" />
-            </Article>
-            <Article>
-                <InputTitle>자신이 멋쟁이사자처럼에 들어와 실현시키고 싶은 IT 서비스에 대해서 설명을 해주세요 (최대 1000자)<Require /> </InputTitle>
-                <TextAreaBox placeholder="텍스트를 입력해주세요" />
-            </Article>
-            <Article>
-                <InputTitle>포트폴리오 링크 첨부</InputTitle>
-                <InputBox type="text" placeholder="포트폴리오 링크를 첨부해주세요" />
-            </Article>
-            <Article>
-                <InputTitle>포트폴리오 파일 첨부</InputTitle>
-                <Article>
-                    <InputBox type="text" placeholder="파일형식 : JPG, PNG, PDF, PPT, PPTX, HWP, HWPX" value="" disabled={true} />
-                    <UploadButton />
-                </Article>
-            </Article>
-            <ButtonBox />
+            <ButtonBox>
+                <Button name="제출하기" disabled={buttonState} onClick={handleClick}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `공통문항 작성하기`}</Button>
+            </ButtonBox>
         </Section>
     )
 }
