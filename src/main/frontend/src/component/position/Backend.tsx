@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength } from '../emotion/component'
+import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength, Modal } from '../emotion/component'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,8 @@ import { AppDispatch, TestState } from '../../app/store';
 import { saveCommon, saveIndex, view, saveBackEnd } from '../../features/fetcherSlice';
 import { useEffect, useMemo } from 'react';
 import axios from 'axios';
+import tempImg from '../../images/temp.png';
+import completeImg from '../../images/complete.png';
 
 export default function Backend() {
 
@@ -17,8 +19,11 @@ export default function Backend() {
     const [importantGroup, setImportantGroup] = useState('');
     const [portfolioLink, setPortfolioLink] = useState('');
     const [buttonState, setButtonState] = useState(false);
+    const [backButtonState, setBackButtonState] = useState(false);
     const [submitCount, setSubmitCount] = useState<number>(0);
-
+    const [tempState, setTempState] = useState<boolean>(false);
+    const [temp, setTemp] = useState<boolean>(false);
+    const [complete, setComplete] = useState<boolean>(false);
 
     const userName = useSelector((state: TestState) => state.fetcher.userName);
     const userID = useSelector((state: TestState) => state.fetcher.userID);
@@ -38,6 +43,8 @@ export default function Backend() {
     const userPortfolioLink = useSelector((state: TestState) => state.fetcher.userPortfolioLinkBack);
 
     useEffect(() => {
+        document.body.style.overflow = "unset";
+
         if (!userName && !userID && !userPhone && !userEmail && !userPosition) {
             alert('잘못된 접근입니다!');
             navigate('/')
@@ -62,6 +69,14 @@ export default function Backend() {
     }, [])
 
     useMemo(() => {
+
+        // 백엔드 파트로 들어왔을 때는 공통 질문이 하나라도 작성된 상태이기 때문에 바로 임시저장이 가능함
+        if (userMotiv || userHardWork || userKeyWord || userMostDeeplyWork) {
+            setTempState(false);
+        } else {
+            setTempState(true);
+        }
+
         if (difficultAndOvercoming && studyFramework && importantGroup) {
             setButtonState(false)
         } else {
@@ -69,6 +84,7 @@ export default function Backend() {
         }
         if (submitCount >= 1) {
             setButtonState(true);
+            setBackButtonState(true);
         }
     }, [difficultAndOvercoming, studyFramework, importantGroup, submitCount])
 
@@ -97,6 +113,8 @@ export default function Backend() {
             portfolioLink: portfolioLink,
             sid: userID,
             studyFramework: studyFramework,
+            submissionStatus: false,
+
         }),
             {
                 headers: {
@@ -126,7 +144,8 @@ export default function Backend() {
                     userPhone: '',
                     userPosition: '',
                 }))
-                navigate('/');
+                setTemp(!temp);
+                document.body.style.overflow = "hidden";
             })
     }
 
@@ -148,6 +167,7 @@ export default function Backend() {
             portfolioLink: portfolioLink,
             sid: userID,
             studyFramework: studyFramework,
+            submissionStatus: true,
         }),
             {
                 headers: {
@@ -177,21 +197,28 @@ export default function Backend() {
                     userPhone: '',
                     userPosition: '',
                 }))
-                navigate('/');
+                setComplete(!complete);
+                document.body.style.overflow = "hidden";
             })
     }
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "극복") {
-            setDifficultAndOvercoming(event.target.value);
+            if (event.target.value.length <= 1000) {
+                setDifficultAndOvercoming(event.target.value);
+            }
         }
 
         if (event.target.name === "경험") {
-            setStudyFramework(event.target.value);
+            if (event.target.value.length <= 1000) {
+                setStudyFramework(event.target.value);
+            }
         }
 
         if (event.target.name === "팀워크") {
-            setImportantGroup(event.target.value);
+            if (event.target.value.length <= 1000) {
+                setImportantGroup(event.target.value);
+            }
         }
 
         if (event.target.name === "포트폴리오") {
@@ -201,6 +228,18 @@ export default function Backend() {
 
     return (
         <Section>
+            {complete ?
+                <Modal text="지원서가 정상적으로 제출되었습니다!" imgSrc={completeImg} alt="최종제출">
+                    <Button name="제출하기" onClick={() => navigate('/')}>메인 화면으로 이동</Button>
+                </Modal>
+                : null
+            }
+            {temp ?
+                <Modal text="소중한 지원서가 학번으로 지원서가 저장이 되었어요!" imgSrc={tempImg}>
+                    <Button name="제출하기" onClick={() => navigate('/')}>메인 화면으로 이동</Button>
+                </Modal>
+                : null
+            }
             <Banner />
             <Article>
                 <InputTitle>개발 관련 공부를 하며 개인적으로 힘들었던 경험과 그걸 극복했던 자신만의 방법이 있나요?<Require /> </InputTitle>
@@ -222,8 +261,8 @@ export default function Backend() {
                 <InputBox type="text" placeholder="포트폴리오 링크를 입력해주세요" maxLength={200} name="포트폴리오" onChange={handleChange} value={portfolioLink} />
             </Article>
             <ButtonBox>
-                <Button name="임시저장" onClick={TempSave}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `임시저장`}</Button>
-                <Button name="제출하기" onClick={Back} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
+                <Button name="임시저장" onClick={TempSave} disabled={tempState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `임시저장`}</Button>
+                <Button name="제출하기" onClick={Back} disabled={backButtonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
                 <Button name="제출하기" onClick={Submit} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `제출하기`}</Button>
             </ButtonBox>
         </Section>

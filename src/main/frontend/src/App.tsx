@@ -13,6 +13,9 @@ import ScrollToTop from './hooks/ScrollToTop';
 export interface WrapperProps {
   children: React.ReactNode;
   name?: string;
+  text?: string;
+  imgSrc?: string;
+  alt?: string;
 }
 
 function App() {

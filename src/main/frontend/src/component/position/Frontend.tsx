@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength } from '../emotion/component'
+import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength, Modal } from '../emotion/component'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,8 @@ import { AppDispatch, TestState } from '../../app/store';
 import { saveCommon, saveIndex, view, saveFrontEnd } from '../../features/fetcherSlice';
 import { useEffect, useMemo } from 'react';
 import axios from 'axios';
+import tempImg from '../../images/temp.png';
+import completeImg from '../../images/complete.png';
 
 export default function Frontend() {
 
@@ -19,6 +21,9 @@ export default function Frontend() {
     const [buttonState, setButtonState] = useState(false);
     const [portfolioLink, setPortfolioLink] = useState('');
     const [submitCount, setSubmitCount] = useState<number>(0);
+    const [tempState, setTempState] = useState<boolean>(false);
+    const [temp, setTemp] = useState<boolean>(false);
+    const [complete, setComplete] = useState<boolean>(false);
 
 
     const userName = useSelector((state: TestState) => state.fetcher.userName);
@@ -40,7 +45,7 @@ export default function Frontend() {
     const userPortfolioLink = useSelector((state: TestState) => state.fetcher.userPortfolioLinkFront);
 
     useEffect(() => {
-
+        document.body.style.overflow = "unset";
         if (!userName && !userID && !userPhone && !userEmail && !userPosition) {
             alert('잘못된 접근입니다!');
             navigate('/')
@@ -66,6 +71,14 @@ export default function Frontend() {
     }, [])
 
     useMemo(() => {
+
+        // 프론트엔드 파트로 들어왔을 때는 공통 질문이 하나라도 작성된 상태이기 때문에 바로 임시저장이 가능함
+        if (userMotiv || userHardWork || userKeyWord || userMostDeeplyWork) {
+            setTempState(false);
+        } else {
+            setTempState(true);
+        }
+
         if (whyFrontend && usingStack && teamProject && achieve) {
             setButtonState(false)
         } else {
@@ -103,7 +116,8 @@ export default function Frontend() {
                 portfolioLink: portfolioLink,
                 sid: userID,
                 teamProject: teamProject,
-                achieve: achieve
+                achieve: achieve,
+                submissionStatus: false,
             }),
                 {
                     headers: {
@@ -134,11 +148,15 @@ export default function Frontend() {
                         userPhone: '',
                         userPosition: '',
                     }))
-                    navigate('/');
+                    setTemp(!temp);
+                    document.body.style.overflow = "hidden";
                 })
         }
     }
 
+    const OpenSubmit = () => {
+        setComplete(!complete);
+    }
 
     const Submit = () => {
         setSubmitCount((prev) => (prev + 1))
@@ -158,7 +176,8 @@ export default function Frontend() {
             portfolioLink: portfolioLink,
             sid: userID,
             teamProject: teamProject,
-            achieve: achieve
+            achieve: achieve,
+            submissionStatus: true,
         }),
             {
                 headers: {
@@ -189,25 +208,35 @@ export default function Frontend() {
                     userPhone: '',
                     userPosition: '',
                 }))
-                navigate('/');
+                setComplete(!complete)
+                document.body.style.overflow = "hidden";
             })
     }
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "동기") {
-            setWhyFrontend(event.target.value);
+            if (event.target.value.length <= 1000) {
+                setWhyFrontend(event.target.value);
+            }
         }
 
         if (event.target.name === "프레임워크") {
-            setUsingStack(event.target.value);
+            if (event.target.value.length <= 1000) {
+
+                setUsingStack(event.target.value);
+            }
         }
 
         if (event.target.name === "경험") {
-            setTeamProject(event.target.value);
+            if (event.target.value.length <= 1000) {
+                setTeamProject(event.target.value);
+            }
         }
 
         if (event.target.name === "성장") {
-            setAchieve(event.target.value);
+            if (event.target.value.length <= 1000) {
+                setAchieve(event.target.value);
+            }
         }
 
         if (event.target.name === "포트폴리오") {
@@ -217,6 +246,18 @@ export default function Frontend() {
 
     return (
         <Section>
+            {complete ?
+                <Modal text="지원서가 정상적으로 제출되었습니다!" imgSrc={completeImg} alt="최종제출">
+                    <Button name="제출하기" onClick={() => navigate('/')}>메인 화면으로 이동</Button>
+                </Modal>
+                : null
+            }
+            {temp ?
+                <Modal text="지원하신 학번으로 지원서가 저장이 되었어요!" imgSrc={tempImg}>
+                    <Button name="제출하기" onClick={() => navigate('/')}>메인 화면으로 이동</Button>
+                </Modal>
+                : null
+            }
             <Banner />
             <Article>
                 <InputTitle>프론트엔드 트랙을 선택하게 된 이유를 구체적으로 서술해주세요<Require /> </InputTitle>
@@ -243,7 +284,7 @@ export default function Frontend() {
                 <InputBox type="text" placeholder="포트폴리오 링크를 입력해주세요" maxLength={200} name="포트폴리오" onChange={handleChange} value={portfolioLink} />
             </Article>
             <ButtonBox>
-                <Button name="임시저장" onClick={TempSave} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `임시저장`}</Button>
+                <Button name="임시저장" onClick={TempSave} disabled={tempState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `임시저장`}</Button>
                 <Button name="제출하기" onClick={Back}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
                 <Button name="제출하기" onClick={Submit} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `제출하기`}</Button>
             </ButtonBox>
