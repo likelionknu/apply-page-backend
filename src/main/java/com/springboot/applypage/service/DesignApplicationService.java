@@ -1,6 +1,10 @@
 package com.springboot.applypage.service;
 
 import com.springboot.applypage.data.dto.DesignApplicationDto;
+import com.springboot.applypage.data.entity.BackendApplication;
+import com.springboot.applypage.data.entity.DesignApplication;
+
+import java.util.List;
 
 public interface DesignApplicationService {
     DesignApplicationDto getDesignApplication(String sid);
@@ -9,4 +13,6 @@ public interface DesignApplicationService {
             throws Exception;
     void deleteDesignApplication(String sid) throws Exception;
     void changePossOrNot(String sid) throws Exception;
+    List<DesignApplication> getReturn(Boolean dir);
+
 }

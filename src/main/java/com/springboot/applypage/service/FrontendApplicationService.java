@@ -1,6 +1,10 @@
 package com.springboot.applypage.service;
 
 import com.springboot.applypage.data.dto.FrontendApplicationDto;
+import com.springboot.applypage.data.entity.DesignApplication;
+import com.springboot.applypage.data.entity.FrontendApplication;
+
+import java.util.List;
 
 public interface FrontendApplicationService {
     FrontendApplicationDto getFrontendApplication(String sid);
@@ -9,4 +13,5 @@ public interface FrontendApplicationService {
             throws Exception;
     void deleteFrontendApplication(String sid) throws Exception;
     void changePossOrNot(String sid) throws Exception;
+    List<FrontendApplication> getReturn(Boolean dir);
 }

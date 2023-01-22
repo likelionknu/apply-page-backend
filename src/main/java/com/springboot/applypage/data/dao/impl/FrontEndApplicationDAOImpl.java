@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
@@ -103,5 +105,12 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
         }else{
             throw new Exception();
         }
+    }
+
+    @Override
+    public List<FrontendApplication> getReturn(Boolean dir) {
+        return frontendApplicationRepository.findAll().stream()
+                .filter(passOrNot -> passOrNot.getPassOrNot().equals(dir))
+                .collect(Collectors.toList());
     }
 }

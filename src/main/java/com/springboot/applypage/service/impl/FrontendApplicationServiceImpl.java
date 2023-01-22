@@ -7,6 +7,8 @@ import com.springboot.applypage.service.FrontendApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FrontendApplicationServiceImpl implements FrontendApplicationService {
 
@@ -159,5 +161,10 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     @Override
     public void changePossOrNot(String sid) throws Exception {
         frontendApplicationDAO.changePassOrNot(sid);
+    }
+
+    @Override
+    public List<FrontendApplication> getReturn(Boolean dir) {
+        return frontendApplicationDAO.getReturn(dir);
     }
 }

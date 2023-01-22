@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class BackendApplicationDAOImpl implements BackendApplicationDAO {
@@ -90,6 +92,9 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
     @Override
     public void changePassOrNot(String sid) throws Exception {
         Optional<BackendApplication> selectedBackendApplication = backendApplicationRepository.findById(sid);
+        backendApplicationRepository.findAll().stream()
+                .filter(passOrNot -> passOrNot.getPassOrNot().equals(true))
+                .collect(Collectors.toList());
 
         if(selectedBackendApplication.isPresent()){
             BackendApplication newBackendApplication = selectedBackendApplication.get();
@@ -100,4 +105,12 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
             throw new Exception();
         }
     }
+
+    @Override
+    public List<BackendApplication> getReturn(Boolean dir) {
+        return backendApplicationRepository.findAll().stream()
+                .filter(passOrNot -> passOrNot.getPassOrNot().equals(dir))
+                .collect(Collectors.toList());
+    }
+
 }

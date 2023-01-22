@@ -1,6 +1,7 @@
 package com.springboot.applypage.controller;
 
 import com.springboot.applypage.data.dto.BackendApplicationDto;
+import com.springboot.applypage.data.entity.BackendApplication;
 import com.springboot.applypage.service.BackendApplicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/backendApplication")
@@ -72,6 +75,17 @@ public class BackendApplicationController {
         LOGGER.info("change backend application pass or not 호출");
 
         return ResponseEntity.status(HttpStatus.OK).body("성공적으로 변경 되었습니다.");
+    }
+
+
+    @GetMapping("/getApplications")
+    public ResponseEntity<List<BackendApplication>> getBackendApplicationWithBoolean(Boolean bool)
+    {
+        List<BackendApplication> backendApplicationResponse = backendApplicationService.getReturn(bool);
+
+        LOGGER.info("get backend application with boolean 호출");
+
+        return ResponseEntity.status(HttpStatus.OK).body(backendApplicationResponse);
     }
 
 

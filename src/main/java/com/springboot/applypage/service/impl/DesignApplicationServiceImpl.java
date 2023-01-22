@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class DesignApplicationServiceImpl implements DesignApplicationService {
@@ -168,5 +169,10 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
     @Override
     public void changePossOrNot(String sid) throws Exception {
         designApplicationDAO.changePassOrNot(sid);
+    }
+
+    @Override
+    public List<DesignApplication> getReturn(Boolean dir) {
+        return designApplicationDAO.getReturn(dir);
     }
 }

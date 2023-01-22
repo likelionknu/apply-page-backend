@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class BackendApplicationServiceImpl implements BackendApplicationService {
@@ -159,5 +160,10 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     @Override
     public void changePossOrNot(String sid) throws Exception {
         backendApplicationDAO.changePassOrNot(sid);
+    }
+
+    @Override
+    public List<BackendApplication> getReturn(Boolean dir) {
+        return backendApplicationDAO.getReturn(dir);
     }
 }
