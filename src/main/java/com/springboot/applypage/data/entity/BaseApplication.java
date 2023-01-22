@@ -25,8 +25,13 @@ public class BaseApplication {
     private String portfolioLink;
     private String department;
 
+    //합격여부
     @ColumnDefault("false")
     private Boolean passOrNot;
+
+    //제출 상태
+    @ColumnDefault("false")
+    private Boolean submissionStatus;
 
     //인생의 최종 목표는 무엇인가요?
     @Column(length = 1000)

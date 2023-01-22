@@ -8,4 +8,5 @@ public interface DesignApplicationService {
     DesignApplicationDto updateDesignApplication(DesignApplicationDto designApplicationDto)
             throws Exception;
     void deleteDesignApplication(String sid) throws Exception;
+    void changePossOrNot(String sid) throws Exception;
 }

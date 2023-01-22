@@ -8,4 +8,5 @@ public interface FrontendApplicationService {
     FrontendApplicationDto updateFrontendApplication(FrontendApplicationDto backendApplicationDto)
             throws Exception;
     void deleteFrontendApplication(String sid) throws Exception;
+    void changePossOrNot(String sid) throws Exception;
 }

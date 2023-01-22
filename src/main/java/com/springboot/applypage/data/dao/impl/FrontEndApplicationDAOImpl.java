@@ -1,6 +1,7 @@
 package com.springboot.applypage.data.dao.impl;
 
 import com.springboot.applypage.data.dao.FrontendApplicationDAO;
+import com.springboot.applypage.data.entity.DesignApplication;
 import com.springboot.applypage.data.entity.FrontendApplication;
 import com.springboot.applypage.data.repository.FrontendApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
             newFrontendApplication.setUpdatedAt(LocalDateTime.now());
             newFrontendApplication.setDepartment(frontendApplication.getDepartment());
             newFrontendApplication.setSid(frontendApplication.getSid());
+            newFrontendApplication.setSubmissionStatus(frontendApplication.getSubmissionStatus());
 
             newFrontendApplication.setMotive(frontendApplication.getMotive());
             newFrontendApplication.setHardWork(frontendApplication.getHardWork());
@@ -87,5 +89,19 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
             throw new Exception();
         }
 
+    }
+
+    @Override
+    public void changePassOrNot(String sid) throws Exception {
+        Optional<FrontendApplication> selectedFrontendApplication = frontendApplicationRepository.findById(sid);
+
+        if(selectedFrontendApplication.isPresent()){
+            FrontendApplication newFrontApplication = selectedFrontendApplication.get();
+
+            newFrontApplication.setPassOrNot(!newFrontApplication.getPassOrNot());
+            frontendApplicationRepository.save(newFrontApplication);
+        }else{
+            throw new Exception();
+        }
     }
 }

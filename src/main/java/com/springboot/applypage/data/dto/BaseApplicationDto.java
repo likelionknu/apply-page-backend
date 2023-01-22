@@ -1,9 +1,6 @@
 package com.springboot.applypage.data.dto;
 
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
-
-import javax.persistence.Column;
 
 @Data
 public class BaseApplicationDto {
@@ -16,6 +13,7 @@ public class BaseApplicationDto {
     private String department;
 
     private Boolean passOrNot;
+    private Boolean submissionStatus;
 
     //인생의 최종 목표는 무엇인가요?
     private String motive;

@@ -36,6 +36,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplicationResponse.setName(designApplication.getName());
         designApplicationResponse.setEmail(designApplication.getEmail());
         designApplicationResponse.setDepartment(designApplication.getDepartment());
+        designApplicationResponse.setSubmissionStatus(designApplication.getSubmissionStatus());
 
         designApplicationResponse.setMotive(designApplication.getMotive());
         designApplicationResponse.setHardWork(designApplication.getHardWork());
@@ -63,6 +64,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplication.setName(designApplicationDto.getName());
         designApplication.setEmail(designApplicationDto.getEmail());
         designApplication.setDepartment(designApplicationDto.getDepartment());
+        designApplication.setSubmissionStatus(designApplicationDto.getSubmissionStatus());
 
         designApplication.setMotive(designApplicationDto.getMotive());
         designApplication.setHardWork(designApplicationDto.getHardWork());
@@ -86,6 +88,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplicationResponse.setName(saveDesignApplication.getName());
         designApplicationResponse.setEmail(saveDesignApplication.getEmail());
         designApplicationResponse.setDepartment(saveDesignApplication.getDepartment());
+        designApplicationResponse.setSubmissionStatus(saveDesignApplication.getSubmissionStatus());
 
         designApplicationResponse.setMotive(saveDesignApplication.getMotive());
         designApplicationResponse.setHardWork(saveDesignApplication.getHardWork());
@@ -114,6 +117,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplication.setName(designApplicationDto.getName());
         designApplication.setEmail(designApplicationDto.getEmail());
         designApplication.setDepartment(designApplicationDto.getDepartment());
+        designApplication.setSubmissionStatus(designApplicationDto.getSubmissionStatus());
 
         designApplication.setMotive(designApplicationDto.getMotive());
         designApplication.setHardWork(designApplicationDto.getHardWork());
@@ -137,6 +141,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         updateDesignApplicationDto.setName(updateDesignApplication.getName());
         updateDesignApplicationDto.setEmail(updateDesignApplication.getEmail());
         updateDesignApplicationDto.setDepartment(updateDesignApplication.getDepartment());
+        updateDesignApplicationDto.setSubmissionStatus(updateDesignApplication.getSubmissionStatus());
 
         updateDesignApplicationDto.setMotive(updateDesignApplication.getMotive());
         updateDesignApplicationDto.setHardWork(updateDesignApplication.getHardWork());
@@ -158,5 +163,10 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         
         designApplicationDAO.deleteDesignApplication(sid);
 
+    }
+
+    @Override
+    public void changePossOrNot(String sid) throws Exception {
+        designApplicationDAO.changePassOrNot(sid);
     }
 }

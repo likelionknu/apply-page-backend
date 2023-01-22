@@ -54,4 +54,14 @@ public class FrontendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body("성공적으로 삭제 되었습니다.");
     }
 
+    @PutMapping("/changePassOrNot")
+    public ResponseEntity<String> changeFrontendApplicationPassOrNot(
+            String sid) throws Exception
+    {
+        frontendApplicationService.changePossOrNot(sid);
+        //LOGGER.info("change backend application pass or not 호출");
+
+        return ResponseEntity.status(HttpStatus.OK).body("성공적으로 변경 되었습니다.");
+    }
+
 }

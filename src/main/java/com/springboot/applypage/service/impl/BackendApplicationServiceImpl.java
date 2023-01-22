@@ -31,6 +31,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplicationResponse.setName(backendApplication.getName());
         backendApplicationResponse.setEmail(backendApplication.getEmail());
         backendApplicationResponse.setDepartment(backendApplication.getDepartment());
+        backendApplicationResponse.setSubmissionStatus(backendApplication.getSubmissionStatus());
 
         backendApplicationResponse.setMotive(backendApplication.getMotive());
         backendApplicationResponse.setHardWork(backendApplication.getHardWork());
@@ -57,6 +58,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplication.setName(backendApplicationDto.getName());
         backendApplication.setEmail(backendApplicationDto.getEmail());
         backendApplication.setDepartment(backendApplicationDto.getDepartment());
+        backendApplication.setSubmissionStatus(backendApplicationDto.getSubmissionStatus());
 
         backendApplication.setMotive(backendApplicationDto.getMotive());
         backendApplication.setHardWork(backendApplicationDto.getHardWork());
@@ -80,6 +82,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplicationResponse.setName(savedBackendApplication.getName());
         backendApplicationResponse.setEmail(savedBackendApplication.getEmail());
         backendApplicationResponse.setDepartment(savedBackendApplication.getDepartment());
+        backendApplicationResponse.setSubmissionStatus(savedBackendApplication.getSubmissionStatus());
 
         backendApplicationResponse.setMotive(savedBackendApplication.getMotive());
         backendApplicationResponse.setHardWork(savedBackendApplication.getHardWork());
@@ -107,6 +110,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplication.setName(backendApplicationDto.getName());
         backendApplication.setEmail(backendApplicationDto.getEmail());
         backendApplication.setDepartment(backendApplicationDto.getDepartment());
+        backendApplication.setSubmissionStatus(backendApplicationDto.getSubmissionStatus());
 
         backendApplication.setMotive(backendApplicationDto.getMotive());
         backendApplication.setHardWork(backendApplicationDto.getHardWork());
@@ -129,6 +133,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         updateBackendApplicationDto.setName(updateBackendApplication.getName());
         updateBackendApplicationDto.setEmail(updateBackendApplication.getEmail());
         updateBackendApplicationDto.setDepartment(updateBackendApplication.getDepartment());
+        updateBackendApplicationDto.setSubmissionStatus(updateBackendApplication.getSubmissionStatus());
 
         updateBackendApplicationDto.setMotive(updateBackendApplication.getMotive());
         updateBackendApplicationDto.setHardWork(updateBackendApplication.getHardWork());
@@ -149,5 +154,10 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
 
         backendApplicationDAO.deleteBackendApplication(sid);
 
+    }
+
+    @Override
+    public void changePossOrNot(String sid) throws Exception {
+        backendApplicationDAO.changePassOrNot(sid);
     }
 }

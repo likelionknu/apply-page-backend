@@ -28,6 +28,7 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         frontendApplicationResponse.setEmail(frontendApplication.getEmail());
         frontendApplicationResponse.setDepartment(frontendApplication.getDepartment());
         frontendApplicationResponse.setSid(frontendApplication.getSid());
+        frontendApplicationResponse.setSubmissionStatus(frontendApplication.getSubmissionStatus());
 
         frontendApplicationResponse.setMotive(frontendApplication.getMotive());
         frontendApplicationResponse.setHardWork(frontendApplication.getHardWork());
@@ -56,6 +57,7 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         frontendApplication.setEmail(frontendApplicationDto.getEmail());
         frontendApplication.setDepartment(frontendApplicationDto.getDepartment());
         frontendApplication.setSid(frontendApplicationDto.getSid());
+        frontendApplication.setSubmissionStatus(frontendApplicationDto.getSubmissionStatus());
 
         frontendApplication.setMotive(frontendApplicationDto.getMotive());
         frontendApplication.setHardWork(frontendApplicationDto.getHardWork());
@@ -79,6 +81,7 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         frontendApplicationResponse.setEmail(savedFrontendApplication.getEmail());
         frontendApplicationResponse.setDepartment(savedFrontendApplication.getDepartment());
         frontendApplicationResponse.setSid(savedFrontendApplication.getSid());
+        frontendApplicationResponse.setSubmissionStatus(savedFrontendApplication.getSubmissionStatus());
 
         frontendApplicationResponse.setMotive(savedFrontendApplication.getMotive());
         frontendApplicationResponse.setHardWork(savedFrontendApplication.getHardWork());
@@ -106,6 +109,7 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         frontendApplication.setEmail(frontendApplicationDto.getEmail());
         frontendApplication.setDepartment(frontendApplicationDto.getDepartment());
         frontendApplication.setSid(frontendApplicationDto.getSid());
+        frontendApplication.setSubmissionStatus(frontendApplicationDto.getSubmissionStatus());
 
         frontendApplication.setMotive(frontendApplicationDto.getMotive());
         frontendApplication.setHardWork(frontendApplicationDto.getHardWork());
@@ -129,6 +133,7 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
         updateFrontendApplicatonDto.setEmail(updateFrontendApplication.getEmail());
         updateFrontendApplicatonDto.setDepartment(updateFrontendApplication.getDepartment());
         updateFrontendApplicatonDto.setSid(updateFrontendApplication.getSid());
+        updateFrontendApplicatonDto.setSubmissionStatus(updateFrontendApplication.getSubmissionStatus());
 
         updateFrontendApplicatonDto.setMotive(updateFrontendApplication.getMotive());
         updateFrontendApplicatonDto.setHardWork(updateFrontendApplication.getHardWork());
@@ -149,5 +154,10 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     public void deleteFrontendApplication(String sid) throws Exception {
         frontendApplicationDAO.deleteFrontendApplication(sid);
 
+    }
+
+    @Override
+    public void changePossOrNot(String sid) throws Exception {
+        frontendApplicationDAO.changePassOrNot(sid);
     }
 }

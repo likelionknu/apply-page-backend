@@ -8,4 +8,5 @@ public interface BackendApplicationDAO {
     BackendApplication selectBackendApplication(String sid);
     BackendApplication updateBackendApplication(BackendApplication backendApplication) throws Exception;
     void deleteBackendApplication(String sid) throws Exception;
+    void changePassOrNot(String id) throws Exception;
 }

@@ -7,4 +7,5 @@ public interface FrontendApplicationDAO {
     FrontendApplication selectFrontendApplication(String sid);
     FrontendApplication updateFrontendApplication(FrontendApplication frontendApplication) throws Exception;
     void deleteFrontendApplication(String sid) throws Exception;
+    void changePassOrNot(String sid) throws Exception;
 }

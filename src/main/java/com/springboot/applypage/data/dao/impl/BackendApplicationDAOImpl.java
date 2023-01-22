@@ -53,6 +53,7 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
             newBackendApplication.setEmail(backendApplication.getEmail());
             newBackendApplication.setUpdatedAt(LocalDateTime.now());
             newBackendApplication.setDepartment(backendApplication.getDepartment());
+            newBackendApplication.setSubmissionStatus(backendApplication.getSubmissionStatus());
 
             newBackendApplication.setMotive(backendApplication.getMotive());
             newBackendApplication.setHardWork(backendApplication.getHardWork());
@@ -84,5 +85,19 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
             throw new Exception();
         }
 
+    }
+
+    @Override
+    public void changePassOrNot(String sid) throws Exception {
+        Optional<BackendApplication> selectedBackendApplication = backendApplicationRepository.findById(sid);
+
+        if(selectedBackendApplication.isPresent()){
+            BackendApplication newBackendApplication = selectedBackendApplication.get();
+
+            newBackendApplication.setPassOrNot(!newBackendApplication.getPassOrNot());
+            backendApplicationRepository.save(newBackendApplication);
+        }else{
+            throw new Exception();
+        }
     }
 }

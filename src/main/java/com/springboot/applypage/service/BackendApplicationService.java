@@ -8,5 +8,6 @@ public interface BackendApplicationService {
     BackendApplicationDto updateBackendApplication(BackendApplicationDto backendApplicationDto)
         throws Exception;
     void deleteBackendApplication(String sid) throws Exception;
+    void changePossOrNot(String sid) throws Exception;
 
 }

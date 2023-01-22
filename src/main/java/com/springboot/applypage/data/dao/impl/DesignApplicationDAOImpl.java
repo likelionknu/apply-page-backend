@@ -53,6 +53,7 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
             newDesignApplication.setEmail(designApplication.getEmail());
             newDesignApplication.setUpdatedAt(LocalDateTime.now());
             newDesignApplication.setDepartment(designApplication.getDepartment());
+            newDesignApplication.setSubmissionStatus(designApplication.getSubmissionStatus());
 
             newDesignApplication.setMotive(designApplication.getMotive());
             newDesignApplication.setHardWork(designApplication.getHardWork());
@@ -83,5 +84,19 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
             throw new Exception();
         }
 
+    }
+
+    @Override
+    public void changePassOrNot(String sid) throws Exception {
+        Optional<DesignApplication> selectedDesignApplication = designApplicationRepository.findById(sid);
+
+        if(selectedDesignApplication.isPresent()){
+            DesignApplication newDesignApplication = selectedDesignApplication.get();
+
+            newDesignApplication.setPassOrNot(!newDesignApplication.getPassOrNot());
+            designApplicationRepository.save(newDesignApplication);
+        }else{
+            throw new Exception();
+        }
     }
 }
