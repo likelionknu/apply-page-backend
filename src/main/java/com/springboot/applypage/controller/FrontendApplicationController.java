@@ -87,4 +87,13 @@ public class FrontendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(frontendApplicationResponse);
     }
 
+    @GetMapping("/getAllApplications")
+    public ResponseEntity<List<FrontendApplication>> getAllFrontendApplications(HttpServletRequest request)
+    {
+        List<FrontendApplication> frontendApplicationResponse = frontendApplicationService.getAllApplications();
+        LOGGER.info("호출 API: " + "get all frontend applications" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(frontendApplicationResponse);
+    }
+
 }

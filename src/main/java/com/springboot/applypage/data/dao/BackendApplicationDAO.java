@@ -12,4 +12,5 @@ public interface BackendApplicationDAO {
     void deleteBackendApplication(String sid) throws Exception;
     void changePassOrNot(String id) throws Exception;
     List<BackendApplication> getReturn(Boolean dir);
+    List<BackendApplication> getAllApplication();
 }

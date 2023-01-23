@@ -13,5 +13,6 @@ public interface BackendApplicationService {
     void deleteBackendApplication(String sid) throws Exception;
     void changePossOrNot(String sid) throws Exception;
     List<BackendApplication> getReturn(Boolean dir);
+    List<BackendApplication> getAllApplications();
 
 }

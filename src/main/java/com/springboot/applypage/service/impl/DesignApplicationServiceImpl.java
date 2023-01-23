@@ -175,4 +175,9 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
     public List<DesignApplication> getReturn(Boolean dir) {
         return designApplicationDAO.getReturn(dir);
     }
+
+    @Override
+    public List<DesignApplication> getAllApplications() {
+        return designApplicationDAO.getAllApplications();
+    }
 }

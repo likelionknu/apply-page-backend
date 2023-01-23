@@ -90,5 +90,15 @@ public class BackendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(backendApplicationResponse);
     }
 
+    @GetMapping("/getAllApplications")
+    public ResponseEntity<List<BackendApplication>> getAllBackendApplications(HttpServletRequest request)
+    {
+        List<BackendApplication> backendApplicationResponse = backendApplicationService.getAllApplications();
+
+        LOGGER.info("호출 API: " + "get all backend application" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(backendApplicationResponse);
+    }
+
 
 }

@@ -113,4 +113,9 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
                 .filter(passOrNot -> passOrNot.getPassOrNot().equals(dir))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<FrontendApplication> getAllApplications() {
+        return frontendApplicationRepository.findAll();
+    }
 }

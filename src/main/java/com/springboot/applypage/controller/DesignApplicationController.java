@@ -85,4 +85,13 @@ public class DesignApplicationController {
 
         return ResponseEntity.status(HttpStatus.OK).body(designApplicationResponse);
     }
+    @GetMapping("/getAllApplications")
+    public ResponseEntity<List<DesignApplication>> getAllDesignApplications(HttpServletRequest request)
+    {
+        List<DesignApplication> designApplicationResponse = designApplicationService.getAllApplications();
+        LOGGER.info("호출 API: " + "get all design applications" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(designApplicationResponse);
+    }
 }

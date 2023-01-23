@@ -166,4 +166,9 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     public List<BackendApplication> getReturn(Boolean dir) {
         return backendApplicationDAO.getReturn(dir);
     }
+
+    @Override
+    public List<BackendApplication> getAllApplications() {
+        return backendApplicationDAO.getAllApplication();
+    }
 }

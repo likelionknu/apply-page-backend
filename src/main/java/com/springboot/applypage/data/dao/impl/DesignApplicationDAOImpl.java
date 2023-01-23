@@ -108,4 +108,9 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
                 .filter(passOrNot -> passOrNot.getPassOrNot().equals(dir))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<DesignApplication> getAllApplications() {
+        return designApplicationRepository.findAll();
+    }
 }

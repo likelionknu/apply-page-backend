@@ -167,4 +167,10 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     public List<FrontendApplication> getReturn(Boolean dir) {
         return frontendApplicationDAO.getReturn(dir);
     }
+
+    @Override
+    public List<FrontendApplication> getAllApplications() {
+        return frontendApplicationDAO.getAllApplications();
+    }
+
 }

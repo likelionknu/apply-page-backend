@@ -113,4 +113,9 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<BackendApplication> getAllApplication() {
+        return backendApplicationRepository.findAll();
+    }
+
 }

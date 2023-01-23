@@ -14,5 +14,6 @@ public interface DesignApplicationService {
     void deleteDesignApplication(String sid) throws Exception;
     void changePossOrNot(String sid) throws Exception;
     List<DesignApplication> getReturn(Boolean dir);
+    List<DesignApplication> getAllApplications();
 
 }

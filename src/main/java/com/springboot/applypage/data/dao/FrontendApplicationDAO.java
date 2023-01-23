@@ -12,4 +12,5 @@ public interface FrontendApplicationDAO {
     void deleteFrontendApplication(String sid) throws Exception;
     void changePassOrNot(String sid) throws Exception;
     List<FrontendApplication> getReturn(Boolean dir);
+    List<FrontendApplication> getAllApplications();
 }
