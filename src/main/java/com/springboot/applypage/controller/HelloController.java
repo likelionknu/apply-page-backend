@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -26,7 +27,7 @@ public class HelloController implements ErrorController {
 
 
     @GetMapping("/sendMail")
-    public String sendMail() {
+    public String sendMail() throws MessagingException {
 
         mailSenderService.sendMail();
 
