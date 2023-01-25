@@ -27,11 +27,11 @@ public class HelloController implements ErrorController {
 
 
     @GetMapping("/sendMail")
-    public String sendMail() throws MessagingException {
+    public void sendMail() throws MessagingException {
 
         mailSenderService.sendMail();
 
-        return "정상 작동 되었습니다.";
+        //return "정상 작동 되었습니다.";
     }
 
 }

@@ -1,6 +1,7 @@
 package com.springboot.applypage.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -26,26 +27,12 @@ public class MailSenderService
     }
 
     public void sendMail() throws MessagingException {
-        /*ArrayList<String> toUserList = new ArrayList<>();
-        int toUserSize;
-
-        toUserList.add("scg9268@naver.com");
-        toUserSize = toUserList.size();
-
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-
-        simpleMailMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
-        simpleMailMessage.setSubject("Subject");
-        simpleMailMessage.setText("Text Sample");
-
-        javaMailSender.send(simpleMailMessage);*/
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         //메일 제목 설정
         helper.setSubject("title");
-
         //수신자 설정
         helper.setTo("scg9268@naver.com");
 
@@ -58,6 +45,10 @@ public class MailSenderService
         //메일 내용 설정 : 템플릿 프로세스
         String html = templateEngine.process("index.html",context);
         helper.setText(html, true);
+        helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
+        helper.addInline("image2", new ClassPathResource("templates/images/.jpg"));
+        helper.addInline("image3", new ClassPathResource("templates/images/background1.png"));
+
 
         //메일 보내기
         javaMailSender.send(message);
