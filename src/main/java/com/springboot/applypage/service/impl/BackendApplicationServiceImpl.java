@@ -49,6 +49,34 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     }
 
     @Override
+    public BackendApplicationDto getBackendApplicationWithEmail(String sid, String email) {
+        BackendApplication backendApplication = backendApplicationDAO.selectBackendApplicationWithEmail(sid, email);
+        BackendApplicationDto backendApplicationResponse = new BackendApplicationDto();
+
+        backendApplicationResponse.setSid(backendApplication.getSid());
+        backendApplicationResponse.setPhoneNumber(backendApplication.getPhoneNumber());
+        backendApplicationResponse.setPortfolioFile(backendApplication.getPortfolioFile());
+        backendApplicationResponse.setPortfolioLink(backendApplication.getPortfolioLink());
+        backendApplicationResponse.setName(backendApplication.getName());
+        backendApplicationResponse.setEmail(backendApplication.getEmail());
+        backendApplicationResponse.setDepartment(backendApplication.getDepartment());
+        backendApplicationResponse.setSubmissionStatus(backendApplication.getSubmissionStatus());
+
+        backendApplicationResponse.setMotive(backendApplication.getMotive());
+        backendApplicationResponse.setHardWork(backendApplication.getHardWork());
+        backendApplicationResponse.setKeyWord(backendApplication.getKeyWord());
+        backendApplicationResponse.setMostDeeplyWork(backendApplication.getMostDeeplyWork());
+
+        backendApplicationResponse.setPassOrNot(backendApplication.getPassOrNot());
+
+        backendApplicationResponse.setDifficultAndOvercoming(backendApplication.getDifficultAndOvercoming());
+        backendApplicationResponse.setStudyFramework(backendApplication.getStudyFramework());
+        backendApplicationResponse.setImportantGroup(backendApplication.getImportantGroup());
+
+        return backendApplicationResponse;
+    }
+
+    @Override
     public BackendApplicationDto saveBackendApplication(BackendApplicationDto backendApplicationDto) {
         BackendApplication backendApplication = new BackendApplication();
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface BackendApplicationService {
     BackendApplicationDto getBackendApplication(String sid);
+    BackendApplicationDto getBackendApplicationWithEmail(String sid, String email);
     BackendApplicationDto saveBackendApplication(BackendApplicationDto backendApplicationDto);
     BackendApplicationDto updateBackendApplication(BackendApplicationDto backendApplicationDto)
         throws Exception;

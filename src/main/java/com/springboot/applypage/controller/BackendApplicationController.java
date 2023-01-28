@@ -48,6 +48,16 @@ public class BackendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(backendApplicationDtoResponse);
     }
 
+    @GetMapping("/getBackendApplicationWithEmail")
+    public ResponseEntity<BackendApplicationDto> getBackendApplicationWithEmail(String sid, String email, HttpServletRequest request)
+    {
+        BackendApplicationDto backendApplicationDtoResponse = backendApplicationService.getBackendApplicationWithEmail(sid, email);
+
+        LOGGER.info("호출 API: " + "get backend application with email" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(backendApplicationDtoResponse);
+    }
+
     @PutMapping()
     public ResponseEntity<BackendApplicationDto> updateBackendApplication(
             @RequestBody  BackendApplicationDto backendApplicationDto, HttpServletRequest request) throws Exception

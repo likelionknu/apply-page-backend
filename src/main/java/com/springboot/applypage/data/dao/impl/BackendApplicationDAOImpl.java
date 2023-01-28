@@ -39,6 +39,21 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
     }
 
     @Override
+    public BackendApplication selectBackendApplicationWithEmail(String sid, String email) {
+        BackendApplication selectedBackendApplication;
+        if(backendApplicationRepository.existsById(sid)){
+            selectedBackendApplication = backendApplicationRepository.getById(sid);
+
+            if(!selectedBackendApplication.getEmail().equals(email)){
+                selectedBackendApplication = new BackendApplication();
+            }
+        }else{
+            selectedBackendApplication = new BackendApplication();
+        }
+        return selectedBackendApplication;
+    }
+
+    @Override
     public BackendApplication updateBackendApplication(BackendApplication backendApplication) throws Exception{
 
         Optional<BackendApplication> selectBackendApplication
