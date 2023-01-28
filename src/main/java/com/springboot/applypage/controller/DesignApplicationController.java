@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/designApplication")
 public class DesignApplicationController {
     private final DesignApplicationService designApplicationService;
-    private final Logger LOGGER = LoggerFactory.getLogger(BackendApplicationController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(DesignApplicationController.class);
 
     @Autowired
     public DesignApplicationController(DesignApplicationService designApplicationService){

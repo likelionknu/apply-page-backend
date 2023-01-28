@@ -22,7 +22,7 @@ import java.util.List;
 public class FrontendApplicationController {
 
     private final FrontendApplicationService frontendApplicationService;
-    private final Logger LOGGER = LoggerFactory.getLogger(BackendApplicationController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(FrontendApplicationController.class);
 
     @Autowired
     public FrontendApplicationController(FrontendApplicationService frontendApplicationService){

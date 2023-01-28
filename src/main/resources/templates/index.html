@@ -64,10 +64,10 @@
 <tr>
 <td class="pad" style="padding-top:30px;">
 <div style="color:#201f42;direction:ltr;font-family:Inter, sans-serif;font-size:18px;font-weight:400;letter-spacing:0px;line-height:180%;text-align:left;">
-<p style="margin: 0; margin-bottom: 0px;">안녕하세요, 홍길동 님</p>
+<p style="margin: 0; margin-bottom: 0px;">안녕하세요, <strong th:text="${name}">홍길동</strong> 님</p>
 <p style="margin: 0; margin-bottom: 0px;">강남대학교 멋쟁이사자처럼 아기사자에 지원해주셔서 감사드립니다.</p>
 <p style="margin: 0; margin-bottom: 0px;"> </p>
-<p style="margin: 0; margin-bottom: 0px;">홍길동 님께서는 면접 대상자로 선정되었습니다.</p>
+<p style="margin: 0; margin-bottom: 0px;"><strong th:text="${name}">홍길동</strong> 님께서는 면접 대상자로 선정되었습니다.</p>
 <p style="margin: 0; margin-bottom: 0px;">면접 안내 사항을 전달드리오니 꼭 숙지해주시기 바랍니다.</p>
 </div>
 </td>
@@ -75,9 +75,13 @@
 <tr>
 <td class="pad" style="padding-top:30px;">
 <div style="color: #000000; background-color: rgba(175, 175, 175, 0.4); direction:ltr;font-family:Inter, sans-serif;font-size:18px;font-weight:400;letter-spacing:0px;line-height:180%;text-align:left;">
-<p style="opacity: 1; margin: 0; margin-bottom: 0px; margin-left: 10px;"> - 면접 일시 : 2023년 00월 00일 00시</p>
-<p style="margin: 0; margin-bottom: 0px; margin-left: 10px;"> - 면접 장소 : 강남대학교 이공관</p>
-<p style="margin: 0; margin-bottom: 0px; margin-left: 10px;"> - 소요 시간 : 15분 내외</p>
+    면접 일시: <p style="display: inline" th:text="${interviewDate}"></p> <br>
+    면접 장소: <p style="display: inline" th:text="${interviewLocation}"></p> <br>
+    소요 시간: <p style="display: inline" th:text="${interviewTime}"></p> <br>
+    <!--<strong th:text="${interviewDate}">홍길동</strong>-->
+    <!--<p th:text="면접 일시 - ${interviewDate}"></p>
+    <p th:text="면접 장소 - ${interviewLocation}"></p>
+    <p th:text="소요 시간 - ${interviewTime}"></p>-->
 </div>
 </td>
 </tr>
@@ -107,7 +111,7 @@
 </table>
 
 <!-- 주황색 패턴 밑 흰색 여백 -->
-<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-color: #ffffff; color: #000000; background-size: auto; width: 700px;" width="700">
+<!--<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-color: #ffffff; color: #000000; background-size: auto; width: 700px;" width="700">
 <tbody>
 <tr>
 <td class="column column-1" style="font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
@@ -115,7 +119,7 @@
 </td>
 </tr>
 </tbody>
-</table>
+</table>-->
 
 <!-- 맨밑의 주황색 바 -->
 <table align="center" cellpadding="0" cellspacing="0" class="row row-6" role="presentation" style="background-size: auto;" width="100%">
@@ -138,6 +142,5 @@
 </tr>
 </tbody>
 </table>
-
 </body>
 </html>
