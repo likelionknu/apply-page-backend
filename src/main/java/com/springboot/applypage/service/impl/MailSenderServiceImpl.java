@@ -50,7 +50,7 @@ public class MailSenderServiceImpl implements MailSenderService
             context.setVariable("interviewTime", mailInfo.getInterviewTime());
 
             //메일 내용 설정 : 템플릿 프로세스
-            String html = templateEngine.process("index.html",context);
+            String html = templateEngine.process("acceptEmail.html",context);
             helper.setText(html, true);
 
             helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
@@ -60,8 +60,36 @@ public class MailSenderServiceImpl implements MailSenderService
             //메일 보내기
             javaMailSender.send(message);
         }
+    }
 
+    @Override
+    public void sendFailMail(List<AcceptEmailDto> acceptEmailDto) throws MessagingException {
+        for (AcceptEmailDto mailInfo:
+                acceptEmailDto) {
 
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
+            helper.setTo(mailInfo.getEmail());
+            helper.setSubject("강남대학교 멋쟁이사자처럼 합격 통지");
+
+            //템플릿에 전달할 데이터 설정
+            Context context = new Context();
+            /*context.setVariable("name", mailInfo.getName());
+            context.setVariable("interviewDate", mailInfo.getInterviewDate());
+            context.setVariable("interviewLocation", mailInfo.getInterviewLocation());
+            context.setVariable("interviewTime", mailInfo.getInterviewTime());*/
+
+            //메일 내용 설정 : 템플릿 프로세스
+            String html = templateEngine.process("failEmail.html",context);
+            helper.setText(html, true);
+
+            /*helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
+            helper.addInline("image2", new ClassPathResource("templates/images/.jpg"));
+            helper.addInline("image3", new ClassPathResource("templates/images/background1.png"));*/
+
+            //메일 보내기
+            javaMailSender.send(message);
+        }
     }
 }

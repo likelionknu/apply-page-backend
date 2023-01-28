@@ -35,4 +35,13 @@ public class EmailController {
 
         return "정상 작동 되었습니다.";
     }
+
+    @PostMapping("/sendFailMail")
+    public String sendFailEmail(@RequestBody List<AcceptEmailDto> acceptEmailDto , HttpServletRequest request) throws MessagingException {
+
+        mailSenderService.sendFailMail(acceptEmailDto);
+        LOGGER.info("호출 API: " + "send fail email" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return "정상 작동 되었습니다.";
+    }
 }
