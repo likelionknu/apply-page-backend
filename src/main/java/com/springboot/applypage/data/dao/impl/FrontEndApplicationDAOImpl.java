@@ -40,6 +40,21 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
     }
 
     @Override
+    public FrontendApplication selectFrontendApplicationWithEmail(String sid, String email) {
+        FrontendApplication selectedFrontendApplication;
+
+        if(frontendApplicationRepository.existsById(sid)){
+            selectedFrontendApplication = frontendApplicationRepository.getById(sid);
+            if(!selectedFrontendApplication.getEmail().equals(email)){
+                selectedFrontendApplication = new FrontendApplication();
+            }
+        }else{
+            selectedFrontendApplication = new FrontendApplication();
+        }
+        return selectedFrontendApplication;
+    }
+
+    @Override
     public FrontendApplication updateFrontendApplication(FrontendApplication frontendApplication) throws Exception {
         Optional<FrontendApplication> selectedFrontendApplication
                 = frontendApplicationRepository.findById(frontendApplication.getSid());

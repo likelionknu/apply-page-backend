@@ -8,6 +8,7 @@ import java.util.List;
 public interface FrontendApplicationDAO {
     FrontendApplication insertFrontendApplication(FrontendApplication frontendApplication);
     FrontendApplication selectFrontendApplication(String sid);
+    FrontendApplication selectFrontendApplicationWithEmail(String sid, String email);
     FrontendApplication updateFrontendApplication(FrontendApplication frontendApplication) throws Exception;
     void deleteFrontendApplication(String sid) throws Exception;
     void changePassOrNot(String sid) throws Exception;

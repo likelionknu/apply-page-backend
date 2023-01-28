@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface FrontendApplicationService {
     FrontendApplicationDto getFrontendApplication(String sid);
+    FrontendApplicationDto getFrontendApplicationWithEmail(String sid, String email);
     FrontendApplicationDto saveFrontendApplication(FrontendApplicationDto backendApplicationDto);
     FrontendApplicationDto updateFrontendApplication(FrontendApplicationDto backendApplicationDto)
             throws Exception;

@@ -49,6 +49,36 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     }
 
     @Override
+    public FrontendApplicationDto getFrontendApplicationWithEmail(String sid, String email) {
+        FrontendApplication frontendApplication = frontendApplicationDAO.selectFrontendApplicationWithEmail(sid, email);
+        FrontendApplicationDto frontendApplicationResponse = new FrontendApplicationDto();
+
+        frontendApplicationResponse.setPhoneNumber(frontendApplication.getPhoneNumber());
+        frontendApplicationResponse.setPortfolioFile(frontendApplication.getPortfolioFile());
+        frontendApplicationResponse.setPortfolioLink(frontendApplication.getPortfolioLink());
+        frontendApplicationResponse.setName(frontendApplication.getName());
+        frontendApplicationResponse.setEmail(frontendApplication.getEmail());
+        frontendApplicationResponse.setDepartment(frontendApplication.getDepartment());
+        frontendApplicationResponse.setSid(frontendApplication.getSid());
+        frontendApplicationResponse.setSubmissionStatus(frontendApplication.getSubmissionStatus());
+
+        frontendApplicationResponse.setMotive(frontendApplication.getMotive());
+        frontendApplicationResponse.setHardWork(frontendApplication.getHardWork());
+        frontendApplicationResponse.setKeyWord(frontendApplication.getKeyWord());
+        frontendApplicationResponse.setMostDeeplyWork(frontendApplication.getMostDeeplyWork());
+
+        frontendApplicationResponse.setPassOrNot(frontendApplication.getPassOrNot());
+
+        frontendApplicationResponse.setWhyFrontend(frontendApplication.getWhyFrontend());
+        frontendApplicationResponse.setUsingStack(frontendApplication.getUsingStack());
+        frontendApplicationResponse.setTeamProject(frontendApplication.getTeamProject());
+        frontendApplicationResponse.setAchieve(frontendApplication.getAchieve());
+
+
+        return frontendApplicationResponse;
+    }
+
+    @Override
     public FrontendApplicationDto saveFrontendApplication(FrontendApplicationDto frontendApplicationDto) {
         FrontendApplication frontendApplication = new FrontendApplication();
 

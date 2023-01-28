@@ -49,6 +49,15 @@ public class FrontendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(frontendApplication);
     }
 
+    @GetMapping("/getFrontendApplicationWithEmail")
+    public ResponseEntity<FrontendApplicationDto> getFrontendApplicationWithEmail(String sid, String email, HttpServletRequest request)
+    {
+        FrontendApplicationDto frontendApplication = frontendApplicationService.getFrontendApplicationWithEmail(sid, email);
+        LOGGER.info("호출 API: " + "get frontend application with email" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(frontendApplication);
+    }
+
     @PutMapping()
     public ResponseEntity<FrontendApplicationDto> updateFrontendApplication(
             @RequestBody FrontendApplicationDto frontendApplicationDto, HttpServletRequest request) throws Exception
