@@ -55,7 +55,6 @@ public class MailSenderServiceImpl implements MailSenderService
 
             helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
             helper.addInline("image2", new ClassPathResource("templates/images/.jpg"));
-            helper.addInline("image3", new ClassPathResource("templates/images/background1.png"));
 
             //메일 보내기
             javaMailSender.send(message);

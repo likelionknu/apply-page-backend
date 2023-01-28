@@ -13,7 +13,7 @@
 </tbody>
 
 <!--  맨위 상단 주황색 부분 -->
-<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-repeat: no-repeat; background-size: cover; background-color: #ff7828; background-image: url('images/.png'); border-radius: 0; color: #000000; width: 700px;" width="700">
+<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-repeat: no-repeat; background-size: cover; background-color: #ff7828; border-radius: 0; color: #000000; width: 700px;" width="700">
 <tbody>
 <tr>
 <td class="column column-1" style="font-weight: 400; text-align: left; padding-left: 30px; padding-right: 10px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="16.666666666666668%">
@@ -64,32 +64,28 @@
 <tr>
 <td class="pad" style="padding-top:30px;">
 <div style="color:#201f42;direction:ltr;font-family:Inter, sans-serif;font-size:18px;font-weight:400;letter-spacing:0px;line-height:180%;text-align:left;">
-<p style="margin: 0; margin-bottom: 0px;">안녕하세요, <strong th:text="${name}">홍길동</strong> 님</p>
-<p style="margin: 0; margin-bottom: 0px;">강남대학교 멋쟁이사자처럼 아기사자에 지원해주셔서 감사드립니다.</p>
-<p style="margin: 0; margin-bottom: 0px;"> </p>
-<p style="margin: 0; margin-bottom: 0px;"><strong th:text="${name}">홍길동</strong> 님께서는 면접 대상자로 선정되었습니다.</p>
-<p style="margin: 0; margin-bottom: 0px;">면접 안내 사항을 전달드리오니 꼭 숙지해주시기 바랍니다.</p>
+    <p style="margin: 0; margin-bottom: 0px;">안녕하세요, <strong th:text="${name}">홍길동</strong> 님</p>
+    <p style="margin: 0; margin-bottom: 0px;">강남대학교 멋쟁이사자처럼 아기사자에 지원해주셔서 감사드립니다.</p>
+    <p style="margin: 0; margin-bottom: 0px;"> </p>
+    <p style="margin: 0; margin-bottom: 0px;"><strong th:text="${name}">홍길동</strong> 님께서는 면접 대상자로 선정되었습니다.</p>
+    <p style="margin: 0; margin-bottom: 0px;">면접 안내 사항을 전달드리오니 꼭 숙지해주시기 바랍니다.</p>
 </div>
 </td>
 </tr>
-<tr>
-<td class="pad" style="padding-top:30px;">
-<div style="color: #000000; background-color: rgba(175, 175, 175, 0.4); direction:ltr;font-family:Inter, sans-serif;font-size:18px;font-weight:400;letter-spacing:0px;line-height:180%;text-align:left;">
-    면접 일시: <p style="display: inline" th:text="${interviewDate}"></p> <br>
-    면접 장소: <p style="display: inline" th:text="${interviewLocation}"></p> <br>
-    소요 시간: <p style="display: inline" th:text="${interviewTime}"></p> <br>
-    <!--<strong th:text="${interviewDate}">홍길동</strong>-->
-    <!--<p th:text="면접 일시 - ${interviewDate}"></p>
-    <p th:text="면접 장소 - ${interviewLocation}"></p>
-    <p th:text="소요 시간 - ${interviewTime}"></p>-->
+    <tr>
+        <td class="pad" style="padding-top:30px;">
+            <div style="color: #000000; background-color: rgba(175, 175, 175, 0.4); direction:ltr;font-family:Inter, sans-serif;font-size:18px;font-weight:400;letter-spacing:0px;line-height:180%;text-align:left;">
+                면접 일시: <p style="display: inline" th:text="${interviewDate}"></p> <br>
+                면접 장소: <p style="display: inline" th:text="${interviewLocation}"></p> <br>
+                소요 시간: <p style="display: inline" th:text="${interviewTime}"></p> <br>
 </div>
 </td>
 </tr>
 <tr>
 <td class="pad" style="padding-top:30px;">
 <div style="color:#201f42;direction:ltr;font-family:Inter, sans-serif;font-size:18px;font-weight:400;letter-spacing:0px;line-height:180%;text-align:left;">
-<p style="margin: 0; margin-bottom: 0px;">기타 문의 사항은 아래 연락처로 보내주시기 바랍니다.</p>
-<p style="margin: 0;">이메일 : scg9268@likelion.org</p>
+    <p style="margin: 0; margin-bottom: 0px;">기타 문의 사항은 아래 연락처로 보내주시기 바랍니다.</p>
+    <p style="margin: 0;">이메일 : scg9268@likelion.org</p>
 </div>
 </td>
 </tr>
@@ -99,48 +95,17 @@
 </tbody>
 </table>
 
-<!-- 주황색 패턴 -->
-<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-repeat: no-repeat; background-size: cover; background-color: #ffffff; color: #000000; background-image: url('cid:image3'); border-radius: 0; width: 700px;" width="700">
-<tbody>
-<tr>
-<td class="column column-1" style="font-weight: 400; text-align: left; padding-left: 30px; padding-right: 10px; vertical-align: middle; padding-top: 20px; padding-bottom: 20px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
-<div class="spacer_block" style="height:90px;line-height:90px;font-size:1px;"> </div>
-</td>
-</tr>
-</tbody>
-</table>
-
-<!-- 주황색 패턴 밑 흰색 여백 -->
-<!--<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-color: #ffffff; color: #000000; background-size: auto; width: 700px;" width="700">
-<tbody>
-<tr>
-<td class="column column-1" style="font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
-<div class="spacer_block" style="height:20px;line-height:35px;font-size:1px;"> </div>
-</td>
-</tr>
-</tbody>
-</table>-->
 
 <!-- 맨밑의 주황색 바 -->
-<table align="center" cellpadding="0" cellspacing="0" class="row row-6" role="presentation" style="background-size: auto;" width="100%">
+<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-size: auto; background-color: #1C1B1A; border-radius: 0; color: #000000; width: 700px;" width="700">
 <tbody>
 <tr>
-<td>
-<table align="center" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="background-size: auto; background-color: #ff7828; border-radius: 0; color: #000000; width: 700px;" width="700">
-<tbody>
-<tr>
-<td class="column column-1" style="font-weight: 400; text-align: left; padding-left: 30px; padding-right: 10px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="33.333333333333336%">
-<div class="spacer_block" style="height:100px;line-height:20px;font-size:1px;"> </div>
-</td>
-<td class="column column-2" style=" font-weight: 400; text-align: left; padding-left: 25px; padding-right: 30px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="66.66666666666667%">
-<div class="spacer_block" style="height:70px;line-height:5px;font-size:1px;"> </div>
+<td class="column column-1" style="font-weight: 500; text-align: left; padding-left: 30px; padding-right: 10px; vertical-align: middle; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="33.333333333333336%">
+<div class="spacer_block" style="height:150px;line-height:20px;font-size:1px;"> </div>
 </td>
 </tr>
 </tbody>
 </table>
-</td>
-</tr>
-</tbody>
-</table>
+
 </body>
 </html>
