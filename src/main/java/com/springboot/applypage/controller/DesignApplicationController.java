@@ -45,6 +45,15 @@ public class DesignApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(designApplicationDtoResponse);
     }
 
+    @GetMapping("/getDesignApplicationWithEmail")
+    public ResponseEntity<DesignApplicationDto> getDesignApplicationWithEmail(String sid, String email, HttpServletRequest request)
+    {
+        DesignApplicationDto designApplicationDtoResponse = designApplicationService.getDesignApplicationWithEmail(sid, email);
+        LOGGER.info("호출 API: " + "get design application with email" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(designApplicationDtoResponse);
+    }
+
     @PutMapping()
     public ResponseEntity<DesignApplicationDto> updateDesignApplication(
             @RequestBody  DesignApplicationDto designApplicationDto, HttpServletRequest request) throws Exception

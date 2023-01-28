@@ -9,6 +9,7 @@ public interface DesignApplicationDAO {
 
     DesignApplication insertDesignApplication(DesignApplication designApplication);
     DesignApplication selectDesignApplication(String sid);
+    DesignApplication selectDesignApplicationWithEmail(String sid, String email);
     DesignApplication updateDesignApplication(DesignApplication designApplication) throws Exception;
     void deleteDesignApplication(String sid) throws Exception;
     void changePassOrNot(String sid) throws Exception;

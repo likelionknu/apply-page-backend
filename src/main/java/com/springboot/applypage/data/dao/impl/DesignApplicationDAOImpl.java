@@ -40,6 +40,23 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
     }
 
     @Override
+    public DesignApplication selectDesignApplicationWithEmail(String sid, String email) {
+        DesignApplication selectedDesignApplication;
+
+        if(designApplicationRepository.existsById(sid)){
+            selectedDesignApplication = designApplicationRepository.getById(sid);
+
+            if(!selectedDesignApplication.getEmail().equals(email)){
+                selectedDesignApplication = new DesignApplication();
+            }
+
+        }else{
+            selectedDesignApplication = new DesignApplication();
+        }
+        return selectedDesignApplication;
+    }
+
+    @Override
     public DesignApplication updateDesignApplication(DesignApplication designApplication) throws Exception {
         Optional<DesignApplication> selectDesignApplication
                 = designApplicationRepository.findById(designApplication.getSid());

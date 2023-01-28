@@ -55,6 +55,35 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
     }
 
     @Override
+    public DesignApplicationDto getDesignApplicationWithEmail(String sid, String email) {
+        DesignApplication designApplication = designApplicationDAO.selectDesignApplicationWithEmail(sid, email);
+        DesignApplicationDto designApplicationResponse = new DesignApplicationDto();
+
+        designApplicationResponse.setSid(designApplication.getSid());
+        designApplicationResponse.setPhoneNumber(designApplication.getPhoneNumber());
+        designApplicationResponse.setPortfolioFile(designApplication.getPortfolioFile());
+        designApplicationResponse.setPortfolioLink(designApplication.getPortfolioLink());
+        designApplicationResponse.setName(designApplication.getName());
+        designApplicationResponse.setEmail(designApplication.getEmail());
+        designApplicationResponse.setDepartment(designApplication.getDepartment());
+        designApplicationResponse.setSubmissionStatus(designApplication.getSubmissionStatus());
+
+        designApplicationResponse.setMotive(designApplication.getMotive());
+        designApplicationResponse.setHardWork(designApplication.getHardWork());
+        designApplicationResponse.setKeyWord(designApplication.getKeyWord());
+        designApplicationResponse.setMostDeeplyWork(designApplication.getMostDeeplyWork());
+
+        designApplicationResponse.setPassOrNot(designApplication.getPassOrNot());
+
+        designApplicationResponse.setWhyDesign(designApplication.getWhyDesign());
+        designApplicationResponse.setToolExperience(designApplication.getToolExperience());
+        designApplicationResponse.setTeamworkExperience(designApplication.getTeamworkExperience());
+        designApplicationResponse.setDesignGrowth(designApplication.getDesignGrowth());
+
+        return designApplicationResponse;
+    }
+
+    @Override
     public DesignApplicationDto saveDesignApplication(DesignApplicationDto designApplicationDto) {
         DesignApplication designApplication = new DesignApplication();
 

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface DesignApplicationService {
     DesignApplicationDto getDesignApplication(String sid);
+    DesignApplicationDto getDesignApplicationWithEmail(String sid, String email);
     DesignApplicationDto saveDesignApplication(DesignApplicationDto designApplicationDto);
     DesignApplicationDto updateDesignApplication(DesignApplicationDto designApplicationDto)
             throws Exception;
