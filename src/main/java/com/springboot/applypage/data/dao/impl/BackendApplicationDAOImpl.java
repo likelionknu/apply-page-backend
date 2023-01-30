@@ -71,6 +71,7 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
             newBackendApplication.setUpdatedAt(LocalDateTime.now());
             newBackendApplication.setDepartment(backendApplication.getDepartment());
             newBackendApplication.setSubmissionStatus(backendApplication.getSubmissionStatus());
+            newBackendApplication.setSendMail(backendApplication.getSendMail());
 
             newBackendApplication.setMotive(backendApplication.getMotive());
             newBackendApplication.setHardWork(backendApplication.getHardWork());

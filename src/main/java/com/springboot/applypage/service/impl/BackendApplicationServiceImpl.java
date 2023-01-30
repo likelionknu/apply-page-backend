@@ -33,6 +33,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplicationResponse.setEmail(backendApplication.getEmail());
         backendApplicationResponse.setDepartment(backendApplication.getDepartment());
         backendApplicationResponse.setSubmissionStatus(backendApplication.getSubmissionStatus());
+        backendApplicationResponse.setSendMail(backendApplication.getSendMail());
 
         backendApplicationResponse.setMotive(backendApplication.getMotive());
         backendApplicationResponse.setHardWork(backendApplication.getHardWork());
@@ -61,6 +62,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplicationResponse.setEmail(backendApplication.getEmail());
         backendApplicationResponse.setDepartment(backendApplication.getDepartment());
         backendApplicationResponse.setSubmissionStatus(backendApplication.getSubmissionStatus());
+        backendApplicationResponse.setSendMail(backendApplication.getSendMail());
 
         backendApplicationResponse.setMotive(backendApplication.getMotive());
         backendApplicationResponse.setHardWork(backendApplication.getHardWork());
@@ -88,6 +90,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplication.setEmail(backendApplicationDto.getEmail());
         backendApplication.setDepartment(backendApplicationDto.getDepartment());
         backendApplication.setSubmissionStatus(backendApplicationDto.getSubmissionStatus());
+        backendApplication.setSendMail(backendApplicationDto.getSendMail());
 
         backendApplication.setMotive(backendApplicationDto.getMotive());
         backendApplication.setHardWork(backendApplicationDto.getHardWork());
@@ -112,6 +115,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplicationResponse.setEmail(savedBackendApplication.getEmail());
         backendApplicationResponse.setDepartment(savedBackendApplication.getDepartment());
         backendApplicationResponse.setSubmissionStatus(savedBackendApplication.getSubmissionStatus());
+        backendApplicationResponse.setSendMail(savedBackendApplication.getSendMail());
 
         backendApplicationResponse.setMotive(savedBackendApplication.getMotive());
         backendApplicationResponse.setHardWork(savedBackendApplication.getHardWork());
@@ -140,6 +144,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         backendApplication.setEmail(backendApplicationDto.getEmail());
         backendApplication.setDepartment(backendApplicationDto.getDepartment());
         backendApplication.setSubmissionStatus(backendApplicationDto.getSubmissionStatus());
+        backendApplication.setSendMail(backendApplicationDto.getSendMail());
 
         backendApplication.setMotive(backendApplicationDto.getMotive());
         backendApplication.setHardWork(backendApplicationDto.getHardWork());
@@ -163,6 +168,7 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
         updateBackendApplicationDto.setEmail(updateBackendApplication.getEmail());
         updateBackendApplicationDto.setDepartment(updateBackendApplication.getDepartment());
         updateBackendApplicationDto.setSubmissionStatus(updateBackendApplication.getSubmissionStatus());
+        updateBackendApplicationDto.setSendMail(updateBackendApplication.getSendMail());
 
         updateBackendApplicationDto.setMotive(updateBackendApplication.getMotive());
         updateBackendApplicationDto.setHardWork(updateBackendApplication.getHardWork());

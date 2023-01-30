@@ -14,6 +14,7 @@ public class BaseApplicationDto {
 
     private Boolean passOrNot;
     private Boolean submissionStatus;
+    private Boolean sendMail;
 
     //인생의 최종 목표는 무엇인가요?
     private String motive;

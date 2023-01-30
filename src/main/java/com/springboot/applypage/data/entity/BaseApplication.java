@@ -1,6 +1,5 @@
 package com.springboot.applypage.data.entity;
 
-import com.springboot.applypage.data.dto.FileDto;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,6 +23,10 @@ public class BaseApplication {
     private String portfolioFile;
     private String portfolioLink;
     private String department;
+
+    //메일 전송 여부
+    @ColumnDefault("false")
+    private Boolean sendMail;
 
     //합격여부
     @ColumnDefault("false")
