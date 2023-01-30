@@ -55,8 +55,7 @@ export default function Common() {
         document.body.style.overflow = "unset";
         console.log("common :", userPosition);
         if (!userName && !userID && !userPhone && !userEmail && !userPosition) {
-            alert('잘못된 접근입니다!');
-            navigate('/')
+            navigate('/404')
         }
 
         // 이전 값들을 저장하기 위해서 Redux 사용
@@ -109,15 +108,16 @@ export default function Common() {
         } else if (userPosition === "디자인") {
             await navigate('/design')
         } else {
+            console.log("error?:", userPosition);
             alert("오류가 발생했습니다, 강남대학교 멋쟁이사자처럼에 문의해주세요!")
             await navigate('/');
         }
     }
 
-    const TempSave = () => {
-        setSubmitCount((prev) => (prev + 1));
+    const TempSave = async () => {
+        await setSubmitCount((prev) => (prev + 1));
         if (userPosition === "프론트엔드") {
-            axios.post('/frontendApplication', JSON.stringify({
+            await axios.post('/frontendApplication', JSON.stringify({
                 department: userDepartment,
                 whyFrontend: userWhyFrontend,
                 email: userEmail,
@@ -142,36 +142,17 @@ export default function Common() {
                     }
                 }
             )
-                .then((res) => {
-                    console.log(res);
-                    dispatch(saveFrontEnd({
-                        userWhyFrontend: '',
-                        userUsingStack: '',
-                        userAchieve: '',
-                        userPortfolioLinkFront: '',
-                        userTeamProject: '',
-                    }));
-                    dispatch(saveCommon({
-                        userMotiv: '',
-                        userHardWork: '',
-                        userKeyWord: '',
-                        userMostDeeplyWork: '',
-                    }))
-                    dispatch(saveIndex({
-                        userName: '',
-                        userID: '',
-                        userDepartment: '',
-                        userEmail: '',
-                        userPhone: '',
-                        userPosition: '',
-                    }))
-                    setTemp(!temp);
+                .then(async (res) => {
+                    await setTemp(true);
                     document.body.style.overflow = "hidden";
+                })
+                .catch((error) => {
+                    console.log(error);
                 })
         }
 
         if (userPosition === "백엔드") {
-            axios.post('/backendApplication', JSON.stringify({
+            await axios.post('/backendApplication', JSON.stringify({
                 department: userDepartment,
                 difficultAndOvercoming: userDifficultAndOvercoming,
                 email: userEmail,
@@ -195,35 +176,14 @@ export default function Common() {
                     }
                 }
             )
-                .then((res) => {
-                    console.log(res);
-                    dispatch(saveBackEnd({
-                        userDifficultAndOvercoming: '',
-                        userImportantGroup: '',
-                        userPortfolioLink: '',
-                        userStudyFramework: '',
-                    }));
-                    dispatch(saveCommon({
-                        userMotiv: '',
-                        userHardWork: '',
-                        userKeyWord: '',
-                        userMostDeeplyWork: '',
-                    }))
-                    dispatch(saveIndex({
-                        userName: '',
-                        userID: '',
-                        userDepartment: '',
-                        userEmail: '',
-                        userPhone: '',
-                        userPosition: '',
-                    }))
-                    setTemp(!temp);
+                .then(async (res) => {
+                    await setTemp(!temp);
                     document.body.style.overflow = "hidden";
                 })
         }
 
         if (userPosition === "디자인") {
-            axios.post('/designApplication', JSON.stringify({
+            await axios.post('/designApplication', JSON.stringify({
                 department: userDepartment,
                 whyDesign: userWhyDesign,
                 email: userEmail,
@@ -248,30 +208,8 @@ export default function Common() {
                     }
                 }
             )
-                .then((res) => {
-                    console.log(res);
-                    dispatch(saveDesign({
-                        userWhyDesign: '',
-                        userToolExperience: '',
-                        userTeamworkExperience: '',
-                        userPortfolioLinkDesign: '',
-                        userDesignGrowth: '',
-                    }));
-                    dispatch(saveCommon({
-                        userMotiv: '',
-                        userHardWork: '',
-                        userKeyWord: '',
-                        userMostDeeplyWork: '',
-                    }))
-                    dispatch(saveIndex({
-                        userName: '',
-                        userID: '',
-                        userDepartment: '',
-                        userEmail: '',
-                        userPhone: '',
-                        userPosition: '',
-                    }))
-                    setTemp(!temp);
+                .then(async (res) => {
+                    await setTemp(!temp);
                     document.body.style.overflow = "hidden";
                 })
         }
@@ -303,11 +241,91 @@ export default function Common() {
         }
     }
 
+    const TempBack = async () => {
+        setTemp(false);
+        setSubmitCount(0);
+        setTempState(false);
+        setButtonState(false);
+    }
+
+    const TempHome = async () => {
+        if (userPosition === "프론트엔드") {
+            dispatch(saveFrontEnd({
+                userWhyFrontend: '',
+                userUsingStack: '',
+                userAchieve: '',
+                userPortfolioLinkFront: '',
+                userTeamProject: '',
+            }));
+            dispatch(saveCommon({
+                userMotiv: '',
+                userHardWork: '',
+                userKeyWord: '',
+                userMostDeeplyWork: '',
+            }))
+            dispatch(saveIndex({
+                userName: '',
+                userID: '',
+                userDepartment: '',
+                userEmail: '',
+                userPhone: '',
+                userPosition: '',
+            }))
+        }
+        if (userPosition === "백엔드") {
+            dispatch(saveBackEnd({
+                userDifficultAndOvercoming: '',
+                userImportantGroup: '',
+                userPortfolioLink: '',
+                userStudyFramework: '',
+            }));
+            dispatch(saveCommon({
+                userMotiv: '',
+                userHardWork: '',
+                userKeyWord: '',
+                userMostDeeplyWork: '',
+            }))
+            dispatch(saveIndex({
+                userName: '',
+                userID: '',
+                userDepartment: '',
+                userEmail: '',
+                userPhone: '',
+                userPosition: '',
+            }))
+        }
+        if (userPosition === "디자인") {
+            await dispatch(saveDesign({
+                userWhyDesign: '',
+                userToolExperience: '',
+                userTeamworkExperience: '',
+                userPortfolioLinkDesign: '',
+                userDesignGrowth: '',
+            }));
+            await dispatch(saveCommon({
+                userMotiv: '',
+                userHardWork: '',
+                userKeyWord: '',
+                userMostDeeplyWork: '',
+            }))
+            await dispatch(saveIndex({
+                userName: '',
+                userID: '',
+                userDepartment: '',
+                userEmail: '',
+                userPhone: '',
+                userPosition: '',
+            }))
+        }
+        await navigate('/');
+    }
+
     return (
         <Section>
             {temp ?
                 <Modal text="지원하신 학번으로 지원서가 저장이 되었어요!" imgSrc={tempImg}>
-                    <Button name="제출하기" onClick={() => navigate('/')}>메인 화면으로 이동</Button>
+                    <Button name="임시저장" onClick={TempHome}>메인 화면으로 이동</Button>
+                    <Button name="제출하기" onClick={TempBack}>이어서 작성하기</Button>
                 </Modal>
                 : null
             }

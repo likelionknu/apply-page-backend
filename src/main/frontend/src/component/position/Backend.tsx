@@ -46,8 +46,7 @@ export default function Backend() {
         document.body.style.overflow = "unset";
 
         if (!userName && !userID && !userPhone && !userEmail && !userPosition) {
-            alert('잘못된 접근입니다!');
-            navigate('/')
+            navigate('/404')
         }
 
         // 이전 값들을 저장하기 위해서 Redux 사용
@@ -114,7 +113,6 @@ export default function Backend() {
             sid: userID,
             studyFramework: studyFramework,
             submissionStatus: false,
-
         }),
             {
                 headers: {
@@ -177,26 +175,6 @@ export default function Backend() {
         )
             .then((res) => {
                 console.log(res);
-                dispatch(saveBackEnd({
-                    userDifficultAndOvercoming: '',
-                    userImportantGroup: '',
-                    userPortfolioLink: '',
-                    userStudyFramework: '',
-                }));
-                dispatch(saveCommon({
-                    userMotiv: '',
-                    userHardWork: '',
-                    userKeyWord: '',
-                    userMostDeeplyWork: '',
-                }))
-                dispatch(saveIndex({
-                    userName: '',
-                    userID: '',
-                    userDepartment: '',
-                    userEmail: '',
-                    userPhone: '',
-                    userPosition: '',
-                }))
                 setComplete(!complete);
                 document.body.style.overflow = "hidden";
             })
@@ -226,6 +204,37 @@ export default function Backend() {
         }
     }
 
+    const TempBack = async () => {
+        setTemp(false);
+        setSubmitCount(0);
+        setTempState(false);
+        setButtonState(false);
+    }
+
+    const TempHome = async () => {
+        await dispatch(saveBackEnd({
+            userDifficultAndOvercoming: '',
+            userImportantGroup: '',
+            userPortfolioLink: '',
+            userStudyFramework: '',
+        }));
+        await dispatch(saveCommon({
+            userMotiv: '',
+            userHardWork: '',
+            userKeyWord: '',
+            userMostDeeplyWork: '',
+        }))
+        await dispatch(saveIndex({
+            userName: '',
+            userID: '',
+            userDepartment: '',
+            userEmail: '',
+            userPhone: '',
+            userPosition: '',
+        }))
+        await navigate('/');
+    }
+
     return (
         <Section>
             {complete ?
@@ -236,7 +245,8 @@ export default function Backend() {
             }
             {temp ?
                 <Modal text="소중한 지원서가 학번으로 지원서가 저장이 되었어요!" imgSrc={tempImg}>
-                    <Button name="제출하기" onClick={() => navigate('/')}>메인 화면으로 이동</Button>
+                    <Button name="임시저장" onClick={TempHome}>메인 화면으로 이동</Button>
+                    <Button name="제출하기" onClick={TempBack}>이어서 작성하기</Button>
                 </Modal>
                 : null
             }

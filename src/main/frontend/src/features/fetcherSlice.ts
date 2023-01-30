@@ -36,6 +36,9 @@ export const fetcherSlice = createSlice({
         userPortfolioLinkBack: '',
         userPortfolioLinkDesign: '',
 
+        // 관리자 페이지에서의 모달창 온/오프
+        userModalState: false,
+        adminState: false,
 
     },
     reducers: {
@@ -76,27 +79,33 @@ export const fetcherSlice = createSlice({
             state.userPortfolioLinkBack = action.payload.userPortfolioLinkBack;
         },
         view: (state) => {
-            console.log(state.userName);
-            console.log(state.userID);
-            console.log(state.userEmail);
-            console.log(state.userPhone);
-            console.log(state.userPosition);
-            console.log(state.userMotiv);
-            console.log(state.userHardWork);
-            console.log(state.userKeyWord);
-            console.log(state.userMostDeeplyWork);
-            // console.log(state.userWhyDesign);
-            // console.log(state.userToolExperience);
-            // console.log(state.userTeamworkExperience);
-            // console.log(state.userDesignGrowth);
-            console.log(state.userWhyFrontend);
-            console.log(state.userUsingStack);
-            console.log(state.userTeamProject);
-            console.log(state.userAchieve);
+            //     console.log(state.userName);
+            //     console.log(state.userID);
+            //     console.log(state.userEmail);
+            //     console.log(state.userPhone);
+            //     console.log(state.userPosition);
+            //     console.log(state.userMotiv);
+            //     console.log(state.userHardWork);
+            //     console.log(state.userKeyWord);
+            //     console.log(state.userMostDeeplyWork);
+            //     console.log(state.userWhyDesign);
+            //     console.log(state.userToolExperience);
+            //     console.log(state.userTeamworkExperience);
+            //     console.log(state.userDesignGrowth);
+            //     console.log(state.userWhyFrontend);
+            //     console.log(state.userUsingStack);
+            //     console.log(state.userTeamProject);
+            //     console.log(state.userAchieve);
         },
+        saveModalState: (state, action) => {
+            state.userModalState = action.payload.userModalState;
+        },
+        saveAdminState: (state, action) => {
+            state.adminState = action.payload.adminState;
+        }
     },
     extraReducers: {},
 })
 
-export const { saveIndex, saveCommon, saveBackEnd, saveFrontEnd, saveDesign, view } = fetcherSlice.actions;
+export const { saveIndex, saveCommon, saveBackEnd, saveFrontEnd, saveDesign, view, saveModalState, saveAdminState } = fetcherSlice.actions;
 export default fetcherSlice.reducer;

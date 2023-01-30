@@ -2,6 +2,17 @@ html {
   background-color: #262626;
 }
 
+a {
+  text-decoration: none;
+  color: #ff7828;
+  font-family: 'Pretendard-Bold';
+  transition: 0.4s all;
+}
+
+a:hover {
+  opacity: 80%;
+}
+
 .App {
   text-align: center;
 }

@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css, keyframes } from "@emotion/react";
 import React, { ChangeEvent, useState } from 'react'
 import banner from '../../images/banner.png';
 import loading from '../../images/loading.gif';
@@ -6,9 +7,11 @@ import axios from 'axios';
 import checkBox from '../images/checkBox.svg';
 import checkedBox from '../images/checkedBox.svg';
 import { useMemo } from 'react';
-import { css, keyframes } from "@emotion/react";
 import { fadeLeft, fadeUp } from "../../styles/Keyframes";
 import { WrapperProps } from "../../App"
+import { ImgClickType } from "../admin/detail/Type";
+import back from '../../images/back.png';
+import oops from '../../images/oops.png';
 
 
 export const TextAreaBox = (props: TextAreaType) => {
@@ -22,15 +25,19 @@ export const TextAreaBox = (props: TextAreaType) => {
         padding-bottom: 1em;
         padding-right: 1em;
         padding-top: 1em;
-        width: 62.5em;
+        width: 64.28em;
         height: 15em;
         border: solid;
         border-radius: 15px;
         border-color: #707070;
         border-width: 1px;
-        font-size: 16px;
+        font-size: 14px;
         box-sizing: border-box;
         resize: none;
+
+        // 익스플로러, 파이어폭스에서 우측 스크롤 없애기
+        -ms-overflow-style: none;
+        scrollbar-width: none;
 
         &:focus {
             outline-color: #ff7828;
@@ -40,6 +47,12 @@ export const TextAreaBox = (props: TextAreaType) => {
             font-family: 'Pretendard-Regular';
             margin-left: 0.4em;
         }
+
+        // 크롬에서 우측 스크롤 없애기
+        &::-webkit-scrollbar {
+            display: none;
+          }
+
         `} {...props} maxLength={1000} />
     )
 }
@@ -83,13 +96,13 @@ export const InputBox = (props: InputType) => {
         letter-spacing: -0.03em;
         padding: 0;
         padding-left: 1em;
-        width: 62.5em;
+        width: 64.28em;
         height: 3.7em;
         border: solid;
-        border-radius: 15px;
+        border-radius: 10px;
         border-color: #707070;
         border-width: 1px;
-        font-size: 16px;
+        font-size: 14px;
         box-sizing: border-box;
 
         &::-webkit-outer-spin-button,
@@ -106,15 +119,15 @@ export const InputBox = (props: InputType) => {
             font-family: 'Pretendard-Regular';
             margin-left: 0.4em;
         }
-        `} {...props} maxLength={props.maxLength} />
+        `} {...props} maxLength={props.maxLength} tabIndex={-1} />
     )
 }
 
 export interface PositionType {
-    name: string;
-    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-    children: React.ReactNode;
-    state: string;
+    name?: string;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    children?: React.ReactNode;
+    state?: string;
     alt?: string;
 }
 
@@ -123,10 +136,10 @@ export const Position = (props: PositionType) => {
         <button css={css`
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.03em;
-            font-size: 16px;
-            height: 3.7em;
+            font-size: 14px;
+            height: 4em;
             ${props.alt === "모달" && css`height: 3em;`} 
-            ${props.alt === "모달" && css`font-size: 14px;`} 
+            ${props.alt === "모달" && css`font-size: 12px;`} 
             border-radius: 50px;
             border: solid;
             border-width: 1px;
@@ -159,11 +172,11 @@ export const Position = (props: PositionType) => {
 export const ModalFrame = ({ children }: WrapperProps) => {
     return (
         <div css={css`
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height:100%;
         background-color: rgba(0, 0, 0, 0.4);
         z-index: 999;
         cursor: pointer;
@@ -178,7 +191,7 @@ export const Modal = (props: WrapperProps) => {
     return (
         <ModalFrame>
             <div css={css`
-                position: absolute;
+                position: fixed;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
@@ -191,10 +204,10 @@ export const Modal = (props: WrapperProps) => {
                     border-radius: 20px;
                     background-color: white;
                     position: fixed;
-                    font-size: 18px;
+                    font-size: 16px;
                     width: 40em;
                     height: 30em;
-                    ${props.alt === "찾기" && css`height: 28em`}
+                    ${props.alt === "찾기" && css`height: 35em`}
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -210,12 +223,12 @@ export const Modal = (props: WrapperProps) => {
                         {props.imgSrc &&
                             <img alt="사람" src={props.imgSrc}
                                 css={css`
-                            width: 10.5em;
+                            width: 9.2em;
                             ${props.alt === "찾기" &&
-                                    'width: 7.5em;'
+                                    'width: 7.3em;'
                                     }
                             ${props.alt === "최종제출" &&
-                                    'width: 8em;'
+                                    'width: 7.5em;'
                                     }
                             ${props.alt === "불러오기" &&
                                     'width: 7.5em;'
@@ -253,8 +266,16 @@ export const ModalInput = (props: InputType) => {
         border-color: #707070;
         border-width: 1px;
         font-size: 16px;
-        ${props.name === "저장된_학번" && css`font-size: 15px;`}
-        ${props.name === "저장된_학번" && css`width: 23.5em;`}
+        ${props.name === "저장된_학번" && css`font-size: 13px;`}
+        ${props.name === "저장된_학번" && css`
+        width: 37em;
+        height: 3.5em;
+        `}
+        ${props.name === "저장된_이메일" && css`font-size: 13px;`}
+        ${props.name === "저장된_이메일" && css`
+        width: 37em;
+        height: 3.5em;
+        `}
         box-sizing: border-box;
 
         &::-webkit-outer-spin-button,
@@ -275,6 +296,46 @@ export const ModalInput = (props: InputType) => {
     )
 }
 
+export const EndTime = () => {
+    return (
+        <section css={css`
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        `}>
+            <div css={css`
+                background-color: white;
+                width: 30em;
+                height: 25em;
+                border-radius: 10px;
+                border: none;
+                font-size: 14px;
+                letter-spacing: -0.03em;
+                line-height: 1.5em;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                row-gap: 2em;
+            `}>
+                <img alt="낫 지원기간" src={oops} css={css`
+                    width: 8em;
+                `} />
+                <span css={css`
+                    font-size: 15px;
+                    letter-spacing: -0.03em;
+                    
+                    font-family: 'Pretendard-Medium';
+                `}>
+                    지원이 마감되었습니다<br />결과 발표를 위해 잠시만 기다려주세요
+                </span>
+            </div>
+        </section>
+    )
+}
+
 export const Precautions = () => {
     return (
         <div css={css`
@@ -283,8 +344,8 @@ export const Precautions = () => {
             display: flex;
             flex-direction: column;
             text-align: left;
-            font-size: 16px;
-            width: 62.5em;
+            font-size: 14px;
+            width: 64.28em;
         `}>
             <InputTitle>주의사항 <Require /> </InputTitle>
             <div css={css`
@@ -293,7 +354,7 @@ export const Precautions = () => {
                 row-gap: 0.5em;
             `}>
                 <span>· 지원서 최종 제출 후에는 지원서의 수정이 불가능합니다.</span>
-                <span>· 지원서의 정보 저장을 위해 제출 전 임시저장을 통해 데이터를 저장해주시기 바랍니다.</span>
+                <span>· 작성 중인 지원서는 임시저장 버튼을 통해 실시간으로 저장이 가능합니다.</span>
                 <span>· 지원서 접수 마감일에는 지원자가 몰려 지원이 어려울 수 있으니, 여유있게 미리 제출해주시기바랍니다.</span>
                 <span>· 문항에 따른 올바른 입력을 해주셔야 지원서의 다음 단계로 이동하실 수 있습니다.</span>
                 <span>· 지원서의 내용이 사실과 다를 경우, 합격이 취소되거나 전형 상의 불이익을 받을 수 있습니다.</span>
@@ -309,9 +370,9 @@ export const PositionBox = (props: WrapperProps) => {
         <div css={css`
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            column-gap: 1em;
+            column-gap: 2em;
             font-size: 16px;
-            width: 62.5em;
+            width: 56.25em;
             ${props.alt === "모달" && css`width: 30em;`} 
         `}>
             {props.children}
@@ -328,6 +389,29 @@ export const Loading = () => {
     )
 }
 
+// 뒤로가기 및 취소
+export const Quit = (props: ImgClickType) => {
+    return (
+        <img alt="뒤로가기" onClick={props.onClick} src={back} css={css`
+            width: 1em;
+            transition: 0.4s all;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            cursor: pointer;
+
+            ${props.alt === "찾기" && css`
+                position: absolute;
+                margin-top: -17em;
+                margin-left: 35.5em;
+            `}
+
+            &:hover {
+                opacity: 60%;
+            }
+        `} />
+    )
+}
+
 export const WordLength = ({ children }: WrapperProps) => {
     return (
         <div css={css`
@@ -336,10 +420,10 @@ export const WordLength = ({ children }: WrapperProps) => {
             text-align:center;
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.03em;
-            font-size: 15px;
+            font-size: 13px;
             color: #ff7828;
             margin-top: 16em;
-            margin-left: 57em;
+            margin-left: 59em;
 
             display:flex;
             justify-content: center;
@@ -352,7 +436,7 @@ export const WordLength = ({ children }: WrapperProps) => {
                 {children}
             </div>
             <span css={css`
-                margin-right: 0.5em;
+                margin-right: 0.3em;
             `}>/</span>
             <span css={css`
             `}>1000</span>
@@ -366,17 +450,10 @@ export const Require = () => {
             margin-left: 0.4em;
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.02em;
-            font-size: 15px;
+            font-size: 14px;
             color: #ff0000;
         `}>* </span>
     )
-}
-
-export interface AgreeType {
-    src: string;
-    text: string;
-    onClick?: (event: React.MouseEvent<HTMLImageElement>) => void;
-    name: string;
 }
 
 export const ArgreeBox = ({ children }: WrapperProps) => {
@@ -392,27 +469,36 @@ export const ArgreeBox = ({ children }: WrapperProps) => {
     )
 }
 
+export interface AgreeType {
+    src: string;
+    text: string;
+    onClick: (event: React.MouseEvent<HTMLImageElement | HTMLDivElement>) => void;
+    name: string;
+}
+
 export const Argree = ((props: AgreeType) => {
     return (
         <div css={css`
             display: flex;
             flex-direction: column;
-            width: 62.5em;
+            width: 64.28em;
+            font-size: 14px;
         `}>
             <div css={css`
                 display: flex;
                 align-items: center;
             `}>
                 <img alt={props.name} onClick={props.onClick} src={props.src} css={css`
-                    width: 1.2em;
+                    width: 1.1em;
                     cursor: pointer;
                 `} />
                 <span css={css`
-                    font-size: 16px;
+                    font-size: 14px;
                     font-family: 'Pretendard-Medium';
                     letter-spacing: -0.03em;
                     margin-left: 0.4em;
-                `}>{props.text}<Require /></span>
+                    cursor: pointer;
+                `} onClick={props.onClick} id={props.name} >{props.text}<Require /></span>
             </div>
         </div>
     )
@@ -422,7 +508,7 @@ export const Banner = () => {
     return (
         <img alt="배너 이미지" src={banner} css={css`
             margin-top: 40px;
-            max-width: 1000px;
+            max-width: 900px;
             border-radius: 12px;
             margin-bottom: 1em;
             // animation: ${fadeLeft} 1.8s ease-in-out;
@@ -436,7 +522,7 @@ export const Section = ({ children }: WrapperProps) => {
             position: absolute;
             left: 50%;
             transform: translate(-50%);
-            max-width: 75em;
+            max-width: 73em;
             width: 100%;
             background-color: white;
 
@@ -444,7 +530,7 @@ export const Section = ({ children }: WrapperProps) => {
             flex-direction: column;
             align-items: center;
             padding-bottom: 5em;
-            row-gap: 1.2em;
+            row-gap: 1.5em;
         `}>
             {children}
         </section>
@@ -456,13 +542,34 @@ export const InputTitle = ({ children }: WrapperProps) => {
         <p css={css`
             font-family: 'Pretendard-Bold';
             letter-spacing: -0.03em;
-            font-size: 16px;
+            font-size: 14px;
 
             display: flex;
             align-items: center;
         `}>
             {children}
         </p>
+    )
+}
+
+export const SearchDepartment = ({ children }: WrapperProps) => {
+    return (
+        <div css={css`
+            font-family: 'Pretendard-Regular';
+            letter-spacing: -0.03em;
+            background-color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            padding: 1em;
+            row-gap: 0.5em;
+            box-shadow:2px 3px 5px 0px #707070;
+            display: flex;
+            flex-direction: column;
+            height: 5em;
+        `}>
+            {children}
+        </div>
     )
 }
 
@@ -480,9 +587,39 @@ export const Article = ({ children }: WrapperProps) => {
     )
 }
 
+export const ErrorDescription = ({ children }: WrapperProps) => {
+    return (
+        <span css={css`
+            position: absolute;
+            font-family: 'Pretendard-Regular';
+            letter-spacing: -0.03em;
+            font-size: 12.5px;
+            margin-top: 10em;
+            color: red;
+        `}>
+            {children}
+        </span>
+    )
+}
+
+export const CollectDescription = ({ children }: WrapperProps) => {
+    return (
+        <span css={css`
+            position: absolute;
+            font-family: 'Pretendard-Regular';
+            letter-spacing: -0.03em;
+            font-size: 12.5px;
+            margin-top: 10em;
+            color: #11BD7E;
+        `}>
+            {children}
+        </span>
+    )
+}
+
 export interface ButtonType {
-    name: string;
-    children: React.ReactNode;
+    name?: string;
+    children?: React.ReactNode;
     disabled?: boolean;
     onClick?: () => void;
     alt?: string;
@@ -493,12 +630,13 @@ export const Button = (props: ButtonType) => {
         <button css={css`
             font-family: 'Pretendard-Bold';
             letter-spacing: -0.03em;
-            font-size: 16px;
+            font-size: 14px;
             width: 15em;
             height: 3.5em;
             ${props.alt === "불러오기" && css`
-                width: 7.5em;
-                font-size: 14px;
+                width: 40em;
+                font-size: 12px;
+                height: 3.8em;
             `}
             border: none;
             border-radius: 7px;
@@ -531,7 +669,7 @@ export const ButtonBox = (props: WrapperProps) => {
             column-gap: 1em;
             margin-top: 3em;
             animation: ${fadeUp} 2s ease-in-out;
-            ${props.alt === "임시저장_모달" && css`margin-top: 2em;`}
+            ${props.alt === "임시저장_모달" && css`margin-top: 0em;`}
         `}>
             {props.children}
         </div>
