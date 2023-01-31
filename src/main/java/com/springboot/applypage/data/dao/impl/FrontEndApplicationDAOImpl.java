@@ -71,6 +71,7 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
             newFrontendApplication.setDepartment(frontendApplication.getDepartment());
             newFrontendApplication.setSid(frontendApplication.getSid());
             newFrontendApplication.setSubmissionStatus(frontendApplication.getSubmissionStatus());
+            newFrontendApplication.setSendMail(frontendApplication.getSendMail());
 
             newFrontendApplication.setMotive(frontendApplication.getMotive());
             newFrontendApplication.setHardWork(frontendApplication.getHardWork());
