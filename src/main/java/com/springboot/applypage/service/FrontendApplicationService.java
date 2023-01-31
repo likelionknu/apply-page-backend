@@ -14,6 +14,7 @@ public interface FrontendApplicationService {
             throws Exception;
     void deleteFrontendApplication(String sid) throws Exception;
     void changePossOrNot(String sid) throws Exception;
+    void changeSendMail(String sid) throws Exception;
     List<FrontendApplication> getReturn(Boolean dir);
     List<FrontendApplication> getAllApplications();
 }

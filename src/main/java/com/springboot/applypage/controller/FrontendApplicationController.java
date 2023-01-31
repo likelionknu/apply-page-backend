@@ -87,6 +87,16 @@ public class FrontendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body("성공적으로 변경 되었습니다.");
     }
 
+    @PutMapping("/changeSendMail")
+    public ResponseEntity<String> changeFrontendApplicationSendMail(
+            String sid, HttpServletRequest request) throws Exception
+    {
+        frontendApplicationService.changeSendMail(sid);
+        LOGGER.info("호출 API: " + "change frontend application send mail" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body("성공적으로 변경 되었습니다.");
+    }
+
     @GetMapping("/getApplications")
     public ResponseEntity<List<FrontendApplication>> getFrontendApplicationWithBoolean(Boolean bool, HttpServletRequest request)
     {

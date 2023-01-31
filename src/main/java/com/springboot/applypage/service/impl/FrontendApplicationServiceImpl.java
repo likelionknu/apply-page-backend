@@ -200,6 +200,11 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     }
 
     @Override
+    public void changeSendMail(String sid) throws Exception {
+        frontendApplicationDAO.changeSendMail(sid);
+    }
+
+    @Override
     public List<FrontendApplication> getReturn(Boolean dir) {
         return frontendApplicationDAO.getReturn(dir);
     }

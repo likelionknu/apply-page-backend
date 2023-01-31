@@ -124,6 +124,20 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
     }
 
     @Override
+    public void changeSendMail(String sid) throws Exception {
+        Optional<FrontendApplication> selectedFrontendApplication = frontendApplicationRepository.findById(sid);
+
+        if(selectedFrontendApplication.isPresent()){
+            FrontendApplication newFrontApplication = selectedFrontendApplication.get();
+
+            newFrontApplication.setSendMail(!newFrontApplication.getSendMail());
+            frontendApplicationRepository.save(newFrontApplication);
+        }else{
+            throw new Exception();
+        }
+    }
+
+    @Override
     public List<FrontendApplication> getReturn(Boolean dir) {
         return frontendApplicationRepository.findAll().stream()
                 .filter(passOrNot -> passOrNot.getPassOrNot().equals(dir))
