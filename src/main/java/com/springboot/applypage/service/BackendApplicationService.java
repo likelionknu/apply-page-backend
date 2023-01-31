@@ -13,6 +13,7 @@ public interface BackendApplicationService {
         throws Exception;
     void deleteBackendApplication(String sid) throws Exception;
     void changePossOrNot(String sid) throws Exception;
+    void changeSendMail(String sid) throws Exception;
     List<BackendApplication> getReturn(Boolean dir);
     List<BackendApplication> getAllApplications();
 

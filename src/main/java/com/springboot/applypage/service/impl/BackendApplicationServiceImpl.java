@@ -197,6 +197,11 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     }
 
     @Override
+    public void changeSendMail(String sid) throws Exception {
+        backendApplicationDAO.changeSendMail(sid);
+    }
+
+    @Override
     public List<BackendApplication> getReturn(Boolean dir) {
         return backendApplicationDAO.getReturn(dir);
     }

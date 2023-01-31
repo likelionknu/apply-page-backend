@@ -11,7 +11,8 @@ public interface BackendApplicationDAO {
     BackendApplication selectBackendApplicationWithEmail(String sid, String email);
     BackendApplication updateBackendApplication(BackendApplication backendApplication) throws Exception;
     void deleteBackendApplication(String sid) throws Exception;
-    void changePassOrNot(String id) throws Exception;
+    void changePassOrNot(String sid) throws Exception;
+    void changeSendMail(String sid) throws Exception;
     List<BackendApplication> getReturn(Boolean dir);
     List<BackendApplication> getAllApplication();
 }

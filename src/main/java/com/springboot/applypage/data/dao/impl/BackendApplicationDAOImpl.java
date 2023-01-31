@@ -108,14 +108,25 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
     @Override
     public void changePassOrNot(String sid) throws Exception {
         Optional<BackendApplication> selectedBackendApplication = backendApplicationRepository.findById(sid);
-        backendApplicationRepository.findAll().stream()
-                .filter(passOrNot -> passOrNot.getPassOrNot().equals(true))
-                .collect(Collectors.toList());
 
         if(selectedBackendApplication.isPresent()){
             BackendApplication newBackendApplication = selectedBackendApplication.get();
 
             newBackendApplication.setPassOrNot(!newBackendApplication.getPassOrNot());
+            backendApplicationRepository.save(newBackendApplication);
+        }else{
+            throw new Exception();
+        }
+    }
+
+    @Override
+    public void changeSendMail(String sid) throws Exception {
+        Optional<BackendApplication> selectedBackendApplication = backendApplicationRepository.findById(sid);
+
+        if(selectedBackendApplication.isPresent()){
+            BackendApplication newBackendApplication = selectedBackendApplication.get();
+
+            newBackendApplication.setSendMail(!newBackendApplication.getSendMail());
             backendApplicationRepository.save(newBackendApplication);
         }else{
             throw new Exception();
