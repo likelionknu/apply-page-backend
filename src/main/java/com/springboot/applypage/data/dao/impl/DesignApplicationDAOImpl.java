@@ -121,6 +121,20 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
     }
 
     @Override
+    public void changeSendMail(String sid) throws Exception {
+        Optional<DesignApplication> selectedDesignApplication = designApplicationRepository.findById(sid);
+
+        if(selectedDesignApplication.isPresent()){
+            DesignApplication newDesignApplication = selectedDesignApplication.get();
+
+            newDesignApplication.setSendMail(!newDesignApplication.getSendMail());
+            designApplicationRepository.save(newDesignApplication);
+        }else{
+            throw new Exception();
+        }
+    }
+
+    @Override
     public List<DesignApplication> getReturn(Boolean dir) {
         return designApplicationRepository.findAll().stream()
                 .filter(passOrNot -> passOrNot.getPassOrNot().equals(dir))

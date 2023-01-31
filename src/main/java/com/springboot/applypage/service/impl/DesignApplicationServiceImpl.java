@@ -207,6 +207,11 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
     }
 
     @Override
+    public void changeSendMail(String sid) throws Exception {
+        designApplicationDAO.changeSendMail(sid);
+    }
+
+    @Override
     public List<DesignApplication> getReturn(Boolean dir) {
         return designApplicationDAO.getReturn(dir);
     }

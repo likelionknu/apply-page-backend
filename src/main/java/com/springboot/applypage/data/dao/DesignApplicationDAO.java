@@ -13,6 +13,7 @@ public interface DesignApplicationDAO {
     DesignApplication updateDesignApplication(DesignApplication designApplication) throws Exception;
     void deleteDesignApplication(String sid) throws Exception;
     void changePassOrNot(String sid) throws Exception;
+    void changeSendMail(String sid) throws Exception;
     List<DesignApplication> getReturn(Boolean dir);
     List<DesignApplication> getAllApplications();
 }
