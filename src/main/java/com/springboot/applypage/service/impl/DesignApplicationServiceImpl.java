@@ -38,6 +38,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplicationResponse.setEmail(designApplication.getEmail());
         designApplicationResponse.setDepartment(designApplication.getDepartment());
         designApplicationResponse.setSubmissionStatus(designApplication.getSubmissionStatus());
+        designApplicationResponse.setSendMail(designApplication.getSendMail());
 
         designApplicationResponse.setMotive(designApplication.getMotive());
         designApplicationResponse.setHardWork(designApplication.getHardWork());
@@ -67,6 +68,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplicationResponse.setEmail(designApplication.getEmail());
         designApplicationResponse.setDepartment(designApplication.getDepartment());
         designApplicationResponse.setSubmissionStatus(designApplication.getSubmissionStatus());
+        designApplicationResponse.setSendMail(designApplication.getSendMail());
 
         designApplicationResponse.setMotive(designApplication.getMotive());
         designApplicationResponse.setHardWork(designApplication.getHardWork());
@@ -95,6 +97,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplication.setEmail(designApplicationDto.getEmail());
         designApplication.setDepartment(designApplicationDto.getDepartment());
         designApplication.setSubmissionStatus(designApplicationDto.getSubmissionStatus());
+        designApplication.setSendMail(designApplicationDto.getSendMail());
 
         designApplication.setMotive(designApplicationDto.getMotive());
         designApplication.setHardWork(designApplicationDto.getHardWork());
@@ -119,6 +122,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplicationResponse.setEmail(saveDesignApplication.getEmail());
         designApplicationResponse.setDepartment(saveDesignApplication.getDepartment());
         designApplicationResponse.setSubmissionStatus(saveDesignApplication.getSubmissionStatus());
+        designApplicationResponse.setSendMail(saveDesignApplication.getSendMail());
 
         designApplicationResponse.setMotive(saveDesignApplication.getMotive());
         designApplicationResponse.setHardWork(saveDesignApplication.getHardWork());
@@ -148,6 +152,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         designApplication.setEmail(designApplicationDto.getEmail());
         designApplication.setDepartment(designApplicationDto.getDepartment());
         designApplication.setSubmissionStatus(designApplicationDto.getSubmissionStatus());
+        designApplication.setSendMail(designApplicationDto.getSendMail());
 
         designApplication.setMotive(designApplicationDto.getMotive());
         designApplication.setHardWork(designApplicationDto.getHardWork());
@@ -172,6 +177,7 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
         updateDesignApplicationDto.setEmail(updateDesignApplication.getEmail());
         updateDesignApplicationDto.setDepartment(updateDesignApplication.getDepartment());
         updateDesignApplicationDto.setSubmissionStatus(updateDesignApplication.getSubmissionStatus());
+        updateDesignApplicationDto.setSendMail(updateDesignApplication.getSendMail());
 
         updateDesignApplicationDto.setMotive(updateDesignApplication.getMotive());
         updateDesignApplicationDto.setHardWork(updateDesignApplication.getHardWork());

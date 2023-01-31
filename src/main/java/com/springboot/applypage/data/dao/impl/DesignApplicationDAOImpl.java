@@ -73,6 +73,7 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
             newDesignApplication.setUpdatedAt(LocalDateTime.now());
             newDesignApplication.setDepartment(designApplication.getDepartment());
             newDesignApplication.setSubmissionStatus(designApplication.getSubmissionStatus());
+            newDesignApplication.setSendMail(designApplication.getSendMail());
 
             newDesignApplication.setMotive(designApplication.getMotive());
             newDesignApplication.setHardWork(designApplication.getHardWork());
