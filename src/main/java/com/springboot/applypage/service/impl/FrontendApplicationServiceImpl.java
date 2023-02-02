@@ -210,6 +210,11 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     }
 
     @Override
+    public List<FrontendApplication> getSubmissionApplication(Boolean dir) {
+        return frontendApplicationDAO.getSubmissionApplications(dir);
+    }
+
+    @Override
     public List<FrontendApplication> getAllApplications() {
         return frontendApplicationDAO.getAllApplications();
     }

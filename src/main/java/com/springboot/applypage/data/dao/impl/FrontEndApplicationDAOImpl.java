@@ -145,6 +145,13 @@ public class FrontEndApplicationDAOImpl implements FrontendApplicationDAO {
     }
 
     @Override
+    public List<FrontendApplication> getSubmissionApplications(Boolean dir) {
+        return frontendApplicationRepository.findAll().stream()
+                .filter(submissionStatus -> submissionStatus.getSubmissionStatus().equals(dir))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<FrontendApplication> getAllApplications() {
         return frontendApplicationRepository.findAll();
     }

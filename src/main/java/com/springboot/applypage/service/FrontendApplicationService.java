@@ -16,5 +16,6 @@ public interface FrontendApplicationService {
     void changePossOrNot(String sid) throws Exception;
     void changeSendMail(String sid) throws Exception;
     List<FrontendApplication> getReturn(Boolean dir);
+    List<FrontendApplication> getSubmissionApplication(Boolean dir);
     List<FrontendApplication> getAllApplications();
 }

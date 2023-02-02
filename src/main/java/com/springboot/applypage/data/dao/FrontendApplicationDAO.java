@@ -14,5 +14,6 @@ public interface FrontendApplicationDAO {
     void changePassOrNot(String sid) throws Exception;
     void changeSendMail(String sid) throws Exception;
     List<FrontendApplication> getReturn(Boolean dir);
+    List<FrontendApplication> getSubmissionApplications(Boolean dir);
     List<FrontendApplication> getAllApplications();
 }

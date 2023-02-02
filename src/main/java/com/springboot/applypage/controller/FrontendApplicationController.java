@@ -106,6 +106,15 @@ public class FrontendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(frontendApplicationResponse);
     }
 
+    @GetMapping("/getSubmissionApplications")
+    public ResponseEntity<List<FrontendApplication>> getFrontendApplicationWithSubmissionStatus(Boolean bool, HttpServletRequest request)
+    {
+        List<FrontendApplication> frontendApplicationResponse = frontendApplicationService.getSubmissionApplication(bool);
+        LOGGER.info("호출 API: " + "get frontend application with submission status" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(frontendApplicationResponse);
+    }
+
     @GetMapping("/getAllApplications")
     public ResponseEntity<List<FrontendApplication>> getAllFrontendApplications(HttpServletRequest request)
     {
