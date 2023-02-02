@@ -15,4 +15,5 @@ public interface BackendApplicationDAO {
     void changeSendMail(String sid) throws Exception;
     List<BackendApplication> getReturn(Boolean dir);
     List<BackendApplication> getAllApplication();
+    List<BackendApplication> getSubmissionApplications(Boolean dir);
 }

@@ -145,4 +145,10 @@ public class BackendApplicationDAOImpl implements BackendApplicationDAO {
         return backendApplicationRepository.findAll();
     }
 
+    @Override
+    public List<BackendApplication> getSubmissionApplications(Boolean dir) {
+        return backendApplicationRepository.findAll().stream()
+                .filter(submissionStatus -> submissionStatus.getSubmissionStatus().equals(dir))
+                .collect(Collectors.toList());
+    }
 }

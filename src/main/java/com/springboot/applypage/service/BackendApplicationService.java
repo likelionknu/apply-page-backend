@@ -15,6 +15,7 @@ public interface BackendApplicationService {
     void changePossOrNot(String sid) throws Exception;
     void changeSendMail(String sid) throws Exception;
     List<BackendApplication> getReturn(Boolean dir);
+    List<BackendApplication> getSubmissionApplications(Boolean dir);
     List<BackendApplication> getAllApplications();
 
 }

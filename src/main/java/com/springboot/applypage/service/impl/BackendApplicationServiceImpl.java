@@ -207,6 +207,11 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     }
 
     @Override
+    public List<BackendApplication> getSubmissionApplications(Boolean dir) {
+        return backendApplicationDAO.getSubmissionApplications(dir);
+    }
+
+    @Override
     public List<BackendApplication> getAllApplications() {
         return backendApplicationDAO.getAllApplication();
     }
