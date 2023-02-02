@@ -142,6 +142,13 @@ public class DesignApplicationDAOImpl implements DesignApplicationDAO {
     }
 
     @Override
+    public List<DesignApplication> getSubmissionApplications(Boolean dir) {
+        return designApplicationRepository.findAll().stream()
+                .filter(submissionStatus -> submissionStatus.getSubmissionStatus().equals(dir))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<DesignApplication> getAllApplications() {
         return designApplicationRepository.findAll();
     }

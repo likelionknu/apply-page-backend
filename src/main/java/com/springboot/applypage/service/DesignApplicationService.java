@@ -16,6 +16,7 @@ public interface DesignApplicationService {
     void changePossOrNot(String sid) throws Exception;
     void changeSendMail(String sid) throws Exception;
     List<DesignApplication> getReturn(Boolean dir);
+    List<DesignApplication> getSubmissionApplication(Boolean dir);
     List<DesignApplication> getAllApplications();
 
 }

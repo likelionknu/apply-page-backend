@@ -217,6 +217,11 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
     }
 
     @Override
+    public List<DesignApplication> getSubmissionApplication(Boolean dir) {
+        return designApplicationDAO.getSubmissionApplications(dir);
+    }
+
+    @Override
     public List<DesignApplication> getAllApplications() {
         return designApplicationDAO.getAllApplications();
     }

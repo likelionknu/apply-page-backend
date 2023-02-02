@@ -15,5 +15,6 @@ public interface DesignApplicationDAO {
     void changePassOrNot(String sid) throws Exception;
     void changeSendMail(String sid) throws Exception;
     List<DesignApplication> getReturn(Boolean dir);
+    List<DesignApplication> getSubmissionApplications(Boolean dir);
     List<DesignApplication> getAllApplications();
 }
