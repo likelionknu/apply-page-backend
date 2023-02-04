@@ -18,5 +18,8 @@ public interface DesignApplicationService {
     List<DesignApplication> getReturn(Boolean dir);
     List<DesignApplication> getSubmissionApplication(Boolean dir);
     List<DesignApplication> getAllApplications();
+    List<DesignApplication> getDesignApplicationWithPassOrNotAndSubmission(
+            Boolean passOrNot, Boolean submission
+    );
 
 }

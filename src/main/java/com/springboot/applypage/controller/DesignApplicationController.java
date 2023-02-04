@@ -116,6 +116,16 @@ public class DesignApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(designApplicationResponse);
     }
 
+    @GetMapping("/getApplicationsWithPassOrNotAndSubmission")
+    public ResponseEntity<List<DesignApplication>> getDesignApplicationsWithPassOrNotAndSubmission(
+            Boolean passOrNot, Boolean submission, HttpServletRequest request)
+    {
+        List<DesignApplication> designApplicationResponse = designApplicationService.getDesignApplicationWithPassOrNotAndSubmission(passOrNot, submission);
+        LOGGER.info("호출 API: " + "get design application with submission status" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(designApplicationResponse);
+    }
+
     @GetMapping("/getAllApplications")
     public ResponseEntity<List<DesignApplication>> getAllDesignApplications(HttpServletRequest request)
     {

@@ -1,20 +1,14 @@
 package com.springboot.applypage.service.impl;
 
 import com.springboot.applypage.data.dao.DesignApplicationDAO;
-import com.springboot.applypage.data.dao.impl.DesignApplicationDAOImpl;
 import com.springboot.applypage.data.dto.DesignApplicationDto;
-import com.springboot.applypage.data.dto.DesignApplicationDto;
-import com.springboot.applypage.data.dto.DesignApplicationDto;
-import com.springboot.applypage.data.dto.DesignApplicationDto;
-import com.springboot.applypage.data.entity.DesignApplication;
-import com.springboot.applypage.data.entity.DesignApplication;
 import com.springboot.applypage.data.entity.DesignApplication;
 import com.springboot.applypage.service.DesignApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DesignApplicationServiceImpl implements DesignApplicationService {
@@ -224,5 +218,12 @@ public class DesignApplicationServiceImpl implements DesignApplicationService {
     @Override
     public List<DesignApplication> getAllApplications() {
         return designApplicationDAO.getAllApplications();
+    }
+
+    @Override
+    public List<DesignApplication> getDesignApplicationWithPassOrNotAndSubmission(Boolean passOrNot, Boolean submission) {
+        return designApplicationDAO.getReturn(passOrNot).stream()
+                .filter(submissionStatus -> submissionStatus.getSubmissionStatus().equals(submission))
+                .collect(Collectors.toList());
     }
 }
