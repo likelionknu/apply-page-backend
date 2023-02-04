@@ -17,5 +17,8 @@ public interface BackendApplicationService {
     List<BackendApplication> getReturn(Boolean dir);
     List<BackendApplication> getSubmissionApplications(Boolean dir);
     List<BackendApplication> getAllApplications();
+    List<BackendApplication> getBackendApplicationWithPassOrNotAndSubmission(
+            Boolean passOrNot, Boolean submission
+    );
 
 }

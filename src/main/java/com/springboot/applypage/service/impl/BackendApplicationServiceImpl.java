@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BackendApplicationServiceImpl implements BackendApplicationService {
@@ -214,5 +215,14 @@ public class BackendApplicationServiceImpl implements BackendApplicationService 
     @Override
     public List<BackendApplication> getAllApplications() {
         return backendApplicationDAO.getAllApplication();
+    }
+
+    @Override
+    public List<BackendApplication> getBackendApplicationWithPassOrNotAndSubmission(
+            Boolean passOrNot, Boolean submission)
+    {
+        return backendApplicationDAO.getReturn(passOrNot).stream()
+                .filter(submissionStatus -> submissionStatus.getSubmissionStatus().equals(submission))
+                .collect(Collectors.toList());
     }
 }
