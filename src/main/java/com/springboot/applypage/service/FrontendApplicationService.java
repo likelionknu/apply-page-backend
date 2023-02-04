@@ -18,4 +18,5 @@ public interface FrontendApplicationService {
     List<FrontendApplication> getReturn(Boolean dir);
     List<FrontendApplication> getSubmissionApplication(Boolean dir);
     List<FrontendApplication> getAllApplications();
+    List<FrontendApplication> getApplicationsWithPassOrNotAndSubmission(Boolean passOrNot, Boolean submission);
 }

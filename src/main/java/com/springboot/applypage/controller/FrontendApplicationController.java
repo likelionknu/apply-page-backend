@@ -115,6 +115,15 @@ public class FrontendApplicationController {
         return ResponseEntity.status(HttpStatus.OK).body(frontendApplicationResponse);
     }
 
+    @GetMapping("/getApplicationsWithPassOrNotAndSubmission")
+    public ResponseEntity<List<FrontendApplication>> getFrontendApplicationWithPassOrNotAndSubmission(Boolean passOrNot, Boolean submission, HttpServletRequest request)
+    {
+        List<FrontendApplication> frontendApplicationResponse = frontendApplicationService.getApplicationsWithPassOrNotAndSubmission(passOrNot, submission);
+        LOGGER.info("호출 API: " + "get frontend application with pass or not submission" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(frontendApplicationResponse);
+    }
+
     @GetMapping("/getAllApplications")
     public ResponseEntity<List<FrontendApplication>> getAllFrontendApplications(HttpServletRequest request)
     {

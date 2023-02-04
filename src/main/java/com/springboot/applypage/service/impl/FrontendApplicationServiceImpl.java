@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FrontendApplicationServiceImpl implements FrontendApplicationService {
@@ -217,6 +218,13 @@ public class FrontendApplicationServiceImpl implements FrontendApplicationServic
     @Override
     public List<FrontendApplication> getAllApplications() {
         return frontendApplicationDAO.getAllApplications();
+    }
+
+    @Override
+    public List<FrontendApplication> getApplicationsWithPassOrNotAndSubmission(Boolean passOrNot, Boolean submission) {
+        return frontendApplicationDAO.getReturn(passOrNot).stream()
+                .filter(submissionStatus -> submissionStatus.getSubmissionStatus().equals(submission))
+                .collect(Collectors.toList());
     }
 
 }
