@@ -17,14 +17,14 @@ export const Section = ({ children }: WrapperProps) => {
                 position: absolute;
                 left: 50%;
                 transform: translate(-50%);
-
+                font-size: 0.95vw;
                 display: flex;
                 flex-direction: column;
                 align-items: center;          
                 width: 60em;
                 height: 100%;
                 background-color: white;
-                border-radius: 15px;
+                border-radius: 0.93em;
                 margin-top: 4em;
             `}>
             {children}
@@ -56,10 +56,11 @@ export const Article = ({ children }: WrapperProps) => {
             width: 100%;
             border: solid;
             display: flex;
+            border-color: #4e5968;
             flex-direction: column;
             align-items: center;
             row-gap: 2em;
-            border-radius: 15px;
+            border-radius: 0.625em;
         `}>
             {children}
         </article>
@@ -80,10 +81,10 @@ export const Answer = (props: AnswerType) => {
             row-gap: 0.5em;
         `}>
             <span css={css`
-                    font-family: 'Pretendard-Bold';
+                    font-family: 'Pretendard-Medium';
                     letter-spacing: -0.03em;
-                    font-size: 14px;
-                    color: #ff7828;
+                    font-size: 0.83vw;
+                    color: #4e5968;
             `}> {props.name}</span>
             <div css={css`
         font-family: 'Pretendard-Medium';
@@ -93,12 +94,11 @@ export const Answer = (props: AnswerType) => {
         width: 60em;
         padding: 1em;
         border: solid;
-        border-color: #ff7828;
-        font-size: 15px;
-        border-radius: 8px;
+        border-color: #e6e8ea;
+        font-size: 0.83vw;
+        border-radius: 0.57em;
         line-height: 1.5em;
-        border-width: 1px;
-        font-size: 14px;
+        border-width: 0.07em;
         box-sizing: border-box;
         white-space: pre-wrap;
 
@@ -132,20 +132,20 @@ export const Button = (props: ButtonType) => {
         <button css={css`
             font-family: 'Pretendard-Bold';
             letter-spacing: -0.03em;
-            font-size: 14px;
+            font-size: 0.83vw;
             width: 15em;
             height: 3.5em;
             transition: 0.5s all;
             ${props.alt === "불러오기" && css`
                 width: 7.5em;
-                font-size: 14px;
+                font-size: 0.83vw;
             `}
             border: none;
-            border-radius: 7px;
+            border-radius: 0.5em;
             color: white;
             transition: 0.5s all;
             ${props.name === "임시저장" && `background-color : #262626;`}
-            ${props.name === "제출하기" && `background-color : #ff7828;`}
+            ${props.name === "제출하기" && `background-color : #4F85E8;`}
             ${props.disabled ?
                 css`
                     cursor: auto;

@@ -9,6 +9,8 @@ import { useEffect, useMemo } from 'react';
 import axios from 'axios';
 import tempImg from '../../images/temp.png';
 import completeImg from '../../images/complete.png';
+import Confetti from '../../hooks/Confetti';
+import { currentTime, endTime } from '../time/time';
 
 export default function Frontend() {
 
@@ -26,6 +28,8 @@ export default function Frontend() {
     const [teamProject, setTeamProject] = useState('');
     const [achieve, setAchieve] = useState('');
     const [portfolioLink, setPortfolioLink] = useState('');
+
+    const [name, setName] = useState<string>('');
 
 
     const userName = useSelector((state: TestState) => state.fetcher.userName);
@@ -52,6 +56,11 @@ export default function Frontend() {
             navigate('/404')
         }
 
+        if (currentTime > endTime) {
+            alert("제출 기간이 마감되었습니다!");
+            navigate('/notTime');
+        }
+
         // 이전 값들을 저장하기 위해서 Redux 사용
 
         if (userWhyFrontend) {
@@ -68,6 +77,10 @@ export default function Frontend() {
         }
         if (userPortfolioLink) {
             setPortfolioLink(userPortfolioLink)
+        }
+
+        if (userName) {
+            setName(userName)
         }
     }, [])
 
@@ -111,7 +124,8 @@ export default function Frontend() {
                 mostDeeplyWork: userMostDeeplyWork,
                 motive: userMotiv,
                 name: userName,
-                passOrNot: true,
+                passOrNot: false,
+                sendMail: false,
                 phoneNumber: userPhone,
                 portfolioFile: "",
                 portfolioLink: portfolioLink,
@@ -127,7 +141,6 @@ export default function Frontend() {
                 }
             )
                 .then((res) => {
-                    console.log(res);
                     setTemp(!temp);
                     document.body.style.overflow = "hidden";
                 })
@@ -139,58 +152,68 @@ export default function Frontend() {
     }
 
     const Submit = () => {
-        setSubmitCount((prev) => (prev + 1))
-        axios.post('/frontendApplication', JSON.stringify({
-            department: userDepartment,
-            whyFrontend: whyFrontend,
-            email: userEmail,
-            hardWork: userHardWork,
-            usingStack: usingStack,
-            keyWord: userKeyWord,
-            mostDeeplyWork: userMostDeeplyWork,
-            motive: userMotiv,
-            name: userName,
-            passOrNot: true,
-            phoneNumber: userPhone,
-            portfolioFile: "",
-            portfolioLink: portfolioLink,
-            sid: userID,
-            teamProject: teamProject,
-            achieve: achieve,
-            submissionStatus: true,
-        }),
-            {
-                headers: {
-                    "Content-type": "application/json",
+
+        const time = new Date();
+
+        if (time > endTime) {
+            alert("제출 기간이 마감되었습니다!");
+            navigate('/notTime');
+        }
+
+        else if (window.confirm("제출하면 수정이 불가해요, 제출하시겠어요?")) {
+            setSubmitCount((prev) => (prev + 1))
+            axios.post('/frontendApplication', JSON.stringify({
+                department: userDepartment,
+                whyFrontend: whyFrontend,
+                email: userEmail,
+                hardWork: userHardWork,
+                usingStack: usingStack,
+                keyWord: userKeyWord,
+                mostDeeplyWork: userMostDeeplyWork,
+                motive: userMotiv,
+                name: userName,
+                passOrNot: false,
+                sendMail: false,
+                phoneNumber: userPhone,
+                portfolioFile: "",
+                portfolioLink: portfolioLink,
+                sid: userID,
+                teamProject: teamProject,
+                achieve: achieve,
+                submissionStatus: true,
+            }),
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                    }
                 }
-            }
-        )
-            .then((res) => {
-                console.log(res);
-                dispatch(saveFrontEnd({
-                    userWhyFrontend: '',
-                    userUsingStack: '',
-                    userAchieve: '',
-                    userPortfolioLinkFront: '',
-                    userTeamProject: '',
-                }));
-                dispatch(saveCommon({
-                    userMotiv: '',
-                    userHardWork: '',
-                    userKeyWord: '',
-                    userMostDeeplyWork: '',
-                }))
-                dispatch(saveIndex({
-                    userName: '',
-                    userID: '',
-                    userDepartment: '',
-                    userEmail: '',
-                    userPhone: '',
-                    userPosition: '',
-                }))
-                setComplete(!complete)
-                document.body.style.overflow = "hidden";
-            })
+            )
+                .then((res) => {
+                    dispatch(saveFrontEnd({
+                        userWhyFrontend: '',
+                        userUsingStack: '',
+                        userAchieve: '',
+                        userPortfolioLinkFront: '',
+                        userTeamProject: '',
+                    }));
+                    dispatch(saveCommon({
+                        userMotiv: '',
+                        userHardWork: '',
+                        userKeyWord: '',
+                        userMostDeeplyWork: '',
+                    }))
+                    dispatch(saveIndex({
+                        userName: '',
+                        userID: '',
+                        userDepartment: '',
+                        userEmail: '',
+                        userPhone: '',
+                        userPosition: '',
+                    }))
+                    setComplete(!complete)
+                    document.body.style.overflow = "hidden";
+                })
+        }
     }
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement> | ChangeEvent<HTMLInputElement>) => {
@@ -229,8 +252,10 @@ export default function Frontend() {
         setSubmitCount(0);
         setTempState(false);
         setButtonState(false);
+        document.body.style.overflow = "unset";
     }
 
+    /* 처음에는 임시 저장에서 메인화면으로 가는 용도로 만들었지만, 최종 제출 후 redux를 초기화하는 로직이 동일해 최종 제출 후 홈으로 갈 때도 같이 사용*/
     const TempHome = async () => {
         await dispatch(saveFrontEnd({
             userWhyFrontend: '',
@@ -258,9 +283,10 @@ export default function Frontend() {
 
     return (
         <Section>
+            {complete && <Confetti />}
             {complete ?
-                <Modal text="지원서가 정상적으로 제출되었습니다!" imgSrc={completeImg} alt="최종제출">
-                    <Button name="제출하기" onClick={() => navigate('/')}>메인 화면으로 이동</Button>
+                <Modal text={`${name}님의 소중한 지원서가 정상적으로 제출되었어요!`} imgSrc={completeImg} alt="최종제출">
+                    <Button name="제출하기" onClick={TempHome}>메인 화면으로 이동</Button>
                 </Modal>
                 : null
             }

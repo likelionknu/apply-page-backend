@@ -53,7 +53,6 @@ export default function Common() {
 
     useEffect(() => {
         document.body.style.overflow = "unset";
-        console.log("common :", userPosition);
         if (!userName && !userID && !userPhone && !userEmail && !userPosition) {
             navigate('/404')
         }
@@ -108,7 +107,6 @@ export default function Common() {
         } else if (userPosition === "디자인") {
             await navigate('/design')
         } else {
-            console.log("error?:", userPosition);
             alert("오류가 발생했습니다, 강남대학교 멋쟁이사자처럼에 문의해주세요!")
             await navigate('/');
         }
@@ -147,7 +145,7 @@ export default function Common() {
                     document.body.style.overflow = "hidden";
                 })
                 .catch((error) => {
-                    console.log(error);
+                    // console.log(error);
                 })
         }
 
@@ -246,6 +244,7 @@ export default function Common() {
         setSubmitCount(0);
         setTempState(false);
         setButtonState(false);
+        document.body.style.overflow = "unset";
     }
 
     const TempHome = async () => {

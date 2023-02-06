@@ -18,6 +18,7 @@ export default function Detail(props: DetailType) {
     const [track, setTrack] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [state, setState] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>('');
 
     const [motive, setMotive] = useState('');
     const [hardwork, setHardwork] = useState('');
@@ -70,6 +71,7 @@ export default function Detail(props: DetailType) {
                     setDepartment(res.data.department);
                     setPhone(res.data.phoneNumber);
                     setState(res.data.passOrNot);
+                    setEmail(res.data.email);
 
                     setMotive(res.data.motive);
                     setHardwork(res.data.hardWork);
@@ -94,6 +96,7 @@ export default function Detail(props: DetailType) {
                     setDepartment(res.data.department);
                     setPhone(res.data.phoneNumber);
                     setState(res.data.passOrNot);
+                    setEmail(res.data.email);
 
                     setMotive(res.data.motive);
                     setHardwork(res.data.hardWork);
@@ -117,6 +120,7 @@ export default function Detail(props: DetailType) {
                     setDepartment(res.data.department);
                     setPhone(res.data.phoneNumber);
                     setState(res.data.passOrNot);
+                    setEmail(res.data.email);
 
                     setMotive(res.data.motive);
                     setHardwork(res.data.hardWork);
@@ -130,7 +134,7 @@ export default function Detail(props: DetailType) {
                     setPortfolioLink(res.data.portfolioLink);
                 })
         }
-    })
+    }, []);
 
     const PassLogic = () => {
         if (props.position === '백엔드') {
@@ -279,13 +283,14 @@ export default function Detail(props: DetailType) {
                     <Answer name="지원 트랙">
                         {track}
                     </Answer>
+                    <Answer name="이메일">
+                        {email}
+                    </Answer>
                     <Answer name="연락처">
                         {phone}
                     </Answer>
                     <Answer name="합불 상태">
-                        <strong>
-                            {state ? "합격" : "불합격"}
-                        </strong>
+                        {state ? "합격" : "불합격"}
                     </Answer>
                     <Answer name="지원자분의 인생의 최종 목표는 무엇인가요?">
                         {motive}

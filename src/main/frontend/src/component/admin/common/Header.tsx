@@ -21,13 +21,16 @@ export default function Header() {
             align-items: center;
             column-gap: 4em;
         `}>
-                <Link to="/admin/main">
+                <Link to="/admin/main" tabIndex={-1}>
                     <HeaderText path={location.pathname} url={"/admin/main"}>전체 지원서</HeaderText>
                 </Link>
-                <Link to="/admin/pass">
+                <Link to="/admin/temp" tabIndex={-1}>
+                    <HeaderText path={location.pathname} url={"/admin/temp"}>임시 지원서</HeaderText>
+                </Link>
+                <Link to="/admin/pass" tabIndex={-1}>
                     <HeaderText path={location.pathname} url={"/admin/pass"}>합격 지원서</HeaderText>
                 </Link>
-                <Link to="/admin/fail">
+                <Link to="/admin/fail" tabIndex={-1}>
                     <HeaderText path={location.pathname} url={"/admin/fail"}>불합 지원서</HeaderText>
                 </Link>
             </div>

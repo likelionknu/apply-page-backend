@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Img, Input, LoginBox, Section } from './emotion/component'
-import person from '../../images/admin.png';
+import person from '../../images/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from '../emotion/component';
 import axios from 'axios';

@@ -1,10 +1,10 @@
 html {
-  background-color: #262626;
+  background-color: #fff;
 }
 
 a {
   text-decoration: none;
-  color: #ff7828;
+  color: #4F85E8;
   font-family: 'Pretendard-Bold';
   transition: 0.4s all;
 }

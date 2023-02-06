@@ -1,6 +1,16 @@
 import React from 'react'
 import { css, keyframes } from "@emotion/react";
 
+
+export const fadeIn = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+`;
+
 export const fadeUp = keyframes`
     0% {
         transform : translateY(30px);

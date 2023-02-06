@@ -38,8 +38,9 @@ export const fetcherSlice = createSlice({
 
         // 관리자 페이지에서의 모달창 온/오프
         userModalState: false,
+        newList: false,
         adminState: false,
-
+        passMailList: [],
     },
     reducers: {
         saveIndex: (state, action) => {
@@ -100,12 +101,18 @@ export const fetcherSlice = createSlice({
         saveModalState: (state, action) => {
             state.userModalState = action.payload.userModalState;
         },
+        renderNewList: (state, action) => {
+            state.newList = action.payload.newList;
+        },
         saveAdminState: (state, action) => {
             state.adminState = action.payload.adminState;
+        },
+        updatePassMailList: (state, action) => {
+            state.passMailList = action.payload;
         }
     },
     extraReducers: {},
 })
 
-export const { saveIndex, saveCommon, saveBackEnd, saveFrontEnd, saveDesign, view, saveModalState, saveAdminState } = fetcherSlice.actions;
+export const { saveIndex, saveCommon, saveBackEnd, saveFrontEnd, saveDesign, view, saveModalState, saveAdminState, updatePassMailList, renderNewList } = fetcherSlice.actions;
 export default fetcherSlice.reducer;

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TestState } from '../../../app/store';
 import { saveModalState } from '../../../features/fetcherSlice';
 
-export default function Main() {
+export default function Temp() {
 
     const [position, setPosition] = useState<string>('백엔드');
     const [frontend, setFrontend] = useState<[]>([]);
@@ -39,7 +39,7 @@ export default function Main() {
         }
 
         dispatch(saveModalState(false));
-        axios.get('/backendApplication/getSubmissionApplications?bool=true')
+        axios.get('/backendApplication/getSubmissionApplications?bool=false')
             .then((res) => {
                 setBackend(() => {
                     return res.data
@@ -58,7 +58,7 @@ export default function Main() {
         setPosition(name);
 
         if (name === "백엔드") {
-            axios.get('/backendApplication/getSubmissionApplications?bool=true')
+            axios.get('/backendApplication/getSubmissionApplications?bool=false')
                 .then((res) => {
                     setBackend(res.data);
 
@@ -71,7 +71,7 @@ export default function Main() {
         }
 
         if (name === "프론트엔드") {
-            axios.get('/frontendApplication/getSubmissionApplications?bool=true')
+            axios.get('/frontendApplication/getSubmissionApplications?bool=false')
                 .then((res) => {
                     setFrontend(res.data);
 
@@ -84,7 +84,7 @@ export default function Main() {
         }
 
         if (name === "디자인") {
-            axios.get('/designApplication/getSubmissionApplications?bool=true')
+            axios.get('/designApplication/getSubmissionApplications?bool=false')
                 .then((res) => {
                     setDesign(res.data);
 
