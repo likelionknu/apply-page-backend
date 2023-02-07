@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength, Modal } from '../emotion/component'
+import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength, Modal, Footer } from '../emotion/component'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -153,7 +153,7 @@ export default function Design() {
             alert("제출 기간이 마감되었습니다!");
             navigate('/notTime');
         }
-        else if (window.confirm("제출하면 수정이 불가해요, 제출하시겠어요?")) {
+        else if (window.confirm("최중 제출을 하면 수정이 불가해요, 제출하시겠어요?")) {
             setSubmitCount((prev) => (prev + 1))
             axios.post('/designApplication', JSON.stringify({
                 department: userDepartment,
@@ -319,6 +319,7 @@ export default function Design() {
                 <Button name="제출하기" onClick={Back}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
                 <Button name="제출하기" onClick={Submit} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `제출하기`}</Button>
             </ButtonBox>
+            <Footer />
         </Section>
     )
 }

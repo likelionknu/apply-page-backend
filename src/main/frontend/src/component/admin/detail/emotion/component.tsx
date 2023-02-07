@@ -35,7 +35,7 @@ export const Section = ({ children }: WrapperProps) => {
 export const Quit = (props: ImgClickType) => {
     return (
         <img alt="뒤로가기" onClick={props.onClick} src={quit} css={css`
-            width: 2em;
+            width: 4em;
             cursor: pointer;
             transition: 0.4s all;
             margin-bottom: 1em;
@@ -54,13 +54,14 @@ export const Article = ({ children }: WrapperProps) => {
             padding-bottom: 5em;
             background-color: white;
             width: 100%;
-            border: solid;
+            border: none;
             display: flex;
-            border-color: #4e5968;
+            border-color: #2e5968;
             flex-direction: column;
             align-items: center;
             row-gap: 2em;
             border-radius: 0.625em;
+            border-width: 0.03em;
         `}>
             {children}
         </article>
@@ -101,6 +102,7 @@ export const Answer = (props: AnswerType) => {
         border-width: 0.07em;
         box-sizing: border-box;
         white-space: pre-wrap;
+        color: #333d4b;
 
         display: flex;
         align-items: center;

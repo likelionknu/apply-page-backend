@@ -20,16 +20,17 @@ export default function NotWidth() {
             align-items: center;
         `}>
             <img alt="404" src={oops} css={css`
-                width: 9em;
+                width: 8.5em;
                 animation: ${fadeUp} 1s ease-in-out;
             `} />
             <span css={css`
                 font-family: 'Pretendard-Bold';
                 letter-spacing: -0.03em;
-                color: black;
+                color: #333d4b;
                 margin-top: 1em;
+                font-size: .88vw;
                 animation: ${fadeUp} 1s ease-in-out;
-            `}>현재 해상도는 원활한 지원환경을 위해 지원을 하지 않고 있어요</span>
+            `}>원활한 지원환경을 PC 또는 태블릿으로 접속해주세요!</span>
         </div>
     )
 }

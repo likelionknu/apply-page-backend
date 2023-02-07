@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength, Modal } from './emotion/component'
+import { ButtonBox, Section, Button, Require, Article, InputTitle, TextAreaBox, InputBox, Banner, WordLength, Modal, Footer } from './emotion/component'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -354,6 +354,7 @@ export default function Common() {
                 <Button name="제출하기" onClick={Back}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
                 <Button name="제출하기" onClick={PartHistoy} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `파트별 문항 작성하기`}</Button>
             </ButtonBox>
+            <Footer />
         </Section>
     )
 }

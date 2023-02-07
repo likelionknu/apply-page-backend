@@ -18,7 +18,7 @@ import Detail from './component/admin/detail/Detail';
 import Error from './component/404/Error';
 import { useSelector } from 'react-redux';
 import { TestState } from './app/store';
-import { IndexHeader } from './component/emotion/component';
+import { Footer, IndexHeader } from './component/emotion/component';
 import Temp from './component/admin/partition/Temp';
 import NotTime from './component/404/NotTime';
 
@@ -49,7 +49,7 @@ function App() {
           <Route path='/admin' element={<Admin />} />
           <Route path='/404' element={<Error />} />
           <Route path='/*' element={<Error />} />
-          <Route path='/notTime' element={<NotTime/>} />
+          <Route path='/notTime' element={<NotTime />} />
 
           <Route element={<Header />}>
             <Route path='/admin/main' element={<Main />} />

@@ -20,14 +20,15 @@ export default function NotTime() {
             align-items: center;
         `}>
             <img alt="404" src={oops} css={css`
-                width: 9em;
+                width: 8.5em;
                 animation: ${fadeUp} 1s ease-in-out;
             `} />
             <span css={css`
                 font-family: 'Pretendard-Bold';
                 letter-spacing: -0.03em;
-                color: black;
+                color: #333d4b;
                 margin-top: 1em;
+                font-size: .88vw;
                 animation: ${fadeUp} 1s ease-in-out;
             `}>현재는 지원 기간이 아닙니다!</span>
         </div>

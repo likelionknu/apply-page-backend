@@ -49,8 +49,8 @@ public class MailSenderServiceImpl implements MailSenderService
             String html = templateEngine.process("acceptEmail.html",context);
             helper.setText(html, true);
 
-            helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
-            helper.addInline("image2", new ClassPathResource("templates/images/.jpg"));
+            //helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
+            //helper.addInline("image2", new ClassPathResource("templates/images/.jpg"));
 
             //메일 보내기
             javaMailSender.send(message);
@@ -76,7 +76,7 @@ public class MailSenderServiceImpl implements MailSenderService
             String html = templateEngine.process("failEmail.html",context);
             helper.setText(html, true);
 
-            helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
+            //helper.addInline("image1", new ClassPathResource("templates/images/_.png"));
 
             //메일 보내기
             javaMailSender.send(message);

@@ -6,7 +6,7 @@ import checkedBox from '../images/checkedBox.svg';
 import { useMemo } from 'react';
 import { css, keyframes } from "@emotion/react";
 import { fadeLeft, fadeUp } from '../styles/Keyframes';
-import { Section, Banner, Article, InputTitle, InputBox, PositionBox, Position, Require, Precautions, ArgreeBox, Argree, ButtonBox, Button, Modal, ModalInput, Quit, EndTime, CollectDescription, ErrorDescription, SearchDepartment } from './emotion/component';
+import { Section, Banner, Article, InputTitle, InputBox, PositionBox, Position, Require, Precautions, ArgreeBox, Argree, ButtonBox, Button, Modal, ModalInput, Quit, EndTime, CollectDescription, ErrorDescription, SearchDepartment, Footer } from './emotion/component';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, TestState } from '../app/store';
@@ -556,7 +556,7 @@ export default function Index() {
                     : null
                 }
                 {isNotTempState ?
-                    <Modal text="발견된 지원서가 없어요!" imgSrc={human} alt="불러오기">
+                    <Modal text="정보를 제대로 입력해주세요, 발견된 지원서가 없어요!" imgSrc={human} alt="불러오기">
                         <Button name="제출하기" onClick={isSubmit}>메인 화면으로 이동</Button>
                     </Modal>
                     : null
@@ -623,12 +623,13 @@ export default function Index() {
                                 margin-left: 1em;
                                 color: #707070;
                                 font-family: 'Pretendard-Regular';
-                                font-size: 0.71vw;
+                                font-size: 0.67vw;
                                 letter-spacing: -0.05em;
                                 // text-decoration: underline;
                                 // text-underline-offset: 0.2em;
                                 cursor: pointer;
-                                margin-left: 58.5em;
+                                margin-left: auto;
+                                margin-right: 1em;
                             `} onClick={RevertDepartment}>학과를 다시 입력하고 싶으신가요?</span>}
                     </InputTitle>
                     <InputBox type="text" placeholder="학과를 입력해주세요" name="학과" onChange={changeValue} maxLength={10} value={department} disabled={openSearch} />
@@ -639,7 +640,6 @@ export default function Index() {
                                     <div css={css`
                                         cursor: pointer;
                                         transition: 0.4s all;
-
                                         &:hover {
                                             opacity: 80%;
                                         }
@@ -647,7 +647,9 @@ export default function Index() {
                                         <span css={css`
                                             color: #4F85E8;
                                         `}>{item.slice(0, department.length)}</span>
-                                        <span>{item.slice(department.length, item.length)}</span>
+                                        <span css={css`
+                                            color: #8B95A1;
+                                        `}>{item.slice(department.length, item.length)}</span>
                                     </div>
                                 )
                             }
@@ -694,6 +696,7 @@ export default function Index() {
                     <Button name="임시저장" onClick={isSave}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `지원서 불러오기`}</Button>
                     <Button name="제출하기" disabled={buttonState} onClick={handleClick}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `공통문항 작성하기`}</Button>
                 </ButtonBox>
+                <Footer />
             </Section>
         )
     }

@@ -58,6 +58,7 @@ export const PassUserContent = ({ children }: WrapperProps) => {
         height: 2em;
         padding: 0.2em 1.6em 0.2em 1.6em;
         border-radius: 3.07em;
+        border-width: 0.076em;
 
         border-color: #4F85E8;
         color: #4F85E8;
@@ -183,24 +184,14 @@ export const HeaderText = (props: HeaderType) => {
         <div css={css`
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.03em;
-            width: 9em;
+            width: 7em;
             border:none;
             padding-bottom: 0.7em;
-            border-width: 0.17em;
+            border-width: 0.37em;
             font-size: 1.01vw;
             text-decoration: none;
-            color: #4e5968;
+            color: #6b7684;
             cursor: pointer;
-
-            &:hover {
-                border:solid;
-                border-top: 0;
-                border-left: 0;
-                border-right: 0;
-                border: color;
-                border-bottom: 0.12em solid #4e5968;
-                margin-bottom: -0.12em;
-            }
 
             ${props.path === props.url && css`
                 border:solid;
@@ -209,8 +200,8 @@ export const HeaderText = (props: HeaderType) => {
                 border-right: 0;
                 border: color;
                 color: #4F85E8;
-                border-bottom: 0.12em solid #4F85E8;
-                margin-bottom: -0.12em;
+                border-bottom: 0.16em solid #4F85E8;
+                margin-bottom: -0.16em;
 
                 &:hover {
                     border:solid;
@@ -218,8 +209,8 @@ export const HeaderText = (props: HeaderType) => {
                     border-left: 0;
                     border-right: 0;
                     border: color;
-                    border-bottom: 0.12em solid #4F85E8;
-                    margin-bottom: -0.12em;
+                    border-bottom: 0.16em solid #4F85E8;
+                    margin-bottom: -0.16em;
                 }
             `}
         `} tabIndex={-1}>{props.children}</div>
@@ -407,7 +398,7 @@ export const List = React.memo(function List(props: ListType) {
 
     return (
         <div css={css`
-            font-family: 'Pretendard-Medium';
+            font-family: 'Pretendard-Regular';
             font-size: 0.83vw;
             letter-spacing: -0.03em;
             color: #4e5968;
@@ -441,7 +432,7 @@ export const List = React.memo(function List(props: ListType) {
             <ListText onClick={props.onClick}>{props.position}</ListText>
             <ListText onClick={props.onClick}>{props.department}</ListText>
             <ListText onClick={props.onClick}>
-                {props.id !== "학번" && props.mailState ? <span css={css` color: #11BD7E `}> {props.id} </span> : props.id}
+                {props.id !== "학번" && props.mailState ? <span css={css` color: #4F85E8; font-family: 'Pretendard-Bold'; `}> {props.id} </span> : props.id}
             </ListText>
             {/* <ListText onClick={props.onClick}>{props.email}</ListText> */}
             {props.check === "체크 없음" && null}

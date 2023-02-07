@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react'
 import { Answer, Article, Quit, Section } from './emotion/component'
 import { ButtonBox, Button } from './emotion/component'
@@ -9,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { TestState } from '../../../app/store';
 import { onModalType } from '../emotion/component';
 import { saveModalState } from '../../../features/fetcherSlice';
+import { css, keyframes } from "@emotion/react";
 
 export default function Detail(props: DetailType) {
 
@@ -153,6 +155,8 @@ export default function Detail(props: DetailType) {
                 }
             } else {
                 alert("이미 합격된 사용자입니다!");
+                setButtonCount(0);
+                setButtonState(false);
             }
         }
         if (props.position === '프론트엔드') {
@@ -171,6 +175,8 @@ export default function Detail(props: DetailType) {
                 }
             } else {
                 alert("이미 합격된 사용자입니다!");
+                setButtonCount(0);
+                setButtonState(false);
             }
         }
         if (props.position === '디자인') {
@@ -189,6 +195,8 @@ export default function Detail(props: DetailType) {
                 }
             } else {
                 alert("이미 합격된 사용자입니다!");
+                setButtonCount(0);
+                setButtonState(false);
             }
         }
     }
@@ -216,6 +224,8 @@ export default function Detail(props: DetailType) {
                 }
             } else {
                 alert("이미 불합격된 사용자입니다!");
+                setButtonCount(0);
+                setButtonState(false);
             }
         }
         if (props.position === '프론트엔드') {
@@ -234,6 +244,8 @@ export default function Detail(props: DetailType) {
                 }
             } else {
                 alert("이미 불합격된 사용자입니다!");
+                setButtonCount(0);
+                setButtonState(false);
             }
         }
         if (props.position === '디자인') {
@@ -252,6 +264,8 @@ export default function Detail(props: DetailType) {
                 }
             } else {
                 alert("이미 불합격된 사용자입니다!");
+                setButtonCount(0);
+                setButtonState(false);
             }
         }
     }
@@ -271,6 +285,35 @@ export default function Detail(props: DetailType) {
             {name ?
                 <Article>
                     <Quit onClick={closeModal} />
+                    <span css={css`
+                        font-family: 'Pretendard-Regular';
+                        color: #333D4B;
+                        letter-spacing: -0.03em;
+                        font-size: 1.56vw;
+                    `}>
+                        <span css={css`
+                            font-family: 'Pretendard-Medium';
+                            letter-spacing: -0.03em;
+                        `}>{name}</span>
+                        님의
+                        <span css={css`
+                            font-family: 'Pretendard-Medium';
+                            letter-spacing: -0.03em;
+                        `}> {track} </span>
+                        지원서
+                    </span>
+                    <span css={css`
+                        font-family: 'Pretendard-Medium';
+                        color: #333D4B;
+                        letter-spacing: -0.03em;
+                        font-size: 0.78vw;
+                        margin-bottom: 3em;
+                    `}> 지원서 상태 :
+                        <span css={css`
+                            font-family: 'Pretendard-Bold';
+                        `}> {state ? "합격" : "불합격"}</span>
+                    </span>
+
                     <Answer name="이름">
                         {name}
                     </Answer>
@@ -288,9 +331,6 @@ export default function Detail(props: DetailType) {
                     </Answer>
                     <Answer name="연락처">
                         {phone}
-                    </Answer>
-                    <Answer name="합불 상태">
-                        {state ? "합격" : "불합격"}
                     </Answer>
                     <Answer name="지원자분의 인생의 최종 목표는 무엇인가요?">
                         {motive}
