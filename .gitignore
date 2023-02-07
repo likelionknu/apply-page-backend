@@ -4,7 +4,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-/src/main/java/com/springboot/applypage/controller/AdminLoginController.java
+!**/src/main/java/com/springboot/applypage/controller/AdminLoginController.java
 
 ### STS ###
 .apt_generated
