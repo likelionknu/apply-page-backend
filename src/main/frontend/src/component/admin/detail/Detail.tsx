@@ -289,7 +289,19 @@ export default function Detail(props: DetailType) {
                         font-family: 'Pretendard-Regular';
                         color: #333D4B;
                         letter-spacing: -0.03em;
-                        font-size: 1.56vw;
+
+                        @media (max-width:768px) { 
+                            font-size: 15px;
+                        }; 
+                
+                        @media all and (min-width:768px) and (max-width:1099px) { 
+                            font-size: 23px;
+                        }; 
+                        @media all and (min-width:1100px) and (max-width:2000px) { 
+                            font-size: 30px;
+                        }; 
+                        font-size: 30px;
+
                     `}>
                         <span css={css`
                             font-family: 'Pretendard-Medium';
@@ -306,7 +318,19 @@ export default function Detail(props: DetailType) {
                         font-family: 'Pretendard-Medium';
                         color: #333D4B;
                         letter-spacing: -0.03em;
-                        font-size: 0.78vw;
+                        
+                        @media (max-width:768px) { 
+                            font-size: 7px;
+                        }; 
+                
+                        @media all and (min-width:768px) and (max-width:1099px) { 
+                            font-size: 15px;
+                        }; 
+                        @media all and (min-width:1100px) and (max-width:2000px) { 
+                            font-size: 16px;
+                        };
+                        font-size: 16px;
+
                         margin-bottom: 3em;
                     `}> 지원서 상태 :
                         <span css={css`

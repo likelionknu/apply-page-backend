@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Content, FailMailSend, List, NotData, Section, onModalType } from '../emotion/component'
+import { Content, FailMailSend, List, NotData, Section, onModalType } from '../emotion/component'
 import Header from '../common/Header';
 import { Position, PositionBox } from '../emotion/component';
 import { frontendDummy, backendDummy, designDummy } from './dummy';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
-import { Loading, Modal } from '../../emotion/component';
+import { Button, Loading, Modal } from '../../emotion/component';
 import { useDispatch, useSelector } from 'react-redux';
 import { TestState } from '../../../app/store';
 import { renderNewList, saveModalState } from '../../../features/fetcherSlice';

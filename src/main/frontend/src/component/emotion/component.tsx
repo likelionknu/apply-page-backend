@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import banner from '../../images/banner.png';
 import loading from '../../images/loading.gif';
 import axios from 'axios';
@@ -14,8 +14,11 @@ import back from '../../images/back.png';
 import oops from '../../images/oops.png';
 import logo from '../../images/logo.png';
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import NotWidth from "../404/NotWidth";
+import { KeyboardIOS } from "../../hooks/KeyboardIOS";
 
 
+// 공통 질문, 각 포지션별 질문에 해당하는 textarea 태그
 export const TextAreaBox = (props: TextAreaType) => {
     return (
         <textarea css={css`
@@ -27,13 +30,18 @@ export const TextAreaBox = (props: TextAreaType) => {
         padding-bottom: 1em;
         padding-right: 1em;
         padding-top: 1em;
-        width: 64.28em;
+        width: 46.88vw;
         height: 15em;
         border: solid;
         border-radius: 1.07em;
         border-color: #e6e8ea;
         border-width: 0.0714em;
-        font-size: 0.73vw;
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 14px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 14px;
+        }; 
         box-sizing: border-box;
         resize: none;
 
@@ -60,6 +68,7 @@ export const TextAreaBox = (props: TextAreaType) => {
     )
 }
 
+// 공통적인 헤더를 나타내주는 컴포넌트
 export const IndexHeader = () => {
 
     const [scrollState, setScrollState] = useState<boolean>(false);
@@ -88,9 +97,18 @@ export const IndexHeader = () => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 1.2em;
-                font-size: 0.95vw;
-                column-gap: 35em;
+                padding-top: 1.2em;
+                padding-bottom: 1.2em;
+                @media (max-width: 1099px) {
+                    display: none;
+                }
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 18px;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 18px;
+                }; 
+                column-gap: 30em;
                 background-color: white;
 
                 ${scrollState && css`
@@ -104,20 +122,20 @@ export const IndexHeader = () => {
                 `}
 
                 a {
-                    font-size: 0.78vw;
+                    @media all and (min-width:768px) and (max-width:1099px) { 
+                        font-size: 14.8px;
+                    }; 
+                    @media all and (min-width:1100px) and (max-width:2000px) { 
+                        font-size: 14.8px;
+                    }; 
                     color: #4e5968;
-                    font-family: 'Pretendard-Medium';
+                    font-family: 'Pretendard-Regular';
                     letter-spacing: -0.03em;
                 }
-
-                @media (max-width: 1059px) {
-                    display: none;
-                  }
             `}>
                 <img alt="로고" src={logo} css={css`
-                    font-size: 0.73vw;
-                    min-width: 80px;
-                    width: 11em;
+                    height: auto;
+                    width: 155px;
                     transition: 0.4s all;
 
                     &:hover {
@@ -125,13 +143,14 @@ export const IndexHeader = () => {
                     }
                 `} />
                 <nav css={css`
+                    height: 100%;
                     display: flex;
                     column-gap: 2.5em;
                     transition: 0.4s all;
                 `}>
-                    <a href="https://ripe-launch-04b.notion.site/88de609dd84e4fcab616b1cf2cf491e2" target="_blank">조직 소개</a>
-                    <a href="https://ripe-launch-04b.notion.site/24b3c0a0d41d4162b1c458055fe86dd8" target="_blank">합류 여정</a>
-                    <a href="https://ripe-launch-04b.notion.site/2bde1551815e455ab4306ab5ca190519" target="_blank">강남멋사 조직도</a>
+                    <a href="https://ripe-launch-04b.notion.site/88de609dd84e4fcab616b1cf2cf491e2" target="_blank" tabIndex={-1}>조직 소개</a>
+                    <a href="https://ripe-launch-04b.notion.site/24b3c0a0d41d4162b1c458055fe86dd8" target="_blank" tabIndex={-1}>합류 여정</a>
+                    <a href="https://ripe-launch-04b.notion.site/2bde1551815e455ab4306ab5ca190519" target="_blank" tabIndex={-1}>강남멋사 조직도</a>
                 </nav>
 
 
@@ -141,6 +160,7 @@ export const IndexHeader = () => {
     )
 }
 
+// 업로드 기능이 생기면 쓰려고 만들어놓은 업로드 컴포넌트
 export const UploadButton = () => {
     return (
         <div css={css`
@@ -173,21 +193,29 @@ export const UploadButton = () => {
     )
 }
 
+// 기본적인 입력 정보를 받기 위한 input 박스
 export const InputBox = (props: InputType) => {
     return (
         <input css={css`
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 13px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 14.5px;
+        }; 
         font-family: 'Pretendard-Regular';
-        font-size: 0.78vw;
         letter-spacing: -0.03em;
         padding: 0;
         padding-left: 1em;
-        width: 60em; // 900px;
+        width: 46.88vw; // 900px;
         height: 3.7em; // 51.8px
         border: solid;
         border-radius: 0.614em; // 0.8596px;
         border-color: #e6e8ea;
         border-width: 0.0614em; // 1px 
         box-sizing: border-box;
+        transition: .2s all;
+        outline-color: #4F85E8;
 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
@@ -197,6 +225,15 @@ export const InputBox = (props: InputType) => {
 
         &:focus {
             outline-color: #4F85E8;
+
+            &:hover {
+                box-shadow: none;
+            }
+            // box-shadow: inset 0 0 0 2px #4F85E8;
+        }
+
+        &:hover {
+            box-shadow: inset 0 0 0 2px #90c2ff;
         }
 
         &::placeholder {
@@ -204,10 +241,11 @@ export const InputBox = (props: InputType) => {
             color: #8B95A1;
             margin-left: 0.4em;
         }
-        `} {...props} maxLength={props.maxLength} tabIndex={-1} />
+        `} {...props} maxLength={props.maxLength} tabIndex={props.tabIndex} />
     )
 }
 
+// 추후 리팩토링에서 Type.ts 파일로 모아서 export 시키도록 하자
 export interface PositionType {
     name?: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -216,15 +254,29 @@ export interface PositionType {
     alt?: string;
 }
 
+// 사용자가 포지션을 선택하기 위해 만들어놓은 포지션 컴포넌트
 export const Position = (props: PositionType) => {
     return (
         <button css={css`
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.03em;
-            font-size: 0.7292vw;
-            height: 4em;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 13px;
+                height: 40px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 14px;
+            };  
+            height: 56px;
             ${props.alt === "모달" && css`height: 3em;`} 
-            ${props.alt === "모달" && css`font-size: 0.71vw;`} 
+            ${props.alt === "모달" && css`
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 12px;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 14px;
+                }; 
+            `} 
             border-radius: 3.57em;
             border: solid;
             border-width: 0.0714em;
@@ -254,6 +306,7 @@ export const Position = (props: PositionType) => {
     )
 }
 
+// 모달의 기본적인 프레임 틀을 짜놓은 컴포넌트
 export const ModalFrame = ({ children }: WrapperProps) => {
     return (
         <div css={css`
@@ -267,52 +320,81 @@ export const ModalFrame = ({ children }: WrapperProps) => {
         background-color: rgba(0, 0, 0, 0.4);
         z-index: 999;
         cursor: pointer;
+        padding-bottom: 10em;
         `}>
             {children}
         </div>
     )
 }
 
+// 모달을 띄울 때 사용하는 모달 컴포넌트
 export const Modal = (props: WrapperProps) => {
 
-    var aa = (document.body.scrollTop + (window.innerHeight / 2));
+    const ModalRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (ModalRef.current != null) {
+            // console.log("모달 등장!", ModalRef.current.style);
+            ModalRef.current.style.top = `${(window.screen.height - 480) / 4 + window.scrollY}px`;
+        }
+    }, [])
 
     return (
         <ModalFrame>
             <div css={css`
-                position: fixed;
+                position: absolute;
                 width: 100%;
                 height: 100%;
-                border: solid;
+                border: none;
                 
                 display: flex;
                 justify-content: center;
                 align-items: center;
             `}>
                 <div css={css`
-                    position: fixed;
-                    top: ${(window.screen.height - 480) / 4 + window.scrollY}px;
+                    position: absolute;  
+                    // top: ${(window.screen.height - 480) / 4 + window.scrollY}px;
+                    -webkit-overflow-scrolling:touch;
 
                     font-family: 'Pretendard-Bold';
                     letter-spacing: -0.03em;
                     border-radius: 1.25em;
                     background-color: white;
-                    font-size: 0.95vw;
-                    width: 40em;
+                    @media (max-width:768px) { 
+                        font-size: 11px;
+                        width: ${window.screen.width / 2 + 140}px;
+                        height: 15em;
+                        padding-top: 6em;
+                        padding-bottom: 6em;
+                    }; 
+                    @media all and (min-width:768px) and (max-width:1099px) { 
+                        font-size: 13.5px;
+                    }; 
+                    @media all and (min-width:1100px) and (max-width:2000px) { 
+                        font-size: 18px;
+                    }; 
+                    width: 38em;
                     height: 30em;
                     color: #333d4b;
                     ${props.alt === "찾기" && css`height: 35em`}
                     ${props.alt === "메일_합격" &&
                     css`
+                        @media (max-width:768px) { 
+                            font-size: 13px;
+                            width: ${window.screen.width / 2 + 140}px;
+                            height: 15em;
+                            padding-top: 6em;
+                            padding-bottom: 6em;
+                        }; 
                             padding-top: 6em;
                             padding-bottom: 6em;
                         `
                     }
                     display: flex;
-                    justify-content: center;
+                    justify-content: center;    
                     align-items: center;
                     animation: ${fadeIn} 0.5s ease-in-out;
-                `}>
+                `} ref={ModalRef}>
                     <div css={css`
                         display: flex;
                         flex-direction: column;
@@ -336,7 +418,18 @@ export const Modal = (props: WrapperProps) => {
                         `} />
                         }
                         <span css={css`
-                            font-size: 0.94vw;
+                            @media (max-width:768px) { 
+                                padding: 1em;
+                                font-size: 11px;
+                                width: 100%;
+                                margin-bottom: -2em;
+                            }; 
+                            @media all and (min-width:768px) and (max-width:1099px) { 
+                                font-size: 14px;
+                            }; 
+                            @media all and (min-width:1100px) and (max-width:2000px) { 
+                                font-size: 18px;
+                            }; 
                             ${props.alt === "찾기" && css`margin-bottom: -1em;`}
                         `}>
                             {props.text}
@@ -356,7 +449,12 @@ export const ModalInput = (props: InputType) => {
         <input css={css`
         font-family: 'Pretendard-Medium';
         letter-spacing: -0.03em;
-        font-size: 0.95vw;
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 14px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 18px;
+        }; 
         padding: 0;
         padding-left: 1em;
         width: 22.5em;
@@ -365,27 +463,61 @@ export const ModalInput = (props: InputType) => {
         border-color: #e6e8ea;
         border-width: 0.0625em;
         ${props.name === "인터뷰_시간" && css`
-        font-size: 0.77vw;
+        @media (max-width:768px) { 
+            font-size: 8px;
+        }; 
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 11px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 15px;
+        }; 
         width: 33.5em;
         height: 3.5em;
         `}
         ${props.name === "인터뷰_장소" && css`
-        font-size: 0.77vw;
+        @media (max-width:768px) { 
+            font-size: 8px;
+        }; 
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 11px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 15px;
+        }; 
         width: 33.5em;
         height: 3.5em;
         `}
         ${props.name === "인터뷰_소요시간" && css`
-        font-size: 0.77vw;
+        @media (max-width:768px) { 
+            font-size: 8px;
+        }; 
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 11px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 15px;
+        }; 
         width: 33.5em;
         height: 3.5em;
         `}
         ${props.name === "저장된_학번" && css`
-        font-size: 0.77vw;
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 12px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 15px;
+        }; 
         width: 37em;
         height: 3.5em;
         `}
         ${props.name === "저장된_이메일" && css`
-        font-size: 0.77vw;
+        @media all and (min-width:768px) and (max-width:1099px) { 
+            font-size: 12px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 15px;
+        }; 
         width: 37em;
         height: 3.5em;
         `}
@@ -397,8 +529,18 @@ export const ModalInput = (props: InputType) => {
             margin: 0;
         }
 
+
         &:focus {
             outline-color: #4F85E8;
+
+            &:hover {
+                box-shadow: none;
+            }
+            // box-shadow: inset 0 0 0 2px #4F85E8;
+        }
+
+        &:hover {
+            box-shadow: inset 0 0 0 2px #90c2ff;
         }
 
         &::placeholder {
@@ -406,10 +548,11 @@ export const ModalInput = (props: InputType) => {
             color: #8B95A1;
             margin-left: 0.4em;
         }
-        `}{...props} />
+        `}{...props} onClick={() => { return false }} />
     )
 }
 
+// 지원 시간이 끝났을 때 사용자에게 나타내는 주의사항 컴포넌트
 export const EndTime = () => {
     return (
         <section css={css`
@@ -424,7 +567,12 @@ export const EndTime = () => {
                 height: 25em;
                 border-radius: 0.714em;
                 border: none;
-                font-size: 0.83vw;
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 16px;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 16px;
+                }; 
                 letter-spacing: -0.03em;
                 line-height: 1.5em;
 
@@ -438,7 +586,12 @@ export const EndTime = () => {
                     width: 8em;
                 `} />
                 <span css={css`
-                    font-size: 0.89vw;
+                    @media all and (min-width:768px) and (max-width:1099px) { 
+                        font-size: 17px;
+                    }; 
+                    @media all and (min-width:1100px) and (max-width:2000px) { 
+                        font-size: 17px;
+                    }; 
                     letter-spacing: -0.03em;
                     
                     font-family: 'Pretendard-Medium';
@@ -450,6 +603,7 @@ export const EndTime = () => {
     )
 }
 
+// 주의사항 컴포넌트
 export const Precautions = () => {
     return (
         <div css={css`
@@ -458,17 +612,39 @@ export const Precautions = () => {
             display: flex;
             flex-direction: column;
             text-align: left;
-            font-size: 0.73vw;
-            width: 64.28em;
+            width: 46.88vw;
+
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 14px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 14px;
+            };
+
 
             span {
-                font-size: 0.73vw;
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 14.5px;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 14.5px;
+                }; 
             }
         `}>
             <InputTitle>주의사항 <Require /> </InputTitle>
             <div css={css`
                 display: flex;
-                font-size: 0.73vw;
+
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    span {
+                        font-size: 13px;
+                    }
+                    font-size: 14px;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 14px;
+                }; 
+
                 flex-direction: column;
                 row-gap: 0.5em;
                 flex-wrap: wrap;
@@ -476,7 +652,7 @@ export const Precautions = () => {
             `}>
                 <span>· 지원서 최종 제출 후에는 지원서의 수정이 불가능합니다.</span>
                 <span>· 작성 중인 지원서는 임시저장 버튼을 통해 실시간으로 저장이 가능합니다.</span>
-                <span>· 지원서 접수 마감일에는 지원자가 몰려 지원이 어려울 수 있으니, 여유있게 미리 제출해주시기바랍니다.</span>
+                <span>· 지원서 접수 마감일에는 지원자가 몰려 지원이 어려울 수 있으니, 여유있게 미리 제출해주시기 바랍니다.</span>
                 <span>· 문항에 따른 올바른 입력을 해주셔야 지원서의 다음 단계로 이동하실 수 있습니다.</span>
                 <span>· 지원서의 내용이 사실과 다를 경우, 합격이 취소되거나 전형 상의 불이익을 받을 수 있습니다.</span>
                 <span>· 지원서는 문항별 최대 1000자의 제한을 두고 있으나, 문항을 다 채우실 필요는 없습니다.</span>
@@ -486,15 +662,21 @@ export const Precautions = () => {
     )
 }
 
+// 포지션 컴포넌트의 컨테이너 틀
 export const PositionBox = (props: WrapperProps) => {
     return (
         <div css={css`
-            font-size: 0.83vw; 
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 12.7px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 16px;
+            };  
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             column-gap: 2em; // 32px
-            width: 56.25em; // 900px
-            ${props.alt === "모달" && css`width: 30em;`} 
+            width: 46.88vw; // 900px
+            ${props.alt === "모달" && css`width: 35em;`} 
         `}>
             {props.children}
         </div>
@@ -505,6 +687,16 @@ export const PositionBox = (props: WrapperProps) => {
 export const Loading = () => {
     return (
         <img alt="로딩 이미지" src={loading} css={css`
+            @media (max-width:768px) { 
+                font-size: 6px;
+            }; 
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 12.7px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 14px;
+            };  
+
             width: 12em;
         `} />
     )
@@ -514,16 +706,24 @@ export const Loading = () => {
 export const Quit = (props: ImgClickType) => {
     return (
         <img alt="뒤로가기" onClick={props.onClick} src={back} css={css`
-            width: 1em;
+            width: .9em;
             transition: 0.4s all;
             margin-top: 2em;
             margin-bottom: 1em;
             cursor: pointer;
 
             ${props.alt === "찾기" && css`
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 13px;
+                    margin-top: -16.8em;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 17.5px;
+                }; 
+
                 position: absolute;
                 margin-top: -17em;
-                margin-left: 35.5em;
+                margin-left: 35em;
             `}
 
             &:hover {
@@ -533,25 +733,34 @@ export const Quit = (props: ImgClickType) => {
     )
 }
 
+// textarea를 입력했을 때, 사용자가 몇자를 입력했는지 나타내주는 컴포넌트
 export const WordLength = ({ children }: WrapperProps) => {
     return (
         <div css={css`
             width: 10em;
-            position: absolute;
+            position: relative;
             text-align:center;
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.03em;
-            font-size: 0.68vw;
+
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 13px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 13px;
+            }; 
+
             color: #4F85E8;
-            margin-top: 16em;
-            margin-left: 59em;
+            margin-left: auto;
+            margin-top: -2.2em;
+            margin-bottom: .5em;
 
             display:flex;
             justify-content: center;
             align-items: center;
         `}>
             <div css={css`
-                width: 2.5em;
+                width: 1.69vw;
                 border-box: box-sizing;
             `}>
                 {children}
@@ -560,24 +769,36 @@ export const WordLength = ({ children }: WrapperProps) => {
                 margin-right: 0.3em;
             `}>/</span>
             <span css={css`
-                font-size: 0.68vw;
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 13px;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 13px;
+                }; 
             `}>1000</span>
         </div>
     )
 }
 
+// 필수로 작성해야하는 질문지를 표시해주는 컴포넌트
 export const Require = () => {
     return (
         <span css={css`
             margin-left: 0.4em;
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.02em;
-            font-size: 0.72vw;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 14px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 14px;
+            }; 
             color: #ff0000;
         `}>* </span>
     )
 }
 
+// 주의사항 확인을 했음에 동의를 구하는 컴포넌트
 export const ArgreeBox = ({ children }: WrapperProps) => {
     return (
         <div css={css`
@@ -598,13 +819,19 @@ export interface AgreeType {
     name: string;
 }
 
+// 체크박스 컴포넌트
 export const Argree = ((props: AgreeType) => {
     return (
         <div css={css`
             display: flex;
             flex-direction: column;
-            width: 64.28em;
-            font-size: 0.73vw;
+            width: 46.88vw;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 14.5px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 14.5px;
+            };
         `}>
             <div css={css`
                 display: flex;
@@ -615,7 +842,12 @@ export const Argree = ((props: AgreeType) => {
                     cursor: pointer;
                 `} />
                 <span css={css`
-                    font-size: 0.73vw;
+                    @media all and (min-width:768px) and (max-width:1099px) { 
+                        font-size: 13px;
+                    }; 
+                    @media all and (min-width:1100px) and (max-width:2000px) { 
+                        font-size: 14.5px;
+                    }; 
                     font-family: 'Pretendard-Medium';
                     letter-spacing: -0.03em;
                     margin-left: 0.4em;
@@ -627,6 +859,7 @@ export const Argree = ((props: AgreeType) => {
     )
 })
 
+// 푸터 컴포넌트
 export const Footer = () => {
     return (
         <section css={css`
@@ -641,9 +874,18 @@ export const Footer = () => {
             padding-bottom: 4em;
         `}>
             <div css={css`
-            width: 64.28em;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 14px;
+
+                span {
+                    font-size: 12px;
+                }
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 14px;
+            }; 
+            width: 46.88vw;
             height: 100%;
-            font-size: 0.74vw;
             font-family: 'Pretendard-Regular';
             letter-spacing: -0.03em;
             margin-left: 0.4em;
@@ -657,9 +899,15 @@ export const Footer = () => {
 
         `}>
                 <span css={css`
-                font-family: 'Pretendard-Medium';
+                font-family: 'Pretendard-Bold';
                 color: #333d4b;
-                font-size: 0.84vw;
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 14.5px !important;
+
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 15.7px !important;
+                }; 
                 margin-bottom: 0.6em;
             `}> 멋쟁이사자처럼 강남대학교 11기</span>
                 <span>경기도 용인시 기흥구 강남로 40 강남대학교 이공관</span>
@@ -674,9 +922,14 @@ export const Banner = () => {
 
     return (
         <img alt="배너 이미지" src={banner} css={css`
-            font-size: 0.80vw;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 15px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 15px;
+            }; 
             margin-top: 8em;
-            width: 22em;
+            width: 22em;  // 테스트
             height: auto;
             margin-bottom: 1em;
             // animation: ${fadeLeft} 1.8s ease-in-out;
@@ -684,10 +937,11 @@ export const Banner = () => {
     )
 }
 
+// 전체적인 내용이 섹션 안으로 들어가게 됩니다, 전체적인 틀 컴포넌트
 export const Section = ({ children }: WrapperProps) => {
-
     return (
-        <section css={css`
+        <>
+            <section css={css`
             position: absolute;
             left: 50%;
             transform: translate(-50%);
@@ -700,28 +954,43 @@ export const Section = ({ children }: WrapperProps) => {
             align-items: center;
             row-gap: 1.5em;
 
+            @media (max-width: 1024px) {
+                display: none;
+            }
+
         `}>
-            {children}
-        </section>
+                {children}
+                <Footer />
+            </section>
+            <NotWidth />
+        </>
     )
 }
 
+// 기본 인적사항에서 input이 무엇을 받을지 알려주는 제목 컴포넌트
 export const InputTitle = ({ children }: WrapperProps) => {
     return (
         <p css={css`
             font-family: 'Pretendard-Medium';
             letter-spacing: -0.03em;
-            font-size: 0.78vw;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 14px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 15px;
+            }; 
             color: #4e5968;
-            display: flex;
-            width: 60em;
+            width: 46.88vw;
             align-items: center;
+            
+            
         `}>
             {children}
         </p>
     )
 }
 
+// 학과를 검색할 때 네이버 검색창 처럼 보여주는 컴포넌트
 export const SearchDepartment = ({ children }: WrapperProps) => {
     return (
         <div css={css`
@@ -730,7 +999,13 @@ export const SearchDepartment = ({ children }: WrapperProps) => {
             background-color: white;
             border: none;
             border-radius: 0.769em;
-            font-size: 0.77vw;
+            @media all and (min-width:768px) and (max-width:1099px) {
+                margin-top: 0.18em; 
+                font-size: 15px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 15px;
+            }; 
             padding: 1em;
             row-gap: 0.5em;
             box-shadow: 0.15em 0.23em 0.38em 0em #707070;
@@ -743,6 +1018,7 @@ export const SearchDepartment = ({ children }: WrapperProps) => {
     )
 }
 
+// 각 인적사항 별로 보기 쉽게 만들어놓은 컨테이너 틀
 export const Article = ({ children }: WrapperProps) => {
     return (
         <article css={css`
@@ -757,14 +1033,22 @@ export const Article = ({ children }: WrapperProps) => {
     )
 }
 
+// 사용자가 잘못된 입력을 했을 때 나타내주는 컴포넌트
 export const ErrorDescription = ({ children }: WrapperProps) => {
     return (
         <span css={css`
             position: absolute;
             font-family: 'Pretendard-Regular';
             letter-spacing: -0.03em;
-            font-size: 0.70vw;
-            margin-top: 10em;
+            font-size:13px;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 13px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 13px;
+            }; 
+            margin-top: 10.2em;
+            margin-left: .5em;
             color: red;
         `}>
             {children}
@@ -772,14 +1056,22 @@ export const ErrorDescription = ({ children }: WrapperProps) => {
     )
 }
 
+// 사용자가 정확한 입력을 했을 때 나타내주는 컴포넌트
 export const CollectDescription = ({ children }: WrapperProps) => {
     return (
         <span css={css`
             position: absolute;
             font-family: 'Pretendard-Regular';
             letter-spacing: -0.03em;
-            font-size: 0.70vw;
-            margin-top: 10em;
+            font-size: 13px;
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 13px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 13px;
+            }; 
+            margin-top: 10.2em;
+            margin-left: .5em;
             color: #11BD7E;
         `}>
             {children}
@@ -795,19 +1087,35 @@ export interface ButtonType {
     alt?: string;
 }
 
+// 기본 버튼 컴포넌트
 export const Button = (props: ButtonType) => {
     return (
         <button css={css`
             font-family: 'Pretendard-Bold';
             letter-spacing: -0.03em;
-            font-size: 0.83vw;
+            @media (max-width:768px) { 
+                font-size: 6px;
+                border-radius: 4px;
+            }; 
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 11.5px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 15.5px;
+            }; 
             width: 15em;
             height: 3.5em;
             border: none;
-            border-radius: 0.5em;
+            border-radius: 8px;
             ${props.alt === "불러오기" && css`
                 width: 40em;
-                font-size: 0.71vw;
+
+                @media all and (min-width:768px) and (max-width:1099px) { 
+                    font-size: 11px;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 14px;
+                }; 
                 height: 3.8em;
                 border-radius: 0.58em;
             `}
@@ -834,12 +1142,17 @@ export const Button = (props: ButtonType) => {
     )
 }
 
+// flex 속성의 버튼을 모아주는 큰 틀의 컨테이너 틀 
 export const ButtonBox = (props: WrapperProps) => {
     return (
         <div css={css`
             display: flex;
             column-gap: 1em;
             margin-top: 3em;
+            width: 46.88vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             ${props.alt === "임시저장_모달" && css`margin-top: 0em;`}
         `}>
             {props.children}
@@ -854,6 +1167,7 @@ export interface InputType {
     disabled?: boolean;
     maxLength?: number;
     name?: string;
+    tabIndex?: number;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 

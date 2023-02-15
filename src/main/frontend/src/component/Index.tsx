@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 import axios from 'axios';
 import checkBox from '../images/checkBox.svg';
 import checkedBox from '../images/checkedBox.svg';
@@ -18,7 +18,7 @@ import { classList } from './class';
 import Confetti from '../hooks/Confetti';
 import NotWidth from './404/NotWidth';
 import NotTime from './404/NotTime';
-import { currentTime, endTime } from './time/time';
+import { currentTime, endTime, startTime } from './time/time';
 
 export default function Index() {
     const [name, setName] = useState<string>('');
@@ -31,6 +31,7 @@ export default function Index() {
     const [load, setLoad] = useState<boolean>(false);
     const [tempId, setTempId] = useState<string>('');
     const [tempEmail, setTempEmail] = useState<string>('');
+    const [tabIndex, setTabIndex] = useState<number>(0);
 
     const [position, setPosition] = useState<string>('');
     const [tempPosition, setTempPosition] = useState<string>('');
@@ -44,6 +45,7 @@ export default function Index() {
     const [isNotTempState, setIsNotTempState] = useState<boolean>(false);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
     const [itIsTemp, setItIsTemp] = useState<boolean>(false);
+    const [isDepartment, setIsDepartment] = useState<boolean>(false);
 
     const [userNameCheck, setUserNameCheck] = useState<boolean | null>(null);
     const [userIDCheck, setUserIDCheck] = useState<boolean | null>(null);
@@ -59,25 +61,33 @@ export default function Index() {
     const userPosition = useSelector((state: TestState) => state.fetcher.userPosition);
     const userDepartment = useSelector((state: TestState) => state.fetcher.userDepartment);
 
+    const departmentRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+
     const [timeState, setTimeState] = useState<boolean>(false);
-    const [widthState, setWidthState] = useState<boolean>(false);
-    const EMAIL_REGEX = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    // const [widthState, setWidthState] = useState<boolean>(false);
+    const EMAIL_REGEX = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
 
     useEffect(() => {
         // 현재 시간이 엔드타임보다 클 경우에는 timesState를 true로 만들어줍니다.
-        if (currentTime > endTime) {
+        // 현재 시간이 스타트타임보다 작을 경우에는 timsState를 true로 만들어줍니다.
+        // timeState가 true라면 모달창을 띄웁니다.
+
+        if (currentTime <= startTime) {
+            setTimeState(true);
+        }
+        else if (currentTime > endTime) {
             setTimeState(true);
         } else {
             setTimeState(false);
         }
 
         // 사용자의 해상도가 1100보다 작을 경우, widthState를 true로 만들어줍니다.
-        if (window.innerWidth && document.body.clientWidth < 1100) {
-            setWidthState(true);
-        } else {
-            setWidthState(false);
-        }
+        // if (window.innerWidth && document.body.clientWidth < 1100) {
+        //     setWidthState(true);
+        // } else {
+        //     setWidthState(false);
+        // }
 
         document.body.style.overflow = "unset";
         // 이전 값들을 저장하기 위해서 Redux 사용
@@ -510,6 +520,10 @@ export default function Index() {
         if (event.target.name === "학과") {
             const eventDepartment = event.target.value.replace(/[_/]|[0-9]|[\[\]{}()<>?|`~!@#$%^&*-+=,.;:\"'\\]/g, '');
             setDepartment(eventDepartment);
+
+            // if (event.target.value.length === 0) {
+            //     setIsDepartment(false);
+            // }
         }
 
         if (event.target.name === "저장된_학번") {
@@ -522,29 +536,31 @@ export default function Index() {
         }
     }
 
-    /* 임시 저장 버튼을 클릭했을 때 생기는 변화*/
+    /* 메인 화면의 임시 저장을 누를 때의 함수 */
     const isSave = () => {
-        setLoad(!load)
+        setLoad(true)
+        setTabIndex(-1);
         document.body.style.overflow = "hidden";
     }
 
+    /* 이미 제출된 지원서가 있을 때의 함수 */
     const isSubmit = () => {
         setSubmit(false);
+        setTabIndex(0);
         window.location.replace("/")
     }
 
+    /* 불러오기 모달을 띄우고, 취소 버튼을 눌렀을 때 */
     const TempModalQuit = () => {
         setTempPosition('');
         setTempId('');
         setTempEmail('');
-        setLoad(false)
+        setLoad(false);
+        setTabIndex(0);
     }
 
     if (timeState) {
         return <NotTime />
-    }
-    else if (widthState) {
-        return <NotWidth />
     }
     else {
         return (
@@ -607,45 +623,60 @@ export default function Index() {
                 <Banner />
                 <Article>
                     <InputTitle>이름 <Require /> </InputTitle>
-                    <InputBox type="text" placeholder="이름을 입력해주세요" name="이름" maxLength={15} onChange={changeValue} value={name} />
-                    {userNameCheck === false && <ErrorDescription>이름을 제대로 입력해주세요!</ErrorDescription>}
+                    <InputBox type="text" placeholder="이름을 입력해주세요 (예시 : 김멋사)" name="이름" maxLength={15} onChange={changeValue} value={name} tabIndex={tabIndex} />
+                    {userNameCheck === false && <ErrorDescription>이름을 제대로 입력해주세요</ErrorDescription>}
                     {userNameCheck && <CollectDescription>이름이 정상적으로 입력되었습니다</CollectDescription>}
                 </Article>
                 <Article>
                     <InputTitle>학번 <Require /> </InputTitle>
-                    <InputBox type="text" placeholder="학번 전체를 입력해주세요" name="학번" maxLength={9} onChange={changeValue} value={id} />
-                    {userIDCheck === false && <ErrorDescription>학번을 제대로 입력해주세요!</ErrorDescription>}
+                    <InputBox type="text" placeholder="학번 전체를 입력해주세요 (예시 : 201704027)" name="학번" maxLength={9} onChange={changeValue} value={id} tabIndex={tabIndex} />
+                    {userIDCheck === false && <ErrorDescription>학번을 제대로 입력해주세요</ErrorDescription>}
                     {userIDCheck && <CollectDescription>학번이 정상적으로 입력되었습니다</CollectDescription>}
                 </Article>
                 <Article>
                     <InputTitle>학과 <Require />
                         {openSearch && <span css={css`
                                 margin-left: 1em;
-                                color: #707070;
+                                color: #6b7684;
                                 font-family: 'Pretendard-Regular';
-                                font-size: 0.67vw;
-                                letter-spacing: -0.05em;
+                                font-size: 14px;
+                                letter-spacing: -0.03em;
                                 // text-decoration: underline;
                                 // text-underline-offset: 0.2em;
                                 cursor: pointer;
-                                margin-left: auto;
-                                margin-right: 1em;
-                            `} onClick={RevertDepartment}>학과를 다시 입력하고 싶으신가요?</span>}
+                                margin-right: .8em;
+                                transition: 0.4s all;
+                                float: right;
+
+                                &:hover {
+                                    opacity: 80%;
+                                }
+                            `} onClick={RevertDepartment}>학과 재설정</span>}
                     </InputTitle>
-                    <InputBox type="text" placeholder="학과를 입력해주세요" name="학과" onChange={changeValue} maxLength={10} value={department} disabled={openSearch} />
+                    <InputBox type="text" placeholder="학과를 입력해주세요 (예시 : 교육학과)" name="학과" onChange={changeValue} maxLength={10} value={department} disabled={openSearch} tabIndex={tabIndex} />
                     {!openSearch && department.length >= 1 && <SearchDepartment>
-                        {classList.map((item) => {
+                        {classList.map((item, key) => {
                             if (department.length >= 1 && item.slice(0, department.length) === department) {
                                 return (
                                     <div css={css`
                                         cursor: pointer;
                                         transition: 0.4s all;
+                                        font-family: 'Pretendard-Regular';
+                                        @media all and (min-width:768px) and (max-width:1099px) { 
+                                            span {
+                                                font-size: 13px;
+                                            }
+                                            font-size: 13px;
+                                        }; 
+                                        font-size: 14.5px;
+                                        letter-spacing: -0.05em;
                                         &:hover {
                                             opacity: 80%;
                                         }
-                                    `} onClick={() => SearchCheck(item)}>
+                                    `} onClick={() => SearchCheck(item)} key={key}>
                                         <span css={css`
                                             color: #4F85E8;
+                                            font-family: 'Pretendard-Medium';
                                         `}>{item.slice(0, department.length)}</span>
                                         <span css={css`
                                             color: #8B95A1;
@@ -664,15 +695,15 @@ export default function Index() {
                 </Article>
                 <Article>
                     <InputTitle>이메일 <Require /> </InputTitle>
-                    <InputBox type="email" placeholder="이메일을 입력해주세요" name="이메일" maxLength={30} onChange={changeValue} value={email} />
-                    {userEmailCheck === false && <ErrorDescription>이메일을 제대로 입력해주세요!</ErrorDescription>}
+                    <InputBox type="email" placeholder="이메일을 입력해주세요 (예시 : kangnam@likelion.org)" name="이메일" maxLength={30} onChange={changeValue} value={email} tabIndex={tabIndex} />
+                    {userEmailCheck === false && <ErrorDescription>이메일을 제대로 입력해주세요</ErrorDescription>}
                     {userEmailCheck && <CollectDescription>이메일이 정상적으로 입력되었습니다</CollectDescription>}
 
                 </Article>
                 <Article>
                     <InputTitle>연락처 (하이픈을 제외한 숫자만 입력)<Require /> </InputTitle>
-                    <InputBox type="text" placeholder="연락 가능한 번호를 입력해주세요" name="연락처" maxLength={11} onChange={changeValue} value={phone} />
-                    {userPhoneCheck === false && <ErrorDescription>연락처를 제대로 입력해주세요!</ErrorDescription>}
+                    <InputBox type="text" placeholder="연락 가능한 번호를 입력해주세요 (예시 : 01012345678)" name="연락처" maxLength={11} onChange={changeValue} value={phone} tabIndex={tabIndex} />
+                    {userPhoneCheck === false && <ErrorDescription>연락처를 제대로 입력해주세요</ErrorDescription>}
                     {userPhoneCheck && <CollectDescription>연락처가 정상적으로 입력되었습니다</CollectDescription>}
                 </Article>
                 <Article>
@@ -696,7 +727,6 @@ export default function Index() {
                     <Button name="임시저장" onClick={isSave}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `지원서 불러오기`}</Button>
                     <Button name="제출하기" disabled={buttonState} onClick={handleClick}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `공통문항 작성하기`}</Button>
                 </ButtonBox>
-                <Footer />
             </Section>
         )
     }

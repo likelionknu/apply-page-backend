@@ -319,7 +319,6 @@ export default function Design() {
                 <Button name="제출하기" onClick={Back}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
                 <Button name="제출하기" onClick={Submit} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `제출하기`}</Button>
             </ButtonBox>
-            <Footer />
         </Section>
     )
 }

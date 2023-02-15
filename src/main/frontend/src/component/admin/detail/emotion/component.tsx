@@ -17,11 +17,21 @@ export const Section = ({ children }: WrapperProps) => {
                 position: absolute;
                 left: 50%;
                 transform: translate(-50%);
-                font-size: 0.95vw;
+                @media (max-width:768px) { 
+                    font-size: 7px;
+                }; 
+    
+                @media all and (min-width:768px) and (max-width:1059px) { 
+                    font-size: 17px;
+                    width: 100%;
+                }; 
+                @media all and (min-width:1100px) and (max-width:2000px) { 
+                    font-size: 17px;
+                    width: 100%;
+                }; 
                 display: flex;
                 flex-direction: column;
                 align-items: center;          
-                width: 60em;
                 height: 100%;
                 background-color: white;
                 border-radius: 0.93em;
@@ -62,6 +72,7 @@ export const Article = ({ children }: WrapperProps) => {
             row-gap: 2em;
             border-radius: 0.625em;
             border-width: 0.03em;
+
         `}>
             {children}
         </article>
@@ -80,11 +91,34 @@ export const Answer = (props: AnswerType) => {
             flex-direction: column;
             text-align: left;
             row-gap: 0.5em;
+            width: 60em;
+
+            @media (max-width:768px) { 
+                font-size: 5.5px;
+            }; 
+
+            @media all and (min-width:768px) and (max-width:1059px) { 
+                font-size: 10px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 15px;
+            }; 
         `}>
             <span css={css`
                     font-family: 'Pretendard-Medium';
-                    letter-spacing: -0.03em;
-                    font-size: 0.83vw;
+                    letter-spacing: -0.03em;   
+
+                    @media (max-width:768px) { 
+                        font-size: 7px;
+                    }; 
+        
+                    @media all and (min-width:768px) and (max-width:1059px) { 
+                        font-size: 13px;
+                    }; 
+                    @media all and (min-width:1100px) and (max-width:2000px) { 
+                        font-size: 15px;
+                    }; 
+
                     color: #4e5968;
             `}> {props.name}</span>
             <div css={css`
@@ -92,11 +126,20 @@ export const Answer = (props: AnswerType) => {
         letter-spacing: -0.03em;
         padding: 0;
         padding-left: 1em;
-        width: 60em;
+        width: 100%;
         padding: 1em;
         border: solid;
         border-color: #e6e8ea;
-        font-size: 0.83vw;
+        @media (max-width:768px) { 
+            font-size: 7px;
+        }; 
+
+        @media all and (min-width:768px) and (max-width:1059px) { 
+            font-size: 13px;
+        }; 
+        @media all and (min-width:1100px) and (max-width:2000px) { 
+            font-size: 15px;
+        }; 
         border-radius: 0.57em;
         line-height: 1.5em;
         border-width: 0.07em;
@@ -135,6 +178,19 @@ export const Button = (props: ButtonType) => {
             font-family: 'Pretendard-Bold';
             letter-spacing: -0.03em;
             font-size: 0.83vw;
+
+            @media (max-width:768px) { 
+                font-size: 7px;
+            }; 
+    
+            @media all and (min-width:768px) and (max-width:1099px) { 
+                font-size: 12.5px;
+            }; 
+            @media all and (min-width:1100px) and (max-width:2000px) { 
+                font-size: 16px;
+            }; 
+
+
             width: 15em;
             height: 3.5em;
             transition: 0.5s all;

@@ -21,6 +21,8 @@ import { TestState } from './app/store';
 import { Footer, IndexHeader } from './component/emotion/component';
 import Temp from './component/admin/partition/Temp';
 import NotTime from './component/404/NotTime';
+import ChannelService from './api/ChannelService';
+import { KeyboardIOS } from './hooks/KeyboardIOS';
 
 export interface WrapperProps {
   children?: React.ReactNode;
@@ -31,6 +33,12 @@ export interface WrapperProps {
 }
 
 function App() {
+
+  useEffect(() => {
+    ChannelService.boot({
+      "pluginKey": "4a95db46-8630-4d8d-a4ad-005f90e433e1", // fill your plugin key
+    });
+  }, [])
 
   return (
     <div className="App">

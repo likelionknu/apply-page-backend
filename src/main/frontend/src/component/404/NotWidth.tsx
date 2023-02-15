@@ -15,9 +15,13 @@ export default function NotWidth() {
             transform: translate(-50%, -50%);
             width: 60%;
 
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
+
+            @media (max-width: 1024px) {
+                display: flex;
+            }
         `}>
             <img alt="404" src={oops} css={css`
                 width: 8.5em;
@@ -28,9 +32,9 @@ export default function NotWidth() {
                 letter-spacing: -0.03em;
                 color: #333d4b;
                 margin-top: 1em;
-                font-size: .88vw;
+                font-size: 15px;
                 animation: ${fadeUp} 1s ease-in-out;
-            `}>원활한 지원환경을 PC 또는 태블릿으로 접속해주세요!</span>
+            `}>원활한 지원환경을 위해 <br /> PC 또는 태블릿으로 접속해주세요!</span>
         </div>
     )
 }

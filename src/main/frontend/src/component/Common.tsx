@@ -354,7 +354,6 @@ export default function Common() {
                 <Button name="제출하기" onClick={Back}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
                 <Button name="제출하기" onClick={PartHistoy} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `파트별 문항 작성하기`}</Button>
             </ButtonBox>
-            <Footer />
         </Section>
     )
 }

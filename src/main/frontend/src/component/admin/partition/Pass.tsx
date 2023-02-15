@@ -32,7 +32,7 @@ export default function Pass() {
     const [pendingState, setPendingState] = useState<boolean>(false);
     const [mailMessage, setMailMessage] = useState<string>("메일 전송 중입니다..");
     const [mailButtonState, setMailButtonState] = useState<boolean>(false);
-    const [render, SetRender] = useState<boolean>(false);
+    const [inputMail, setInputMail] = useState<boolean>(true);
 
     const [time, setTime] = useState<string>('');
     const [place, setPlace] = useState<string>('');
@@ -41,8 +41,6 @@ export default function Pass() {
     const [backendState, setBackendState] = useState<boolean | null>(true);
     const [frontendState, setFrontendState] = useState<boolean | null>(true);
     const [designState, setDesignState] = useState<boolean | null>(true);
-    const [clickState, setClickState] = useState<boolean>(false);
-    const [checkState, setCheckState] = useState<boolean>(false);
     const [sid, setSid] = useState<string>('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -266,6 +264,13 @@ export default function Pass() {
         if (event.target.name === "인터뷰_소요시간") {
             setPlayTime(event.target.value);
         }
+
+        // time, place, playTime에 정보가 들어와야 버튼이 활성화 됩니다!
+        if (time && place && playTime) {
+            setInputMail(false);
+        } else {
+            setInputMail(true);
+        }
     }
 
     return (
@@ -310,7 +315,7 @@ export default function Pass() {
                                 justify-content: center;
                             `}>
                                 <Button name="임시저장" onClick={ClearMail}>닫기</Button>
-                                <Button name="제출하기" onClick={SendMail}>메일 전송</Button>
+                                <Button name="제출하기" onClick={SendMail} disabled={inputMail}>메일 전송</Button>
                             </div>
                         </div>
                     </ButtonBox>

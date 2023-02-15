@@ -48,7 +48,7 @@ export default function Index() {
                 <Img src={person} />
                 <Input type="text" placeholder='아이디를 입력해주세요' name="아이디" onChange={handleChange} value={id} />
                 <Input type="password" placeholder='비밀번호를 입력해주세요' name="비밀번호" onChange={handleChange} value={pw} />
-                <Button onClick={handleClick}>관리자 로그인</Button>
+                <Button onClick={handleClick}>강남멋사 관리자 로그인</Button>
             </LoginBox>
         </Section>
     )

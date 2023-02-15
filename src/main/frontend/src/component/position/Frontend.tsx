@@ -304,7 +304,7 @@ export default function Frontend() {
                 <WordLength>{whyFrontend.length}</WordLength>
             </Article>
             <Article>
-                <InputTitle>프론트엔드 개발과 관련된 프레임워크나 html, css, js 등의 언어를 사용해 보신 적 있으신가요? 있으시다면 어디까지 사용해 보셨는지 구체적으로 적어주세요<Require /> </InputTitle>
+                <InputTitle>프론트엔드 개발과 관련된 프레임워크나 HTML, CSS, JavaScript 등의 언어를 사용해보신 경험에 대해 구체적으로 적어주세요<Require /> </InputTitle>
                 <TextAreaBox placeholder="텍스트를 입력해주세요" name="프레임워크" onChange={handleChange} value={usingStack} />
                 <WordLength>{usingStack.length}</WordLength>
             </Article>
@@ -319,15 +319,14 @@ export default function Frontend() {
                 <WordLength>{achieve.length}</WordLength>
             </Article>
             <Article>
-                <InputTitle>포트폴리오 링크가 있다면 첨부해주세요 </InputTitle>
-                <InputBox type="text" placeholder="포트폴리오 링크를 입력해주세요" maxLength={200} name="포트폴리오" onChange={handleChange} value={portfolioLink} />
+                <InputTitle>깃허브 또는 포트폴리오 링크가 있다면 첨부해주세요 </InputTitle>
+                <InputBox type="text" placeholder="https 또는 http를 포함하는 링크 전체를 입력해주세요" maxLength={200} name="포트폴리오" onChange={handleChange} value={portfolioLink} />
             </Article>
             <ButtonBox>
                 <Button name="임시저장" onClick={TempSave} disabled={tempState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `임시저장`}</Button>
                 <Button name="제출하기" onClick={Back}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `뒤로가기`}</Button>
                 <Button name="제출하기" onClick={Submit} disabled={buttonState}>{submitCount >= 1 ? `잠시만 기다려주세요...` : `제출하기`}</Button>
             </ButtonBox>
-            <Footer />
         </Section>
     )
 }

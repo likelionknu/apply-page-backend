@@ -27,9 +27,9 @@ export default function Error() {
                 letter-spacing: -0.03em;
                 color: #333d4b;
                 margin-top: 1em;
-                font-size: .88vw;
+                font-size: 15px;
                 animation: ${fadeUp} 1s ease-in-out;
-            `}>웁스웁스, 잘못된 접근을 하셨어요</span>
+            `}>웁스웁스, 잘못된 접근을 하셨어요!</span>
             <Link to='/'>
                 <button css={css`
                 font-family: 'Pretendard-Bold';
