@@ -1,4 +1,4 @@
-package com.springboot.applypage.data.entity;
+package com.springboot.applypage.data.enumdata;
 
 public enum Role {
     ROOT, REPR, MANA, BABY

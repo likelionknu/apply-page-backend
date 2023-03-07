@@ -1,5 +1,6 @@
 package com.springboot.applypage.data.entity;
 
+import com.springboot.applypage.data.enumdata.Role;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
