@@ -15,6 +15,9 @@ import java.time.LocalDate;
 @Table(name="user")
 public class User extends BaseEntity{
 
+    //전화번호
+    //비밀번호 - 암호화
+
     @Id
     private Long sid;
 
