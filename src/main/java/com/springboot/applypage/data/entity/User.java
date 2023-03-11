@@ -1,7 +1,9 @@
 package com.springboot.applypage.data.entity;
 
 import com.springboot.applypage.data.enumdata.Role;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
@@ -12,6 +14,8 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="user")
 public class User extends BaseEntity{
 
