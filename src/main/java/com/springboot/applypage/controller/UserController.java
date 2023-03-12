@@ -1,6 +1,8 @@
 package com.springboot.applypage.controller;
 
+import com.springboot.applypage.data.dto.ChangeUserDto;
 import com.springboot.applypage.data.dto.UserDto;
+import com.springboot.applypage.data.entity.User;
 import com.springboot.applypage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,15 @@ public class UserController {
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
         UserDto savedUser = userService.saveUser(userDto);
         return ResponseEntity.status(HttpStatus.OK).body(savedUser);
+    }
+
+    @PutMapping()
+    public ResponseEntity<UserDto> changeUser(
+            @RequestBody ChangeUserDto changeUserDto) throws Exception{
+        UserDto userDto = userService.changeUser(
+                changeUserDto.getSid(),
+                changeUserDto.getRole());
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
     @DeleteMapping()

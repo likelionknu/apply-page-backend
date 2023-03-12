@@ -3,6 +3,7 @@ package com.springboot.applypage.service.impl;
 import com.springboot.applypage.data.dao.UserDAO;
 import com.springboot.applypage.data.dto.UserDto;
 import com.springboot.applypage.data.entity.User;
+import com.springboot.applypage.data.enumdata.Role;
 import com.springboot.applypage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,20 @@ public class UserServiceImpl implements UserService {
         return responseUser;
     }
 
+    @Override
+    public UserDto changeUser(Long sid, Role role)throws Exception{
+        User changedUser = userDAO.updateUser(sid, role);
+
+        UserDto responseUser = new UserDto();
+        responseUser.setRole(changedUser.getRole());
+        responseUser.setEmail(changedUser.getEmail());
+        responseUser.setSid(changedUser.getSid());
+        responseUser.setBirthDay(changedUser.getBirthDay());
+        responseUser.setName(changedUser.getName());
+
+        return responseUser;
+
+    }
     @Override
     public void deleteUser(Long sid) throws Exception{
         userDAO.deleteUser(sid);
