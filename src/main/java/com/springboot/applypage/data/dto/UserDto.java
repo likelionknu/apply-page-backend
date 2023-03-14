@@ -24,4 +24,8 @@ public class UserDto {
 
     private Role role;
 
+    private String tel;
+
+    private String password;
+
 }

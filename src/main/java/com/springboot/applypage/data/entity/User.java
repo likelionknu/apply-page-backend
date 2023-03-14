@@ -35,6 +35,10 @@ public class User extends BaseEntity{
     private LocalDate birthDay;
 
     @Column(nullable = false)
-    @ColumnDefault("BABY")
+    private String tel;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+   // @ColumnDefault("BABY")
     private Role role;
 }

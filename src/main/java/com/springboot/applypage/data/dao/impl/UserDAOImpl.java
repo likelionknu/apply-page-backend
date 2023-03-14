@@ -2,10 +2,12 @@ package com.springboot.applypage.data.dao.impl;
 
 import com.springboot.applypage.data.dao.UserDAO;
 import com.springboot.applypage.data.entity.User;
+import com.springboot.applypage.data.enumdata.Role;
 import com.springboot.applypage.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -29,6 +31,26 @@ public class UserDAOImpl implements UserDAO {
     public User selectUser(Long sid) {
         User selectedUser = userRepository.getById(sid);
         return selectedUser;
+    }
+    @Override
+    public User updateUser(Long sid, Role role, String tel, String password)throws Exception{
+        Optional<User> selectedUser = userRepository.findById(sid);
+
+        User updatedUser;
+        if(selectedUser.isPresent()){
+            User user = selectedUser.get();
+
+            user.setRole(role);
+            user.setPassword(password);
+            user.setTel(tel);
+            user.setUpdatedAt(LocalDateTime.now());
+
+            updatedUser = userRepository.save(user);
+        }else {
+            throw new Exception();
+        }
+        return updatedUser;
+
     }
 
     @Override
