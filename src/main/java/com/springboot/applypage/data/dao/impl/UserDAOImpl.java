@@ -33,7 +33,7 @@ public class UserDAOImpl implements UserDAO {
         return selectedUser;
     }
     @Override
-    public User updateUser(Long sid, Role role)throws Exception{
+    public User updateUser(Long sid, Role role, String tel, String password)throws Exception{
         Optional<User> selectedUser = userRepository.findById(sid);
 
         User updatedUser;
@@ -41,6 +41,8 @@ public class UserDAOImpl implements UserDAO {
             User user = selectedUser.get();
 
             user.setRole(role);
+            user.setPassword(password);
+            user.setTel(tel);
             user.setUpdatedAt(LocalDateTime.now());
 
             updatedUser = userRepository.save(user);

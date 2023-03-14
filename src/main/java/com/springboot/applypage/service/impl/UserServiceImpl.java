@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
 
-    @Autowired
+    @Autowired     
     public UserServiceImpl(UserDAO userDAO){
         this.userDAO = userDAO;
     }
@@ -29,6 +29,8 @@ public class UserServiceImpl implements UserService {
         responseUser.setEmail(selectedUser.getEmail());
         responseUser.setSid(selectedUser.getSid());
         responseUser.setBirthDay(selectedUser.getBirthDay());
+        responseUser.setTel((selectedUser.getTel()));
+        responseUser.setPassword(selectedUser.getPassword());
 
 
         return responseUser;
@@ -36,13 +38,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto saveUser(UserDto user) {
-        //User savedUser = userDAO.insertUser(user);
+       // User savedUser = userDAO.insertUser(user);
         User savedUser = new User();
         savedUser.setEmail(user.getEmail());
         savedUser.setBirthDay(user.getBirthDay());
         savedUser.setName(user.getName());
         savedUser.setRole(user.getRole());
         savedUser.setSid(user.getSid());
+        savedUser.setTel(user.getTel());
+        savedUser.setPassword(user.getPassword());
 
         savedUser = userDAO.insertUser(savedUser);
 
@@ -52,13 +56,15 @@ public class UserServiceImpl implements UserService {
         responseUser.setSid(savedUser.getSid());
         responseUser.setBirthDay(savedUser.getBirthDay());
         responseUser.setName(savedUser.getName());
+        responseUser.setTel((savedUser.getTel()));
+        responseUser.setPassword(savedUser.getPassword());
 
         return responseUser;
     }
 
     @Override
-    public UserDto changeUser(Long sid, Role role)throws Exception{
-        User changedUser = userDAO.updateUser(sid, role);
+    public UserDto changeUser(Long sid, Role role,String tel, String password)throws Exception{
+        User changedUser = userDAO.updateUser(sid, role,tel,password);
 
         UserDto responseUser = new UserDto();
         responseUser.setRole(changedUser.getRole());
@@ -66,6 +72,8 @@ public class UserServiceImpl implements UserService {
         responseUser.setSid(changedUser.getSid());
         responseUser.setBirthDay(changedUser.getBirthDay());
         responseUser.setName(changedUser.getName());
+        responseUser.setTel((changedUser.getTel()));
+        responseUser.setPassword(changedUser.getPassword());
 
         return responseUser;
 

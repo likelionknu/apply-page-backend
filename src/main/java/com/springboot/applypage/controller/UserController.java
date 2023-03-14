@@ -36,7 +36,9 @@ public class UserController {
             @RequestBody ChangeUserDto changeUserDto) throws Exception{
         UserDto userDto = userService.changeUser(
                 changeUserDto.getSid(),
-                changeUserDto.getRole());
+                changeUserDto.getRole(),
+                changeUserDto.getTel(),
+                changeUserDto.getPassword());
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
