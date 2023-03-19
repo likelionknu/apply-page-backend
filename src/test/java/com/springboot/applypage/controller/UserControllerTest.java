@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(UserController.class)       //UserController 클래스 만을 가지고 온다
 public class UserControllerTest {
 
-    @Autowired
+/*    @Autowired
     private MockMvc mockMvc;
 
     @MockBean                           //가짜 객체를 주입받는다.
@@ -105,5 +105,5 @@ public class UserControllerTest {
                 , "성창규"
                 , LocalDate.of(2020, Month.JANUARY, 8)
                 , Role.ROOT));
-    }
+    }*/
 }

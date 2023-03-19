@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,8 +18,8 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Table(name="user")
 public class User extends BaseEntity implements UserDetails {
@@ -39,16 +40,25 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private LocalDate birthDay;
+    /*@Column(nullable = true)
+    private LocalDate birthDay;*/
+
+    /*@ElementCollection(fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<String> role = new ArrayList<>();*/
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
-    private List<String> role = new ArrayList<>();
+    private List<String> roles = new ArrayList<>();
 
-    @Override
+
+    /*@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.role.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    }*/
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

@@ -11,9 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+@Service
 public class SignServiceImpl implements SignService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(SignServiceImpl.class);
@@ -35,22 +37,26 @@ public class SignServiceImpl implements SignService {
     };
 
     @Override
-    public SignUpResultDto signUp(String id, String password, String name, String role) {
+    public SignUpResultDto signUp(String id, String password, String name, String role, Long sid) {
         LOGGER.info("[getSignUpResult] 회원가입정보 전달");
         User user;
         if(role.equalsIgnoreCase("admin")){
             user = User.builder()
                     .email(id)
+                    .sid(sid)
                     .name(name)
                     .passwd(passwordEncoder.encode(password))
-                    .role(Collections.singletonList("ROLE_ADMIN"))
+                    //.role(Collections.singletonList("ROLE_ADMIN"))
+                    .roles(Collections.singletonList("ROLE_ADMIN"))
                     .build();
         }else{
             user = User.builder()
                     .email(id)
                     .name(name)
+                    .sid(sid)
                     .passwd(passwordEncoder.encode(password))
-                    .role(Collections.singletonList("ROLE_USER"))
+                    //.role(Collections.singletonList("ROLE_USER"))
+                    .roles(Collections.singletonList("ROLE_USER"))
                     .build();
         }
 
@@ -83,7 +89,7 @@ public class SignServiceImpl implements SignService {
         LOGGER.info("[getSignInResult] SignInResultDto 객체 생성");
         SignInResultDto signInResultDto = SignInResultDto.builder()
                 .token(jwtTokenProvider.createToken(String.valueOf(user.getEmail())
-                ,user.getRole()))
+                ,user.getRoles()))
                 .build();
 
         LOGGER.info("[getSignInResult] SignInResultDto 객체에 값 주입");

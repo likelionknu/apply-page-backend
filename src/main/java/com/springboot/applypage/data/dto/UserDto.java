@@ -18,6 +18,8 @@ public class UserDto {
 
     private String email;
 
+    private String passwd;
+
     private String name;
 
     private LocalDate birthDay;

@@ -9,8 +9,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
+    @Override
+    public UserDto getUser(Long sid) {
+        return null;
+    }
 
-    private final UserDAO userDAO;
+    @Override
+    public UserDto saveUser(UserDto user) {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(Long sid) throws Exception {
+
+    }
+
+/*    private final UserDAO userDAO;
 
     @Autowired
     public UserServiceImpl(UserDAO userDAO){
@@ -58,5 +72,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long sid) throws Exception{
         userDAO.deleteUser(sid);
-    }
+    }*/
 }

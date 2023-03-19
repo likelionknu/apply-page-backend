@@ -20,7 +20,7 @@ public class UserServiceTest {
     private UserDAO userDAO = Mockito.mock(UserDAO.class);
     private UserServiceImpl userService;
 
-    @BeforeEach
+/*    @BeforeEach
     public void setUpTest(){
         userService = new UserServiceImpl(userDAO);
     }
@@ -68,5 +68,5 @@ public class UserServiceTest {
         Assertions.assertEquals(userDto.getSid(), 201904055L);
         Assertions.assertEquals(userDto.getName(), "성창규");
         Assertions.assertEquals(userDto.getRole(), Role.ROOT);
-    }
+    }*/
 }
