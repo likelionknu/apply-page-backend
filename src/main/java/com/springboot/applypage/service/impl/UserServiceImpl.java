@@ -3,6 +3,7 @@ package com.springboot.applypage.service.impl;
 import com.springboot.applypage.data.dao.UserDAO;
 import com.springboot.applypage.data.dto.UserDto;
 import com.springboot.applypage.data.entity.User;
+import com.springboot.applypage.data.repository.UserRepository;
 import com.springboot.applypage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
+
 
     @Autowired
     public UserServiceImpl(UserDAO userDAO){
