@@ -39,7 +39,15 @@ public class SignServiceImpl implements SignService {
     };
 
     @Override
-    public SignUpResultDto signUp(String id, String password, String name, String role, Long sid, LocalDate birthDay) {
+    public SignUpResultDto signUp(
+            String id,
+            String password,
+            String name,
+            String role,
+            Long sid,
+            LocalDate birthDay,
+            String tel
+    ) {
         LOGGER.info("[getSignUpResult] 회원가입정보 전달");
         User user;
         if(role.equalsIgnoreCase("admin")){
@@ -51,6 +59,7 @@ public class SignServiceImpl implements SignService {
                     //.role(Collections.singletonList("ROLE_ADMIN"))
                     .roles(Collections.singletonList("ROLE_ADMIN"))
                     .birthDay(birthDay)
+                    .tel(tel)
                     .build();
         }else{
             user = User.builder()
@@ -61,6 +70,7 @@ public class SignServiceImpl implements SignService {
                     //.role(Collections.singletonList("ROLE_USER"))
                     .roles(Collections.singletonList("ROLE_USER"))
                     .birthDay(birthDay)
+                    .tel(tel)
                     .build();
         }
 
