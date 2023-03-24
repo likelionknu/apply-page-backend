@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,9 +52,11 @@ public class SignController {
             @ApiParam(value = "Password", required = true) @RequestParam String password,
             @ApiParam(value = "이름", required = true) @RequestParam String name,
             @ApiParam(value = "권한", required = true) @RequestParam String role,
+            @ApiParam(value = "생일", required = true, example = "2001-05-31") @RequestParam String birthDay,
             @ApiParam(value = "학번", required = true) @RequestParam Long sid){
 
-        SignUpResultDto signUpResultDto = signService.signUp(id, password, name, role, sid);
+        //LocalDate ld = LocalDate.now();
+        SignUpResultDto signUpResultDto = signService.signUp(id, password, name, role, sid, LocalDate.parse(birthDay, DateTimeFormatter.ISO_DATE));
 
         return signUpResultDto;
     }

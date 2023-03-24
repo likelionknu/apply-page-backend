@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,8 +41,8 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String name;
 
-    /*@Column(nullable = true)
-    private LocalDate birthDay;*/
+    @Column(nullable = true)
+    private LocalDate birthDay;
 
     /*@ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
@@ -50,7 +51,6 @@ public class User extends BaseEntity implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
-
 
     /*@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

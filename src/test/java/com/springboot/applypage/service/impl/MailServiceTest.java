@@ -1,22 +1,15 @@
 package com.springboot.applypage.service.impl;
 
-import com.springboot.applypage.data.dao.UserDAO;
 import com.springboot.applypage.data.dto.AcceptEmailDto;
 import com.springboot.applypage.service.MailSenderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import javax.mail.internet.MimeMessage;
-import java.util.Objects;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 public class MailServiceTest {
 

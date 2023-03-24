@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Date;
 
 @Service
 public class SignServiceImpl implements SignService {
@@ -37,7 +39,7 @@ public class SignServiceImpl implements SignService {
     };
 
     @Override
-    public SignUpResultDto signUp(String id, String password, String name, String role, Long sid) {
+    public SignUpResultDto signUp(String id, String password, String name, String role, Long sid, LocalDate birthDay) {
         LOGGER.info("[getSignUpResult] 회원가입정보 전달");
         User user;
         if(role.equalsIgnoreCase("admin")){
@@ -48,6 +50,7 @@ public class SignServiceImpl implements SignService {
                     .passwd(passwordEncoder.encode(password))
                     //.role(Collections.singletonList("ROLE_ADMIN"))
                     .roles(Collections.singletonList("ROLE_ADMIN"))
+                    .birthDay(birthDay)
                     .build();
         }else{
             user = User.builder()
@@ -57,6 +60,7 @@ public class SignServiceImpl implements SignService {
                     .passwd(passwordEncoder.encode(password))
                     //.role(Collections.singletonList("ROLE_USER"))
                     .roles(Collections.singletonList("ROLE_USER"))
+                    .birthDay(birthDay)
                     .build();
         }
 
