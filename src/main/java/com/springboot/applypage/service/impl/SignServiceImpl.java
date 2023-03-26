@@ -50,7 +50,7 @@ public class SignServiceImpl implements SignService {
     ) {
         LOGGER.info("[getSignUpResult] 회원가입정보 전달");
         User user;
-        if(role.equalsIgnoreCase("admin")){
+        /*if(role.equalsIgnoreCase("admin")){
             user = User.builder()
                     .email(id)
                     .sid(sid)
@@ -72,7 +72,18 @@ public class SignServiceImpl implements SignService {
                     .birthDay(birthDay)
                     .tel(tel)
                     .build();
-        }
+        }*/
+
+        user = User.builder()
+                .email(id)
+                .name(name)
+                .sid(sid)
+                .passwd(passwordEncoder.encode(password))
+                //.role(Collections.singletonList("ROLE_USER"))
+                .roles(Collections.singletonList("ROLE_USER"))
+                .birthDay(birthDay)
+                .tel(tel)
+                .build();
 
         User savedUser = userRepository.save(user);
         SignUpResultDto signUpResultDto = new SignInResultDto();
