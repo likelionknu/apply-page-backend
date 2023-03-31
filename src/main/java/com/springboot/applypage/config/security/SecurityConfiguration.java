@@ -33,10 +33,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/sign-api/sign-in", "/sign-api/sign-up",
                         "/sign-api/exception").permitAll()
                 .antMatchers(HttpMethod.GET, "/product/**").permitAll()
+                .antMatchers("/sign-api/update-in")
+                .hasAnyRole(
+                        "ROOT",
+                        "ADMIN",
+                        "MANAGE",
+                        "LION",
+                        "APPLY"
+                )//모든 권한
 
                 .antMatchers("**exception**").permitAll()
 
-                .anyRequest().hasRole("ADMIN")
+                .anyRequest().hasAnyRole("ADMIN")
+                //.anyRequest().hasRole("USER")   //role 추가 해봄...
 
                 .and()
                 .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
