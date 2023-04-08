@@ -33,22 +33,54 @@ public class UserServiceImpl implements UserService {
     @Override
     public UpdateInResultDto updateUserRole(String token, String newRole, String userEmail) throws RuntimeException {
 
+        //user -> 바뀌어야하는 사람
+        //manager -> 바꾸는 사람
+
         User user = userRepository.getByEmail(userEmail);
-        //user.getRoles().get(0) == "ROLE_ADMIN";
-        switch (user.getRoles().get(0)){
+        User manager = userRepository.getByEmail(jwtTokenProvider.getUsername(token));
+        UpdateInResultDto updateInResultDto = new UpdateInResultDto();
+
+        String userRole = user.getRoles().get(0);
+        String managerRole = manager.getRoles().get(0);
+
+        switch (managerRole){
+
+            case "ROLE_ROOT" :
+
+                if(!(
+                        userRole.equals("ROLE_LION") ||
+                        userRole.equals("ROLE_APPLY") ||
+                        userRole.equals("ROLE_MANAGE") ||
+                        userRole.equals("ROLE_ADMIN")
+                )){
+                    updateInResultDto.setMsg("권한 실패");
+                }
+                updateInResultDto.setMsg("권한 성공");
+
+                break;
+
             case "ROLE_ADMIN" :
 
-                //tocken에서 ROLE 가지고 오기
+                if(!(userRole.equals("ROLE_LION")|| userRole.equals("ROLE_APPLY") || userRole.equals("ROLE_MANAGE"))){
+                    updateInResultDto.setMsg("권한 실패");
+                }
+                updateInResultDto.setMsg("권한 성공");
 
                 break;
 
             case "ROLE_MANAGE" :
+                if(!(userRole.equals("ROLE_LION") || userRole.equals("ROLE_APPLY"))){
+                    updateInResultDto.setMsg("권한 실패");
+                }
+                updateInResultDto.setMsg("권한 성공");
                 break;
 
             case "ROLE_LION" :
+                //권한이 없으므로 error return
                 break;
 
             case "ROLE_APPLY" :
+                //권한이 없으므로 error return
                 break;
 
         }
