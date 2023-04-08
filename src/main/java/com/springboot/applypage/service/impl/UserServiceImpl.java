@@ -76,13 +76,10 @@ public class UserServiceImpl implements UserService {
                 break;
 
             case "ROLE_LION" :
-                //권한이 없으므로 error return
-                break;
 
             case "ROLE_APPLY" :
-                //권한이 없으므로 error return
+                updateInResultDto.setMsg("권한 성공");
                 break;
-
         }
 
         return null;
