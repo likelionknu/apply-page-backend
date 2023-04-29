@@ -66,7 +66,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 , "/swagger-ui.html"
                 , "/webjars/**"
                 , "/swagger/**"
-                , "/sign-api/exception");
+                , "/sign-api/exception"
+                , "/"
+                , "/**");
     }
 
 }
