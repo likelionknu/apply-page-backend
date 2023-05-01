@@ -42,6 +42,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "APPLY"
                 )//모든 권한
 
+                .antMatchers("/adminLogin")
+                .hasAnyRole(
+                        "ROOT",
+                        "ADMIN",
+                        "MANAGE"
+                )
+
                 .antMatchers("**exception**").permitAll()
 
                 .anyRequest().hasAnyRole("ADMIN")
@@ -68,7 +75,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 , "/swagger/**"
                 , "/sign-api/exception"
                 , "/"
-                , "/**");
+                , "/static/**"
+                , "/favicon.ico"
+                , "/manifest.json");
     }
 
 }

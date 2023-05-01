@@ -79,13 +79,6 @@ public class SignController {
             @ApiParam(value = "newPassword", required = true, example = "example1234") @RequestParam String newPassword,
             @RequestHeader(value = "X-AUTH-TOKEN", required = true) String token)
             throws RuntimeException {
-        /*LOGGER.info("[signIn] 로그인을 시도하고 있습니다. id : {}, pw : ****", id);
-        SignInResultDto signInResultDto = signService.signIn(id, password);*/
-
-        /*if(signInResultDto.getCode() == 0){
-            LOGGER.info("[signIn] 정상적으로 로그인되었습니다. id : {}, token : {}", id,
-                    signInResultDto.getToken());
-        }*/
 
         UpdateInResultDto updateInResultDto = signService.updatePassword(password, newPassword, token);
 
