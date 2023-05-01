@@ -3,8 +3,6 @@ package com.springboot.applypage.service.impl;
 import com.springboot.applypage.data.dao.ChatDAO;
 import com.springboot.applypage.data.dto.ChatDto;
 import com.springboot.applypage.data.entity.Chat;
-import com.springboot.applypage.data.entity.User;
-import com.springboot.applypage.data.enumdata.Role;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

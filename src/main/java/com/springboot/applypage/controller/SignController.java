@@ -51,12 +51,12 @@ public class SignController {
 
     @PostMapping(value = "/sign-up")
     public SignUpResultDto signUp(
-            @ApiParam(value = "ID", required = true) @RequestParam String id,
-            @ApiParam(value = "Password", required = true) @RequestParam String password,
-            @ApiParam(value = "이름", required = true) @RequestParam String name,
-            @ApiParam(value = "권한", required = true) @RequestParam String role,
+            @ApiParam(value = "ID", required = true, example = "exampleId1234") @RequestParam String id,
+            @ApiParam(value = "Password", required = true, example = "1234") @RequestParam String password,
+            @ApiParam(value = "이름", required = true, example = "성창규") @RequestParam String name,
+            @ApiParam(value = "권한", required = true, example = "ROLE_ADMIN") @RequestParam String role,
             @ApiParam(value = "생일", required = true, example = "2001-05-31") @RequestParam String birthDay,
-            @ApiParam(value = "학번", required = true) @RequestParam Long sid,
+            @ApiParam(value = "학번", required = true, example = "201904055") @RequestParam Long sid,
             @ApiParam(value = "전화번호", required = true, example = "010-1111-2222") @RequestParam String tel
     ){
 
