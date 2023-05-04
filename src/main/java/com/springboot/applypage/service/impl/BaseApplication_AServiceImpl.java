@@ -21,7 +21,7 @@ public class BaseApplication_AServiceImpl implements BaseApplication_AService {
         this.baseApplication_ADAO = baseApplication_ADAO;
     }
     @Override
-    public BaseApplication_ADto getBaseApplication_AService(Long Q_id) {
+    public BaseApplication_ADto getBaseApplication_A(Long Q_id) {
         BaseApplication_A baseApplication_A = baseApplication_ADAO.selectBaseApplication_A(Q_id);
         BaseApplication_ADto baseApplication_AResponse = new BaseApplication_ADto();
 
@@ -34,7 +34,7 @@ public class BaseApplication_AServiceImpl implements BaseApplication_AService {
     }
 
     @Override
-    public BaseApplication_ADto saveBaseApplication_AService(BaseApplication_ADto baseApplication_ADto) {
+    public BaseApplication_ADto saveBaseApplication_A(BaseApplication_ADto baseApplication_ADto) {
         BaseApplication_A baseApplication_A = new BaseApplication_A();
 
         baseApplication_A.setId(baseApplication_ADto.getId());
@@ -45,10 +45,10 @@ public class BaseApplication_AServiceImpl implements BaseApplication_AService {
         BaseApplication_A savedBaseApplication_A = baseApplication_ADAO.insertBaseApplication_A(baseApplication_A);
         BaseApplication_ADto baseApplication_AResponse = new BaseApplication_ADto();
 
-        baseApplication_AResponse.setId(baseApplication_A.getId());
-        baseApplication_AResponse.setQ_id(baseApplication_A.getQ_id());
-        baseApplication_AResponse.setSid(baseApplication_A.getSid());
-        baseApplication_AResponse.setAnswer_str(baseApplication_A.getAnswer_str());
+        baseApplication_AResponse.setId(savedBaseApplication_A.getId());
+        baseApplication_AResponse.setQ_id(savedBaseApplication_A.getQ_id());
+        baseApplication_AResponse.setSid(savedBaseApplication_A.getSid());
+        baseApplication_AResponse.setAnswer_str(savedBaseApplication_A.getAnswer_str());
 
         return baseApplication_AResponse;
     }
@@ -80,6 +80,6 @@ public class BaseApplication_AServiceImpl implements BaseApplication_AService {
 
     @Override
     public List<BaseApplication_A> getAllApplications() {
-        return baseApplication_ADAO.getAllApplication();
+        return baseApplication_ADAO.getAllApplications();
     }
 }

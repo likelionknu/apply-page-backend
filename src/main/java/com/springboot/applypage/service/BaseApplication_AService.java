@@ -8,8 +8,8 @@ import com.springboot.applypage.data.entity.BaseApplication_Q;
 import java.util.List;
 
 public interface BaseApplication_AService {
-    BaseApplication_ADto getBaseApplication_AService(Long Q_id);
-    BaseApplication_ADto saveBaseApplication_AService(BaseApplication_ADto baseApplication_ADto);
+    BaseApplication_ADto getBaseApplication_A(Long Q_id);
+    BaseApplication_ADto saveBaseApplication_A(BaseApplication_ADto baseApplication_ADto);
     BaseApplication_ADto updateBaseApplication_A(BaseApplication_ADto baseApplication_ADto)
             throws Exception;
     void deleteBaseApplication_A(Long Q_id) throws Exception;

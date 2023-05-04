@@ -22,7 +22,7 @@ public class BaseApplication_QServiceImpl implements BaseApplication_QService {
     }
 
     @Override
-    public BaseApplication_QDto getBaseApplication_QService(Long Q_id){
+    public BaseApplication_QDto getBaseApplication_Q(Long Q_id){
 
         BaseApplication_Q baseApplication_Q = baseApplication_QDAO.selectBaseApplication_Q(Q_id);
         BaseApplication_QDto baseApplication_QResponse = new BaseApplication_QDto();
@@ -35,7 +35,7 @@ public class BaseApplication_QServiceImpl implements BaseApplication_QService {
     }
 
     @Override
-    public BaseApplication_QDto saveBaseApplication_QService(BaseApplication_QDto baseApplication_QDto) {
+    public BaseApplication_QDto saveBaseApplication_Q(BaseApplication_QDto baseApplication_QDto) {
         BaseApplication_Q baseApplication_Q = new BaseApplication_Q();
 
         baseApplication_Q.setQ_id(baseApplication_QDto.getQ_id());
@@ -45,9 +45,9 @@ public class BaseApplication_QServiceImpl implements BaseApplication_QService {
         BaseApplication_Q savedBaseApplication_Q = baseApplication_QDAO.insertBaseApplication_Q(baseApplication_Q);
         BaseApplication_QDto baseApplication_QResponse = new BaseApplication_QDto();
 
-        baseApplication_QResponse.setQ_id(baseApplication_Q.getQ_id());
-        baseApplication_QResponse.setPart(baseApplication_Q.getPart());
-        baseApplication_QResponse.setQuestion_str(baseApplication_Q.getQuestion_str());
+        baseApplication_QResponse.setQ_id(savedBaseApplication_Q.getQ_id());
+        baseApplication_QResponse.setPart(savedBaseApplication_Q.getPart());
+        baseApplication_QResponse.setQuestion_str(savedBaseApplication_Q.getQuestion_str());
 
 
         return baseApplication_QResponse;
@@ -81,7 +81,7 @@ public class BaseApplication_QServiceImpl implements BaseApplication_QService {
 
     @Override
     public List<BaseApplication_Q> getAllApplications() {
-        return baseApplication_QDAO.getAllApplication();
+        return baseApplication_QDAO.getAllApplications();
     }
 
 }

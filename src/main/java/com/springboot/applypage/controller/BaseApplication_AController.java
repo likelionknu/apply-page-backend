@@ -30,7 +30,7 @@ public class BaseApplication_AController {
     public ResponseEntity<BaseApplication_ADto> createBaseApplication_A(
             @RequestBody BaseApplication_ADto baseApplication_ADto, HttpServletRequest request)
     {
-        BaseApplication_ADto baseApplication_ADtoResponse = baseApplication_AService.saveBaseApplication_AService(
+        BaseApplication_ADto baseApplication_ADtoResponse = baseApplication_AService.saveBaseApplication_A(
                 baseApplication_ADto);
 
         LOGGER.info("호출 API: " + "create BaseApplication_A" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
@@ -39,9 +39,9 @@ public class BaseApplication_AController {
     }
 
     @GetMapping()
-    public ResponseEntity<BaseApplication_ADto> getBaseApplication_A(Long sid, HttpServletRequest request)
+    public ResponseEntity<BaseApplication_ADto> getBaseApplication_A(Long id, HttpServletRequest request)
     {
-        BaseApplication_ADto baseApplication_ADtoResponse = baseApplication_AService.getBaseApplication_AService(sid);
+        BaseApplication_ADto baseApplication_ADtoResponse = baseApplication_AService.getBaseApplication_A(id);
 
         LOGGER.info("호출 API: " + "get BaseApplication_A" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 
@@ -60,9 +60,9 @@ public class BaseApplication_AController {
     }
 
     @DeleteMapping()
-    public ResponseEntity<String> deleteBaseApplication_A (Long sid, HttpServletRequest request) throws Exception
+    public ResponseEntity<String> deleteBaseApplication_A (Long id, HttpServletRequest request) throws Exception
     {
-        baseApplication_AService.deleteBaseApplication_A(sid);
+        baseApplication_AService.deleteBaseApplication_A(id);
 
         LOGGER.info("호출 API: " + "delete BaseApplication_A" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 

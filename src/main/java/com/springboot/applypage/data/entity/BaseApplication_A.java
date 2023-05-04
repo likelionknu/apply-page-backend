@@ -5,8 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -14,9 +12,10 @@ import javax.persistence.*;
 public class BaseApplication_A{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="Q_id")
+    @JoinColumn(name="Q_id", referencedColumnName = "Q_id")
     private BaseApplication_Q Q_id;
 
     @Column(nullable = false)

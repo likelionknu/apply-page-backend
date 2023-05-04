@@ -11,7 +11,7 @@ public interface BaseApplication_QDAO {
     BaseApplication_Q selectBaseApplication_Q(Long Q_id);
     BaseApplication_Q updateBaseApplication_Q(BaseApplication_Q baseApplication_Q) throws Exception;
     void deleteBaseApplication_Q(Long Q_id) throws Exception;
-    List<BaseApplication_Q> getAllApplication();
+    List<BaseApplication_Q> getAllApplications();
 
     //파트별 질문으로 넘어가는 메소드 구현 필요?
 }

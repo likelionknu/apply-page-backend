@@ -77,7 +77,7 @@ public class ChangeHistoryDAOImpl implements ChangeHistoryDAO {
 
 
     @Override
-    public List<ChangeHistory> getAllApplication() {
+    public List<ChangeHistory> getAllApplications() {
         return changeHistoryRepository.findAll();
     }
 

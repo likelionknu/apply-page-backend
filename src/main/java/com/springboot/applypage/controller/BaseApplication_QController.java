@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @RequestMapping("/BaseApplication_Q")
 public class BaseApplication_QController {
     private final BaseApplication_QService baseApplication_QService;
-    private final Logger LOGGER = LoggerFactory.getLogger(BaseApplication_QService.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(BaseApplication_QController.class);
 
     @Autowired
     public BaseApplication_QController(BaseApplication_QService baseApplication_QService){
@@ -29,7 +29,7 @@ public class BaseApplication_QController {
     public ResponseEntity<BaseApplication_QDto> createBaseApplication_Q(
             @RequestBody BaseApplication_QDto baseApplication_QDto, HttpServletRequest request)
     {
-        BaseApplication_QDto baseApplication_QDtoResponse = baseApplication_QService.saveBaseApplication_QService(
+        BaseApplication_QDto baseApplication_QDtoResponse = baseApplication_QService.saveBaseApplication_Q(
                 baseApplication_QDto);
 
         LOGGER.info("호출 API: " + "create BaseApplication_Q" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
@@ -40,7 +40,7 @@ public class BaseApplication_QController {
     @GetMapping()
     public ResponseEntity<BaseApplication_QDto> getBaseApplication_Q(Long Q_id, HttpServletRequest request)
     {
-        BaseApplication_QDto baseApplication_QDtoDtoResponse = baseApplication_QService.getBaseApplication_QService(Q_id);
+        BaseApplication_QDto baseApplication_QDtoDtoResponse = baseApplication_QService.getBaseApplication_Q(Q_id);
 
         LOGGER.info("호출 API: " + "get BaseApplication_Q" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 

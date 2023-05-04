@@ -20,9 +20,9 @@ public class ChangeHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Q_id")
-    private Long Q_id;
+    private BaseApplication_Q Q_id;
 
     @Column(nullable = false)
     private String change_Q;

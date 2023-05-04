@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 public class BaseApplication_ADto {
     private Long id;
     private BaseApplication_Q Q_id;

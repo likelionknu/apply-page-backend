@@ -10,5 +10,5 @@ public interface ChangeHistoryDAO {
     ChangeHistory selectChangeHistory(Long sid);
     ChangeHistory updateChangeHistory(ChangeHistory changeHistory) throws Exception;
     void deleteChangeHistory(Long sid) throws Exception;
-    List<ChangeHistory> getAllApplication();
+    List<ChangeHistory> getAllApplications();
 }

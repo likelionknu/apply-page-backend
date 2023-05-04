@@ -21,7 +21,7 @@ public class ChangeHistoryServiceImpl implements ChangeHistoryService {
     }
 
     @Override
-    public ChangeHistoryDto getChangeHistoryService(Long id){
+    public ChangeHistoryDto getChangeHistory(Long id){
 
         ChangeHistory changeHistory = changeHistoryDAO.selectChangeHistory(id);
         ChangeHistoryDto changeHistoryResponse = new ChangeHistoryDto();
@@ -36,7 +36,7 @@ public class ChangeHistoryServiceImpl implements ChangeHistoryService {
     }
 
     @Override
-    public ChangeHistoryDto saveChangeHistoryService(ChangeHistoryDto changeHistoryDto) {
+    public ChangeHistoryDto saveChangeHistory(ChangeHistoryDto changeHistoryDto) {
         ChangeHistory changeHistory = new ChangeHistory();
 
         changeHistory.setQ_id(changeHistoryDto.getQ_id());
@@ -46,9 +46,9 @@ public class ChangeHistoryServiceImpl implements ChangeHistoryService {
         ChangeHistory savedChangeHistory = changeHistoryDAO.insertChangeHistory(changeHistory);
         ChangeHistoryDto changeHistoryResponse = new ChangeHistoryDto();
 
-        changeHistoryResponse.setQ_id(changeHistory.getQ_id());
-        changeHistoryResponse.setSid(changeHistory.getSid());
-        changeHistoryResponse.setChange_Q(changeHistory.getChange_Q());
+        changeHistoryResponse.setQ_id(savedChangeHistory.getQ_id());
+        changeHistoryResponse.setSid(savedChangeHistory.getSid());
+        changeHistoryResponse.setChange_Q(savedChangeHistory.getChange_Q());
 
 
         return changeHistoryResponse;
@@ -83,7 +83,7 @@ public class ChangeHistoryServiceImpl implements ChangeHistoryService {
 
     @Override
     public List<ChangeHistory> getAllApplications() {
-        return changeHistoryDAO.getAllApplication();
+        return changeHistoryDAO.getAllApplications();
     }
 
 }

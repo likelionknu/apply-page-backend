@@ -7,19 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @Data
 @Table(name="question")
 public class BaseApplication_Q {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(columnDefinition = "Long default 0")
     private Long Q_id;
-
+    @Column
     private String part;
 
     @Column(nullable = false)

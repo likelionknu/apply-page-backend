@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 public class BaseApplication_QDto {
     private Long Q_id;
     private String part;

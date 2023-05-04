@@ -75,7 +75,7 @@ public class BaseApplication_QDAOImpl implements BaseApplication_QDAO {
 
 
     @Override
-    public List<BaseApplication_Q> getAllApplication() {
+    public List<BaseApplication_Q> getAllApplications() {
         return baseApplication_QRepository.findAll();
     }
 

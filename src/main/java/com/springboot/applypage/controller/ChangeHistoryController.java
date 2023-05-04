@@ -29,7 +29,7 @@ public class ChangeHistoryController {
     public ResponseEntity<ChangeHistoryDto> createChangeHistory(
             @RequestBody ChangeHistoryDto changeHistoryDto, HttpServletRequest request)
     {
-        ChangeHistoryDto changeHistoryDtoResponse = changeHistoryService.saveChangeHistoryService(
+        ChangeHistoryDto changeHistoryDtoResponse = changeHistoryService.saveChangeHistory(
                 changeHistoryDto);
 
         LOGGER.info("호출 API: " + "create ChangeHistory" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
@@ -40,7 +40,7 @@ public class ChangeHistoryController {
     @GetMapping()
     public ResponseEntity<ChangeHistoryDto> getBaseChangeHistory(Long sid, HttpServletRequest request)
     {
-        ChangeHistoryDto changeHistoryDtoResponse = changeHistoryService.getChangeHistoryService(sid);
+        ChangeHistoryDto changeHistoryDtoResponse = changeHistoryService.getChangeHistory(sid);
 
         LOGGER.info("호출 API: " + "get ChangeHistory" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 

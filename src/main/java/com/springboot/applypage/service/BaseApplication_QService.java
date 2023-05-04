@@ -8,8 +8,8 @@ import com.springboot.applypage.data.entity.ChangeHistory;
 import java.util.List;
 
 public interface BaseApplication_QService {
-    BaseApplication_QDto getBaseApplication_QService(Long Q_id);
-    BaseApplication_QDto saveBaseApplication_QService(BaseApplication_QDto baseApplication_QDto);
+    BaseApplication_QDto getBaseApplication_Q(Long Q_id);
+    BaseApplication_QDto saveBaseApplication_Q(BaseApplication_QDto baseApplication_QDto);
     BaseApplication_QDto updateBaseApplication_Q(BaseApplication_QDto baseApplication_QDto)
             throws Exception;
     void deleteBaseApplication_Q(Long Q_id) throws Exception;

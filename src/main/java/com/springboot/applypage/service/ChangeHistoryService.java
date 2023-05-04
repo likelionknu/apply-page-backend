@@ -8,8 +8,8 @@ import com.springboot.applypage.data.entity.ChangeHistory;
 import java.util.List;
 
 public interface ChangeHistoryService {
-    ChangeHistoryDto getChangeHistoryService(Long sid);
-    ChangeHistoryDto saveChangeHistoryService(ChangeHistoryDto changeHistoryDto);
+    ChangeHistoryDto getChangeHistory(Long sid);
+    ChangeHistoryDto saveChangeHistory(ChangeHistoryDto changeHistoryDto);
     ChangeHistoryDto updateChangeHistory(ChangeHistoryDto changeHistoryDto)
             throws Exception;
     void deleteChangeHistory(Long sid) throws Exception;

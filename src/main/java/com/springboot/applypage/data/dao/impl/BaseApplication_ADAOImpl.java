@@ -74,7 +74,7 @@ public class BaseApplication_ADAOImpl implements BaseApplication_ADAO {
 
 
     @Override
-    public List<BaseApplication_A> getAllApplication() {
+    public List<BaseApplication_A> getAllApplications() {
         return baseApplication_ARepository.findAll();
     }
 
