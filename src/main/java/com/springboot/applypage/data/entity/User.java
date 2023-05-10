@@ -27,7 +27,7 @@ public class User extends BaseEntity implements UserDetails {
 
     //전화번호
     //비밀번호 - 암호화
-
+//야야야
     @Id
     private Long sid;
 
