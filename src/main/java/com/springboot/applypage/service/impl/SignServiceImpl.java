@@ -4,6 +4,7 @@ import com.springboot.applypage.common.CommonResponse;
 import com.springboot.applypage.config.security.JwtTokenProvider;
 import com.springboot.applypage.data.dto.SignInResultDto;
 import com.springboot.applypage.data.dto.SignUpResultDto;
+import com.springboot.applypage.data.dto.UpdateInResultDto;
 import com.springboot.applypage.data.entity.User;
 import com.springboot.applypage.data.repository.UserRepository;
 import com.springboot.applypage.service.SignService;
@@ -39,30 +40,27 @@ public class SignServiceImpl implements SignService {
     };
 
     @Override
-    public SignUpResultDto signUp(String id, String password, String name, String role, Long sid, LocalDate birthDay) {
+    public SignUpResultDto signUp(
+            String id,
+            String password,
+            String name,
+            String role,
+            Long sid,
+            LocalDate birthDay,
+            String tel
+    ) {
         LOGGER.info("[getSignUpResult] 회원가입정보 전달");
         User user;
-        if(role.equalsIgnoreCase("admin")){
-            user = User.builder()
-                    .email(id)
-                    .sid(sid)
-                    .name(name)
-                    .passwd(passwordEncoder.encode(password))
-                    //.role(Collections.singletonList("ROLE_ADMIN"))
-                    .roles(Collections.singletonList("ROLE_ADMIN"))
-                    .birthDay(birthDay)
-                    .build();
-        }else{
-            user = User.builder()
-                    .email(id)
-                    .name(name)
-                    .sid(sid)
-                    .passwd(passwordEncoder.encode(password))
-                    //.role(Collections.singletonList("ROLE_USER"))
-                    .roles(Collections.singletonList("ROLE_USER"))
-                    .birthDay(birthDay)
-                    .build();
-        }
+
+        user = User.builder()
+                .email(id)
+                .name(name)
+                .sid(sid)
+                .passwd(passwordEncoder.encode(password))
+                .roles(Collections.singletonList(role))
+                .birthDay(birthDay)
+                .tel(tel)
+                .build();
 
         User savedUser = userRepository.save(user);
         SignUpResultDto signUpResultDto = new SignInResultDto();
@@ -102,6 +100,38 @@ public class SignServiceImpl implements SignService {
         return signInResultDto;
     }
 
+    @Override
+    public UpdateInResultDto updatePassword(String passwd, String newPasswd, String token) throws RuntimeException {
+        //jwtTokenProvider.getUsername()
+        //passwordEncoder.
+
+        User user = userRepository.getByEmail(jwtTokenProvider.getUsername(token));
+
+        System.out.println("토큰에서 값 추출" + user.toString());
+
+        if(!passwordEncoder.matches(passwd, user.getPassword())){
+            throw new RuntimeException();
+        }
+
+        User newUser = User.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .sid(user.getSid())
+                .passwd(passwordEncoder.encode(newPasswd))
+                .roles(user.getRoles())
+                .birthDay(user.getBirthDay())
+                .tel(user.getTel())
+                .build();
+        newUser.setCreatedAt(user.getCreatedAt());
+
+        userRepository.save(newUser);
+
+        UpdateInResultDto updateInResultDto = new UpdateInResultDto();
+        setSuccessResult(updateInResultDto);
+
+        return updateInResultDto;
+    }
+
     private void setSuccessResult(SignUpResultDto result){
         result.setSuccess(true);
         result.setCode(CommonResponse.SUCCESS.getCode());
@@ -109,6 +139,18 @@ public class SignServiceImpl implements SignService {
     }
 
     private void setFailResult(SignUpResultDto result){
+        result.setSuccess(false);
+        result.setCode(CommonResponse.FAIL.getCode());
+        result.setMsg(CommonResponse.FAIL.getMsg());
+    }
+
+    private void setSuccessResult(UpdateInResultDto result){
+        result.setSuccess(true);
+        result.setCode(CommonResponse.SUCCESS.getCode());
+        result.setMsg(CommonResponse.SUCCESS.getMsg());
+    }
+
+    private void setFailResult(UpdateInResultDto result){
         result.setSuccess(false);
         result.setCode(CommonResponse.FAIL.getCode());
         result.setMsg(CommonResponse.FAIL.getMsg());

@@ -24,6 +24,4 @@ public class BackendApplication extends BaseApplication {
     //단체생활에서 가장 중요하다고 생각하는 것은 무엇인가요?
     @Column(length = 1000)
     private String importantGroup;
-
-
 }

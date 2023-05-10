@@ -41,21 +41,16 @@ public class User extends BaseEntity implements UserDetails {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = true)
-    private LocalDate birthDay;
+    @Column(nullable = false)
+    private String tel;
 
-    /*@ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> role = new ArrayList<>();*/
+    @Column(nullable = false)
+    private LocalDate birthDay;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    /*@Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.role.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }*/
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
