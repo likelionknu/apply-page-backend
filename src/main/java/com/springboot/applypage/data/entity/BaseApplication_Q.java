@@ -15,7 +15,6 @@ public class BaseApplication_Q {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(columnDefinition = "Long default 0")
     private Long Q_id;
     @Column
     private String part;
