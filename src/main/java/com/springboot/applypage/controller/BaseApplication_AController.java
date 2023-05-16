@@ -1,6 +1,7 @@
 package com.springboot.applypage.controller;
 
 import com.springboot.applypage.data.dto.BaseApplication_ADto;
+import com.springboot.applypage.data.dto.BaseApplication_AnsDto;
 import com.springboot.applypage.data.dto.BaseApplication_QDto;
 import com.springboot.applypage.service.BaseApplication_AService;
 import com.springboot.applypage.service.BaseApplication_QService;
@@ -24,6 +25,18 @@ public class BaseApplication_AController {
     @Autowired
     public BaseApplication_AController(BaseApplication_AService baseApplication_AService){
         this.baseApplication_AService = baseApplication_AService;
+    }
+
+
+    @PostMapping("/new_ans")
+    public ResponseEntity<BaseApplication_AnsDto> createBaseApplication_Ans(
+            @RequestBody BaseApplication_AnsDto baseApplication_ADto, HttpServletRequest request)
+    {
+        BaseApplication_AnsDto baseApplication_ADtoResponse = baseApplication_AService.saveBaseApplication_Ans(baseApplication_ADto);
+
+        LOGGER.info("호출 API: " + "create BaseApplication_A" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.OK).body(baseApplication_ADtoResponse);
     }
 
     @PostMapping()

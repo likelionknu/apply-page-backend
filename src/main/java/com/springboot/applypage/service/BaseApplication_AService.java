@@ -1,6 +1,7 @@
 package com.springboot.applypage.service;
 
 import com.springboot.applypage.data.dto.BaseApplication_ADto;
+import com.springboot.applypage.data.dto.BaseApplication_AnsDto;
 import com.springboot.applypage.data.dto.BaseApplication_QDto;
 import com.springboot.applypage.data.entity.BaseApplication_A;
 import com.springboot.applypage.data.entity.BaseApplication_Q;
@@ -13,5 +14,6 @@ public interface BaseApplication_AService {
     BaseApplication_ADto updateBaseApplication_A(BaseApplication_ADto baseApplication_ADto)
             throws Exception;
     void deleteBaseApplication_A(Long Q_id) throws Exception;
+    BaseApplication_AnsDto saveBaseApplication_Ans(BaseApplication_AnsDto baseApplication_ansDto);
     List<BaseApplication_A> getAllApplications();
 }
