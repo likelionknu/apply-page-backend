@@ -1,5 +1,6 @@
 package com.springboot.applypage.service.impl;
 
+import com.springboot.applypage.config.security.JwtTokenProvider;
 import com.springboot.applypage.data.dao.BaseApplication_ADAO;
 import com.springboot.applypage.data.dao.BaseApplication_QDAO;
 import com.springboot.applypage.data.dto.BaseApplication_ADto;
@@ -10,6 +11,7 @@ import com.springboot.applypage.data.entity.BaseApplication_Q;
 import com.springboot.applypage.data.entity.User;
 import com.springboot.applypage.data.repository.UserRepository;
 import com.springboot.applypage.service.BaseApplication_AService;
+import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +22,19 @@ public class BaseApplication_AServiceImpl implements BaseApplication_AService {
 
     private final BaseApplication_ADAO baseApplication_ADAO;
     private final BaseApplication_QDAO baseApplication_QDAO;
+    public JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
     @Autowired
     public BaseApplication_AServiceImpl(
             BaseApplication_ADAO baseApplication_ADAO
             , BaseApplication_QDAO baseApplication_QDAO
-            , UserRepository userRepository){
+            , UserRepository userRepository
+            , JwtTokenProvider jwtTokenProvider){
         this.baseApplication_ADAO = baseApplication_ADAO;
         this.baseApplication_QDAO = baseApplication_QDAO;
         this.userRepository = userRepository;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
     @Override
     public BaseApplication_ADto getBaseApplication_A(Long Q_id) {
@@ -45,12 +50,13 @@ public class BaseApplication_AServiceImpl implements BaseApplication_AService {
     }
 
     @Override
-    public BaseApplication_AnsDto saveBaseApplication_Ans(BaseApplication_AnsDto baseApplication_ansDto) {
+    public BaseApplication_AnsDto saveBaseApplication_Ans(BaseApplication_AnsDto baseApplication_ansDto, String token) {
         BaseApplication_A baseApplication_A = new BaseApplication_A();
 
         //baseApplication_A.setId(baseApplication_ansDto.getId());
         //baseApplication_A.setSid(baseApplication_ansDto.getSid());
-        User user = userRepository.getById(baseApplication_ansDto.getSid());
+        User user = userRepository.getByEmail(jwtTokenProvider.getUsername(token));
+        //User user = userRepository.getById(baseApplication_ansDto.getSid());
         BaseApplication_Q baseApplication_q  = baseApplication_QDAO.selectBaseApplication_Q(baseApplication_ansDto.getQ_id());
 
         baseApplication_A.setUser(user);

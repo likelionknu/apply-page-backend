@@ -5,6 +5,8 @@ import com.springboot.applypage.data.dto.BaseApplication_AnsDto;
 import com.springboot.applypage.data.dto.BaseApplication_QDto;
 import com.springboot.applypage.service.BaseApplication_AService;
 import com.springboot.applypage.service.BaseApplication_QService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,21 @@ public class BaseApplication_AController {
         this.baseApplication_AService = baseApplication_AService;
     }
 
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(
+                    name = "X-AUTH-TOKEN",
+                    value = "로그인 성공 후 발급 받은 access_token",
+                    required = true,
+                    dataType = "String",
+                    paramType = "header")
+    })
     @PostMapping("/new_ans")
     public ResponseEntity<BaseApplication_AnsDto> createBaseApplication_Ans(
-            @RequestBody BaseApplication_AnsDto baseApplication_ADto, HttpServletRequest request)
+            @RequestBody BaseApplication_AnsDto baseApplication_ADto,
+            @RequestHeader(value = "X-AUTH-TOKEN", required = true) String token,
+            HttpServletRequest request)
     {
-        BaseApplication_AnsDto baseApplication_ADtoResponse = baseApplication_AService.saveBaseApplication_Ans(baseApplication_ADto);
+        BaseApplication_AnsDto baseApplication_ADtoResponse = baseApplication_AService.saveBaseApplication_Ans(baseApplication_ADto, token);
 
         LOGGER.info("호출 API: " + "create BaseApplication_A" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 

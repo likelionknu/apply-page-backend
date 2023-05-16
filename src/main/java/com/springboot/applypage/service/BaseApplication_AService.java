@@ -14,6 +14,6 @@ public interface BaseApplication_AService {
     BaseApplication_ADto updateBaseApplication_A(BaseApplication_ADto baseApplication_ADto)
             throws Exception;
     void deleteBaseApplication_A(Long Q_id) throws Exception;
-    BaseApplication_AnsDto saveBaseApplication_Ans(BaseApplication_AnsDto baseApplication_ansDto);
+    BaseApplication_AnsDto saveBaseApplication_Ans(BaseApplication_AnsDto baseApplication_ansDto, String token);
     List<BaseApplication_A> getAllApplications();
 }
