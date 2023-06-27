@@ -77,7 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 ,"/BaseApplication_Q/**"
                 ,"/BaseApplication_A/**"
                 , "/sign-api/exception"
-                , "/"
+                , "/**"
                 , "/static/**"
                 , "/favicon.ico"
                 , "/manifest.json");

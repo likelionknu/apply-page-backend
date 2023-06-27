@@ -14,13 +14,13 @@ public class HelloController implements ErrorController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(HelloController.class);
 
-    @GetMapping({ "/", "/error" })
-    public String index(HttpServletRequest request) {
+    //@GetMapping({ "/", "/error" })
+   // public String index(HttpServletRequest request) {
 
-        LOGGER.info("main page 최초 접속" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
+     //   LOGGER.info("main page 최초 접속" + " 접속자 IP: " + request.getRemoteAddr() + ", 최초 접속 시간: " +  LocalDateTime.now());
 
-        return "index";
-    }
+     //   return "index";
+   // }
 
     public String getErrorPath() {
         return "/error";
