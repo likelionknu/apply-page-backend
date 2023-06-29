@@ -1,26 +1,39 @@
 package com.springboot.applypage.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
+import com.springboot.applypage.data.dto.KakaoProfile;
+import com.springboot.applypage.data.entity.kakaoUser;
+import com.springboot.applypage.data.repository.KakaoUserRepository;
 import com.springboot.applypage.data.repository.UserRepository;
 import com.springboot.applypage.service.OAuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.DefaultResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Optional;
 
 @Service
 public class OAuthServiceImpl implements OAuthService {
 
     private final UserRepository userRepository;
+    private final KakaoUserRepository kakaoUserRepository;
     @Autowired
-    public OAuthServiceImpl(UserRepository userRepository) {
+    public OAuthServiceImpl(UserRepository userRepository, KakaoUserRepository kakaoUserRepository) {
         this.userRepository = userRepository;
+        this.kakaoUserRepository = kakaoUserRepository;
     }
-
 
     @Override
     public String getKakaoAccessToken(String code) {
@@ -76,4 +89,72 @@ public class OAuthServiceImpl implements OAuthService {
 
         return access_Token;
     }
+    @Override
+    public void loginWithAccessToken(String access_token) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + access_token);
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        RestTemplate rt = new RestTemplate();
+        HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest = new HttpEntity<>(headers);
+        rt.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+        rt.setErrorHandler(new DefaultResponseErrorHandler() {
+            public boolean hasError(ClientHttpResponse response) throws IOException {
+                HttpStatus statusCode = response.getStatusCode();
+                return statusCode.series() == HttpStatus.Series.SERVER_ERROR;
+            }
+        });
+
+    }
+
+    @Override
+    public kakaoUser saveUser(String access_token) {
+
+        KakaoProfile profile = findProfile(access_token);
+        //KakaoProfile.KakaoAccount tmp = profile.getKakao_account();
+        Optional<kakaoUser> kuser = kakaoUserRepository.findByKakaoEmail(profile.getKakao_account().getEmail());
+
+
+//        if(kuser == null) {
+//            kuser = kakaoUser.builder()
+//                    .kakaoId(profile.getId())
+//                    //(4)
+//                    .kakaoProfileImg(profile.getKakao_account().getProfile().getProfile_image_url())
+//                    .kakaoNickname(profile.getKakao_account().getProfile().getNickname())
+//                    .kakaoEmail(profile.getKakao_account().getEmail());
+//
+//
+//            KakaoUserRepository.save(kuser);
+//        }
+
+        return null;
+    }
+
+    public KakaoProfile findProfile(String access_token){
+
+        RestTemplate rt = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + access_token); //(1-4)
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest =
+                new HttpEntity<>(headers);
+
+        ResponseEntity<String> kakaoProfileResponse = rt.exchange(
+                "https://kapi.kakao.com/v2/user/me",
+                HttpMethod.POST,
+                kakaoProfileRequest,
+                String.class
+        );
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        KakaoProfile kakaoProfile = null;
+        try {
+            kakaoProfile = objectMapper.readValue(kakaoProfileResponse.getBody(), KakaoProfile.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return kakaoProfile;
+    }
+
 }
